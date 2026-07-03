@@ -226,6 +226,58 @@ const docGenerateItems = [
   },
 ] as SidebarsConfig[string];
 
+/** totvs/tlpp-probat-samples — engine de testes PROBAT. */
+const probatItems = [
+  {
+    type: 'doc',
+    id: 'tlpp/probat/index',
+    label: 'Visão geral',
+    key: 'probat-intro',
+  },
+  {
+    type: 'category',
+    label: 'Fundamentos',
+    collapsed: true,
+    key: 'probat-fundamentos',
+    items: [
+      'tlpp/probat/configuracao',
+      'tlpp/probat/annotations',
+      'tlpp/probat/testes-funcao-classe',
+      'tlpp/probat/asserts',
+    ],
+  },
+  {
+    type: 'category',
+    label: 'Controle de execução',
+    collapsed: true,
+    key: 'probat-execucao',
+    items: [
+      'tlpp/probat/pulando-testes',
+      'tlpp/probat/error-log',
+      'tlpp/probat/suites-execucao',
+      'tlpp/probat/cobertura',
+      'tlpp/probat/execucao-resultados',
+    ],
+  },
+  {
+    type: 'category',
+    label: 'Cenários práticos',
+    collapsed: true,
+    key: 'probat-cenarios',
+    items: [
+      'tlpp/probat/testes-api-rest',
+      'tlpp/probat/integracao-bd',
+      'tlpp/probat/tdd',
+    ],
+  },
+  {
+    type: 'doc',
+    id: 'tlpp/probat/automacao-scripts',
+    label: 'Automação (CI/CD)',
+    key: 'probat-automacao',
+  },
+] as SidebarsConfig[string];
+
 /** Catálogo de repositórios GitHub (página RepoCatalog). */
 const githubReposItems = [
   {
@@ -251,6 +303,12 @@ const sidebars: SidebarsConfig = {
       label: 'DOC GENERATE',
       collapsed: true,
       items: docGenerateItems,
+    },
+    {
+      type: 'category',
+      label: 'PROBAT',
+      collapsed: true,
+      items: probatItems,
     },
     {
       type: 'category',

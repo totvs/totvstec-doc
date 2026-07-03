@@ -63,7 +63,7 @@
 
 .front {
   border: 1px solid var(--ifm-color-emphasis-200);
-  border-left: 3px solid color-mix(in srgb, var(--card-accent) 55%, transparent);
+  border-left: 3px solid var(--card-accent);
   background:
     linear-gradient(
       152deg,
@@ -161,13 +161,9 @@
 .frontTeaser {
   margin: 0;
   font-size: 0.875rem;
-  line-height: 1.55;
+  line-height: 1.5;
   color: var(--ifm-color-content-secondary);
   max-width: 92%;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 .badge {
@@ -249,8 +245,9 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
   padding: 1.5rem 1.5rem 1.35rem;
-  gap: 0.65rem;
+  gap: 0.75rem;
 }
 
 .backTitle {
@@ -266,10 +263,10 @@
 
 .backDescription {
   margin: 0;
-  font-size: 0.875rem;
+  max-width: 22rem;
+  font-size: 0.9375rem;
   line-height: 1.55;
   color: var(--card-back-muted);
-  flex: 1;
 }
 
 .highlights {
@@ -348,8 +345,8 @@
   --card-accent: var(--totvs-home-rest);
 }
 
-.accent_docGenerate {
-  --card-accent: var(--totvs-home-doc-generate);
+.accent_tlpp {
+  --card-accent: var(--totvs-home-tlpp);
 }
 
 .accent_github {
@@ -487,7 +484,4 @@
     letter-spacing: 0.06em;
   }
 
-  .frontTeaser {
-    -webkit-line-clamp: 2;
-  }
 }

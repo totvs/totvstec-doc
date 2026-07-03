@@ -4,3 +4,6 @@
 [submodule "deps/tlpp-sample-rest"]
 	path = deps/tlpp-sample-rest
 	url = https://github.com/totvs/tlpp-sample-rest.git
+[submodule "deps/tlpp-probat-samples"]
+	path = deps/tlpp-probat-samples
+	url = https://github.com/totvs/tlpp-probat-samples.git

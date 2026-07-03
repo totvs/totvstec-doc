@@ -50,11 +50,6 @@ export default function Home(): ReactNode {
                         {card.backDescDefault}
                       </Translate>
                     }
-                    backHighlights={card.highlights.map((item) => (
-                      <Translate key={item.id} id={item.id}>
-                        {item.defaultMessage}
-                      </Translate>
-                    ))}
                   />
                 ))}
               </div>

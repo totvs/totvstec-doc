@@ -10,37 +10,20 @@ import {
 import type {Props} from '@theme/CodeBlock/Content/String';
 import CodeBlockLayout from '@theme/CodeBlock/Layout';
 
-import {normalizeTlppCode} from '@site/src/prism/normalize-tlpp-code';
 import {resolveCodeLanguage} from '@site/src/prism/resolve-code-language';
 
-function prepareCode(
-  children: Props['children'],
-  language?: string,
-  className?: string,
-): {
-  code: Props['children'];
-  language?: string;
-} {
-  const resolved = resolveCodeLanguage(language ?? parseLanguage(className));
-  if (typeof children !== 'string' || resolved !== 'tlpp') {
-    return {code: children, language: resolved};
-  }
-  return {
-    code: normalizeTlppCode(children),
-    language: resolved,
-  };
-}
-
+/**
+ * Resolve aliases de linguagem (```advpl, ```prw, ```th → tlpp) preservando
+ * a indentação original do bloco — classes e métodos TLPP dependem dela.
+ */
 function useCodeBlockMetadata(props: Props): CodeBlockMetadata {
   const {prism} = useThemeConfig();
-  const {code, language} = prepareCode(
-    props.children,
-    props.language,
-    props.className,
+  const language = resolveCodeLanguage(
+    props.language ?? parseLanguage(props.className),
   );
 
   return createCodeBlockMetadata({
-    code,
+    code: props.children,
     className: props.className,
     metastring: props.metastring,
     magicComments: prism.magicComments,

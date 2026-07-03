@@ -86,18 +86,27 @@
 }
 
 .cardsInner {
-  max-width: 58rem;
+  max-width: 64rem;
   margin: 0 auto;
 }
 
 .cardGrid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.35rem;
 }
 
 .cardGrid :global(.section-card) {
   height: 100%;
+}
+
+@media (max-width: 996px) {
+  .cardGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    max-width: 26rem;
+    margin: 0 auto;
+  }
 }
 
 @media (max-width: 768px) {
@@ -122,11 +131,6 @@
   .subtitle {
     font-size: clamp(0.875rem, 3.6vw, 1rem);
     max-width: 22rem;
-  }
-
-  .cardGrid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
   }
 }
 

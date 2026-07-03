@@ -33,6 +33,8 @@ scripts/prepare-standalone-repo.mjs
 !/docs/tlpp/rest/metadados/.gitkeep
 /docs/tlpp/rest/exemplos-repositorio/**
 !/docs/tlpp/rest/exemplos-repositorio/.gitkeep
+/docs/tlpp/probat/**
+!/docs/tlpp/probat/.gitkeep
 
 # Artefatos gerados — não versionar em static/
 /static/openapi/

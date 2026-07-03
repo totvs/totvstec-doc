@@ -61,6 +61,32 @@
       "notifyHub": {
         "eventType": "rest-samples-updated"
       }
+    },
+    {
+      "id": "probat-samples",
+      "owner": "totvs",
+      "name": "tlpp-probat-samples",
+      "branch": "main",
+      "label": "PROBAT — engine de testes",
+      "description": "Exemplos da engine de testes nativa do tlppCore: testes unitários, funcionais e integrados, asserts, suites, cobertura de código, TDD e automação CI/CD.",
+      "tags": ["probat", "testes", "tdd", "coverage"],
+      "highlights": [
+        {"label": "Recursos básicos (asserts, skip, error log)", "path": "test/probat_resources"},
+        {"label": "Execução apartada (suite, thread, priority)", "path": "test/apartness"},
+        {"label": "Testes de API REST", "path": "test/api"},
+        {"label": "Integração com banco de dados", "path": "test/integration"},
+        {"label": "Scripts de automação", "path": "run"}
+      ],
+      "sync": {
+        "submodulePath": "deps/tlpp-probat-samples",
+        "submoduleUrl": "https://github.com/totvs/tlpp-probat-samples.git",
+        "mdxSources": [
+          {"from": "docs/exemplos", "to": "docs/tlpp/probat"}
+        ]
+      },
+      "notifyHub": {
+        "eventType": "probat-samples-updated"
+      }
     }
   ]
 }

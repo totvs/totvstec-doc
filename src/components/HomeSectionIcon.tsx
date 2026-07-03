@@ -26,14 +26,12 @@ export default function HomeSectionIcon({accent}: Props): ReactNode {
           <path d="M9 15h4" />
         </svg>
       );
-    case 'docGenerate':
+    case 'tlpp':
       return (
         <svg viewBox="0 0 24 24" aria-hidden {...common}>
-          <path d="M8 4h8l4 4v12H8z" />
-          <path d="M16 4v4h4" />
-          <path d="M10 13h6" />
-          <path d="M10 16h4" />
-          <path d="M10 10h2" />
+          <path d="M8 8l-4 4 4 4" />
+          <path d="M16 8l4 4-4 4" />
+          <path d="M13.5 5l-3 14" />
         </svg>
       );
     case 'github':

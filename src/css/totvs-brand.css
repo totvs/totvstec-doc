@@ -153,11 +153,11 @@
     var(--totvs-azul) 100%
   );
 
-  /* Home — acentos por seção (doc = azul TOTVS; tools = roxo institucional) */
+  /* Home — um accent por card (primária / secundária / terciária) */
   --totvs-home-rest: var(--totvs-azul);
-  --totvs-home-doc-generate: var(--totvs-azul);
-  --totvs-home-github: var(--totvs-azul);
-  --totvs-home-tools: var(--totvs-tools-accent);
+  --totvs-home-tlpp: var(--totvs-azul);
+  --totvs-home-tools: var(--totvs-roxo);
+  --totvs-home-github: var(--totvs-laranja);
 }
 
 [data-theme='dark'] {
