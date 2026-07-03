@@ -22,8 +22,9 @@ export default function TlppToolsPage(): ReactNode {
             </h1>
             <p className={styles.lead}>
               <Translate id="tools.lead">
-                Ferramentas no navegador para explorar documentação OpenAPI e acelerar o
-                desenvolvimento com TLPP — sem depender do AppServer local.
+                Ferramentas no navegador para explorar documentação OpenAPI e
+                acelerar o desenvolvimento com TLPP — sem depender do AppServer
+                local.
               </Translate>
             </p>
           </div>

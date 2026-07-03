@@ -1,0 +1,59 @@
+.notice {
+  margin: 0 0 0 0.25rem;
+  padding: 0.85rem 0.75rem 0.85rem 0.9rem;
+  border-left: 2px solid color-mix(in srgb, var(--ifm-color-primary) 22%, var(--ifm-color-emphasis-200));
+  border-radius: 0 var(--totvs-radius-lg) var(--totvs-radius-lg) 0;
+  background: color-mix(in srgb, var(--ifm-color-primary) 4%, transparent);
+}
+
+.label {
+  margin: 0 0 0.45rem;
+  padding: 0 0.15rem;
+  font-family: var(--ifm-heading-font-family);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ifm-heading-color);
+  opacity: 0.85;
+}
+
+.text {
+  margin: 0 0 0.55rem;
+  padding: 0 0.15rem;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--ifm-color-content-secondary);
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin: 0 0.15rem;
+  padding: 0.2rem 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--ifm-color-primary) !important;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.linkIcon {
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+[data-theme='light'] .notice {
+  background: color-mix(in srgb, var(--ifm-color-primary) 5%, #ffffff);
+  border-left-color: color-mix(in srgb, var(--ifm-color-primary) 28%, #e2e8ef);
+}
+
+[data-theme='dark'] .notice {
+  background: color-mix(in srgb, var(--totvs-azul) 8%, transparent);
+  border-left-color: color-mix(in srgb, var(--totvs-azul) 28%, transparent);
+}

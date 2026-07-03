@@ -1,0 +1,43 @@
+.docItemContainer header + *,
+.docItemContainer article > *:first-child {
+  margin-top: 0;
+}
+
+@media (min-width: 997px) {
+  .docItemCol {
+    max-width: 75% !important;
+  }
+}
+
+/* Coluna direita: sticky no conjunto, TOC e aviso empilhados sem sobrepor */
+.docAside {
+  position: sticky;
+  top: calc(var(--ifm-navbar-height) + 1rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-height: calc(100vh - var(--ifm-navbar-height) - 2rem);
+  padding-top: 0.25rem;
+}
+
+.docAsideToc {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+/* Desliga o sticky interno do TOC — o pai já é sticky */
+.docAsideToc :global(.theme-doc-toc-desktop) {
+  position: static !important;
+  top: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+.docAsideNotice {
+  flex: 0 0 auto;
+}
+
+.mobileNotice {
+  margin: 0.75rem 0 1.25rem;
+}

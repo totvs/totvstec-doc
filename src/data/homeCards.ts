@@ -13,7 +13,7 @@ export type HomeCard = {
 };
 
 /**
- * Três seções fixas do hub: TLPP | Tools | Github.
+ * Três seções fixas do hub: Docs | Tools | Github.
  * Textos curtos e estáveis — não listam features (evitam poluição
  * e não precisam mudar quando a documentação cresce).
  */
@@ -23,12 +23,12 @@ export const homeCards: HomeCard[] = [
     to: '/docs/tlpp/rest',
     accent: 'tlpp',
     titleId: 'home.card.tlpp.title',
-    titleDefault: 'TLPP',
+    titleDefault: 'DOCS',
     descId: 'home.card.tlpp.desc',
-    descDefault: 'Documentação do tlppCore.',
+    descDefault: 'REST, Doc Generate e PROBAT.',
     backDescId: 'home.card.tlpp.backDesc',
     backDescDefault:
-      'Referência técnica do tlppCore — do servidor REST aos testes automatizados.',
+      'Documentação do REST TLPP, geração OpenAPI e testes com PROBAT.',
   },
   {
     id: 'tools',
