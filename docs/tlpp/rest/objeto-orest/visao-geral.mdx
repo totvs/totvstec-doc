@@ -22,17 +22,19 @@ No [Quickstart](/docs/tlpp/rest/primeiros-passos/quickstart) você usou `oRest:s
 5. **AppServer** devolve HTTP ao cliente (status + body + headers).
 6. **Thread** encerra; o `oRest` daquela requisição é descartado (objeto novo na próxima chamada).
 
-## Responsabilidades
+## Trilha sugerida
 
-| Área | O que fazer |
-|------|-------------|
-| [Leitura da requisição](/docs/tlpp/rest/objeto-orest/leitura-requisicao) | Body, headers, path, query, IP, método HTTP |
-| [Leitura da resposta](/docs/tlpp/rest/objeto-orest/leitura-resposta) | Inspecionar body, status e headers já montados |
-| [Escrita da resposta](/docs/tlpp/rest/objeto-orest/escrita-resposta) | `setResponse`, status, chunked, reset |
-| [Cabeçalhos de resposta](/docs/tlpp/rest/objeto-orest/cabecalhos-resposta) | Criar, atualizar e remover headers HTTP |
-| [Pool e serviço](/docs/tlpp/rest/objeto-orest/pool-servidor) | TlppData, UserData, thread pool, entry points |
-| [Utilitários](/docs/tlpp/rest/objeto-orest/utilitarios) | Finalizar chamada HTTP, fechar conexão |
+Ordem de leitura dentro do oREST. Cada página lista métodos com sintaxe, retorno e exemplo.
 
-Cada página lista os métodos com explicação, sintaxe, retorno e exemplo de código. Sugestão: comece pela [Leitura da requisição](/docs/tlpp/rest/objeto-orest/leitura-requisicao), depois [Escrita da resposta](/docs/tlpp/rest/objeto-orest/escrita-resposta).
+| Etapa | O que você aprende | Comece em |
+|-------|-------------------|-----------|
+| **1 — Leitura da requisição** | Body, headers, path, query, IP, método HTTP | [Leitura da requisição](/docs/tlpp/rest/objeto-orest/leitura-requisicao) |
+| **2 — Leitura da resposta** | Inspecionar body, status e headers já montados | [Leitura da resposta](/docs/tlpp/rest/objeto-orest/leitura-resposta) |
+| **3 — Escrita da resposta** | `setResponse`, status, chunked, reset | [Escrita da resposta](/docs/tlpp/rest/objeto-orest/escrita-resposta) |
+| **4 — Cabeçalhos** | Criar, atualizar e remover headers HTTP | [Cabeçalhos de resposta](/docs/tlpp/rest/objeto-orest/cabecalhos-resposta) |
+| **5 — Pool e serviço** | TlppData, UserData, thread pool, entry points | [Pool e serviço](/docs/tlpp/rest/objeto-orest/pool-servidor) |
+| **6 — Utilitários** | Finalizar chamada HTTP, fechar conexão | [Utilitários](/docs/tlpp/rest/objeto-orest/utilitarios) |
+
+Fontes `.tlpp` por método no GitHub: [Exemplos REST · oREST](/docs/tlpp/rest/exemplos-repositorio/orest-leitura-requisicao).
 
 **Próximo passo:** [Leitura da requisição](/docs/tlpp/rest/objeto-orest/leitura-requisicao)

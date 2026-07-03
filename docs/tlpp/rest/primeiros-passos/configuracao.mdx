@@ -6,6 +6,7 @@ displayed_sidebar: restSidebar
 ---
 
 import SourceFile from '@site/src/components/SourceFile';
+import ExemploRef from '@site/src/components/ExemploRef';
 import {INI_BASICO} from '@site/src/snippets/tdn';
 import {REST_START_TLPP} from '@site/src/snippets/rest_start';
 
@@ -79,5 +80,11 @@ Environment=SEU_ENV
 | Serviço REST fixo, ambiente estável | **INI** |
 | Config em código, múltiplos serviços, start sob demanda | **JSON** |
 | Migração WsRESTful, `LoadURNs` dinâmico | **JSON** — [Sem annotation](/docs/tlpp/rest/configuracoes/sem-annotation) |
+
+## Exemplos no GitHub
+
+Subida do serviço e primeiros endpoints em [Primeiros passos](/docs/tlpp/rest/exemplos-repositorio/primeiros-passos):
+
+<ExemploRef repo="rest-samples" file="rest_start.tlpp" path="primeiros-passos" />
 
 **Próximo passo:** [Composição da URL](/docs/tlpp/rest/primeiros-passos/composicao-url)

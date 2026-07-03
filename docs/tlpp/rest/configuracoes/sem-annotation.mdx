@@ -6,6 +6,7 @@ displayed_sidebar: restSidebar
 ---
 
 import SourceFile from '@site/src/components/SourceFile';
+import ExemploRef from '@site/src/components/ExemploRef';
 import {
   F_INIT_SERVICE,
   LOAD_URNS_NO_ANNOTATION,
@@ -48,5 +49,11 @@ Inclui `sLoadURNs`, handlers por verbo, path param (`:myparam`), classe/método 
 />
 
 As chaves do objeto de configuração devem coincidir exatamente com as seções INI (case-sensitive). Tabela completa: [Referência JSON](/docs/tlpp/rest/configuracoes/referencia-json) · equivalente INI: [Referência INI](/docs/tlpp/rest/configuracoes/referencia-ini).
+
+## Exemplos no GitHub
+
+`LoadURNs` e start sem annotation em [Primeiros passos](/docs/tlpp/rest/exemplos-repositorio/primeiros-passos) e [Configurações](/docs/tlpp/rest/exemplos-repositorio/configuracoes):
+
+<ExemploRef repo="rest-samples" file="load_urns.tlpp" path="primeiros-passos" />
 
 **Próximo passo:** [Referência INI](/docs/tlpp/rest/configuracoes/referencia-ini) — tabela de chaves do `appserver.ini` antes do caminho JSON completo.

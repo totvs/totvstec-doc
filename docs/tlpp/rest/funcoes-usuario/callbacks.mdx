@@ -6,6 +6,7 @@ displayed_sidebar: restSidebar
 ---
 
 import SourceFile from '@site/src/components/SourceFile';
+import ExemploRef from '@site/src/components/ExemploRef';
 import {USER_EXITS_INI, USER_EXITS_JSON} from '@site/src/snippets/tdn';
 
 User Exits são funções ADVPL/TLPP compiladas no RPO, referenciadas na chave `UserExits` do thread pool ou slave. Cada callback aponta para uma função existente no `Environment` daquele pool.
@@ -16,17 +17,19 @@ Entenda [Pool e serviço](/docs/tlpp/rest/objeto-orest/pool-servidor) (thread po
 
 Nenhuma chave é obrigatória — mas se você declarar `OnBlock=`, por exemplo, o valor não pode ficar vazio.
 
-## Os 7 callbacks
+## Trilha sugerida
 
-| Callback | Momento | Onde configurar |
-|----------|---------|-----------------|
-| [OnBlock](/docs/tlpp/rest/funcoes-usuario/on-block) | Na subida do REST — bloqueia URNs listadas | Thread Pool |
-| [OnAllow](/docs/tlpp/rest/funcoes-usuario/on-allow) | Na subida — permite só URNs listadas | Thread Pool |
-| [OnSelect](/docs/tlpp/rest/funcoes-usuario/on-select) | Antes de atender — escolhe qual slave processa | Thread Pool |
-| [OnStart](/docs/tlpp/rest/funcoes-usuario/on-start) | Thread criada | Slave (ou pool sem slaves) |
-| [OnStop](/docs/tlpp/rest/funcoes-usuario/on-stop) | Thread encerrada | Slave (ou pool sem slaves) |
-| [OnSend](/docs/tlpp/rest/funcoes-usuario/on-send) | Antes de enviar resposta ao cliente | Slave (ou pool sem slaves) |
-| [OnError](/docs/tlpp/rest/funcoes-usuario/on-error) | Exceção na thread | Pool e/ou Slave |
+Os 7 callbacks, na ordem em que costumam aparecer no ciclo de vida. Cada página detalha assinatura e exemplo.
+
+| Etapa | Momento | Comece em |
+|-------|---------|-----------|
+| **1 — OnBlock** | Na subida — bloqueia URNs listadas (Thread Pool) | [OnBlock](/docs/tlpp/rest/funcoes-usuario/on-block) |
+| **2 — OnAllow** | Na subida — permite só URNs listadas (Thread Pool) | [OnAllow](/docs/tlpp/rest/funcoes-usuario/on-allow) |
+| **3 — OnSelect** | Antes de atender — escolhe o slave (Thread Pool) | [OnSelect](/docs/tlpp/rest/funcoes-usuario/on-select) |
+| **4 — OnStart** | Thread criada (Slave) | [OnStart](/docs/tlpp/rest/funcoes-usuario/on-start) |
+| **5 — OnStop** | Thread encerrada (Slave) | [OnStop](/docs/tlpp/rest/funcoes-usuario/on-stop) |
+| **6 — OnSend** | Antes de enviar a resposta (Slave) | [OnSend](/docs/tlpp/rest/funcoes-usuario/on-send) |
+| **7 — OnError** | Exceção na thread (Pool e/ou Slave) | [OnError](/docs/tlpp/rest/funcoes-usuario/on-error) |
 
 Autenticação HTTP (`OnAuth`) é outro recurso — configurada em `TlppData`, não em User Exits. Ver [Authorization](/docs/tlpp/rest/authorization).
 
@@ -91,5 +94,11 @@ Mesma finalidade (controlar APIs disponíveis), lógica oposta:
 Configure **apenas um** por ambiente. Se ambos estiverem ativos, **OnAllow vence** e OnBlock é ignorado.
 
 OnBlock e OnAllow só são lidos no **Thread Pool** — configurar nos slaves não tem efeito.
+
+## Exemplos no GitHub
+
+User Exits em [Callbacks](/docs/tlpp/rest/exemplos-repositorio/callbacks):
+
+<ExemploRef repo="rest-samples" file="exemplo_onstart.tlpp" path="callbacks" />
 
 **Próximo passo:** [OnBlock](/docs/tlpp/rest/funcoes-usuario/on-block)

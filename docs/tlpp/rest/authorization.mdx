@@ -6,6 +6,7 @@ displayed_sidebar: restSidebar
 ---
 
 import SourceFile from '@site/src/components/SourceFile';
+import ExemploRef from '@site/src/components/ExemploRef';
 import {
   INI_BASIC_AUTH,
   EXEMPLO_ON_AUTH,
@@ -262,5 +263,11 @@ Dentro de um endpoint, consulte o esquema e a função configurados:
 | `getThreadPoolAuthorizationOnAuth()` | `OnAuth` do thread pool |
 
 Catálogo completo: [Pool e serviço](/docs/tlpp/rest/objeto-orest/pool-servidor).
+
+## Exemplos no GitHub
+
+Basic Auth, OAuth2 e `OnAuth` em [Authorization](/docs/tlpp/rest/exemplos-repositorio/authorization):
+
+<ExemploRef repo="rest-samples" file="exemplo_onAuth.tlpp" path="authorization" />
 
 **Próximo passo:** [Callbacks](/docs/tlpp/rest/funcoes-usuario/callbacks) — hooks de ciclo de vida (opcional para APIs simples).

@@ -422,15 +422,6 @@ html {
   border-top: none;
 }
 
-[data-theme='light'] .table-of-contents__link {
-  color: var(--totvs-text-muted);
-}
-
-[data-theme='light'] .table-of-contents__link--active,
-[data-theme='light'] .table-of-contents__link:hover {
-  color: var(--totvs-cyan-dim);
-}
-
 .theme-doc-sidebar-menu {
   padding: 0.5rem 0.65rem 1.5rem;
 }
@@ -552,6 +543,145 @@ html {
 
 [data-theme='dark'] .menu__list .menu__list {
   border-left-color: rgba(255, 255, 255, 0.08);
+}
+
+/* ── TOC direita (nesta página) ───────────────── */
+
+.theme-doc-toc-desktop {
+  padding-top: 0.25rem;
+}
+
+.table-of-contents {
+  padding: 0.85rem 0.75rem 0.85rem 0.9rem;
+  margin-left: 0.25rem;
+  border-left: 2px solid color-mix(in srgb, var(--ifm-color-primary) 22%, var(--ifm-color-emphasis-200));
+  border-radius: 0 var(--totvs-radius-lg) var(--totvs-radius-lg) 0;
+  background: color-mix(in srgb, var(--ifm-color-primary) 4%, transparent);
+}
+
+.table-of-contents::before {
+  content: 'Nesta página';
+  display: block;
+  margin: 0 0 0.65rem;
+  padding: 0 0.15rem;
+  font-family: var(--ifm-heading-font-family);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ifm-heading-color);
+  opacity: 0.85;
+}
+
+.table-of-contents li {
+  margin: 0.15rem 0;
+}
+
+.table-of-contents__link {
+  display: block;
+  padding: 0.28rem 0.45rem;
+  border-radius: 6px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--totvs-text-muted);
+  transition:
+    color 0.15s ease,
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.table-of-contents__link:hover {
+  color: var(--ifm-heading-color);
+  background: color-mix(in srgb, var(--ifm-color-primary) 8%, transparent);
+  text-decoration: none;
+}
+
+.table-of-contents__link--active {
+  color: var(--ifm-color-primary) !important;
+  font-weight: 700;
+  background: color-mix(in srgb, var(--ifm-color-primary) 12%, transparent);
+  box-shadow: inset 2px 0 0 var(--ifm-color-primary);
+}
+
+.table-of-contents > li > .table-of-contents__link {
+  font-weight: 600;
+}
+
+.table-of-contents ul {
+  padding-left: 0.55rem;
+  margin-top: 0.1rem;
+  border-left: 1px solid color-mix(in srgb, var(--ifm-color-primary) 14%, var(--ifm-color-emphasis-200));
+}
+
+.table-of-contents ul .table-of-contents__link {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: color-mix(in srgb, var(--totvs-text-muted) 88%, transparent);
+}
+
+[data-theme='light'] .table-of-contents {
+  background: color-mix(in srgb, var(--ifm-color-primary) 5%, #ffffff);
+  border-left-color: color-mix(in srgb, var(--ifm-color-primary) 28%, #e2e8ef);
+}
+
+[data-theme='light'] .table-of-contents__link {
+  color: #5a6578;
+}
+
+[data-theme='light'] .table-of-contents__link:hover {
+  color: var(--totvs-azul-escuro);
+}
+
+[data-theme='light'] .table-of-contents__link--active {
+  color: var(--ifm-color-primary) !important;
+}
+
+[data-theme='dark'] .table-of-contents {
+  background: color-mix(in srgb, var(--totvs-azul) 8%, transparent);
+  border-left-color: color-mix(in srgb, var(--totvs-azul) 28%, transparent);
+}
+
+[data-theme='dark'] .table-of-contents::before {
+  color: color-mix(in srgb, var(--totvs-azul) 40%, #e8f4f8);
+}
+
+[data-theme='dark'] .table-of-contents__link--active {
+  color: var(--totvs-azul) !important;
+  background: color-mix(in srgb, var(--totvs-azul) 14%, transparent);
+  box-shadow:
+    inset 2px 0 0 var(--totvs-azul),
+    0 0 10px color-mix(in srgb, var(--totvs-azul) 10%, transparent);
+}
+
+/* TOC mobile (colapsável) */
+.theme-doc-toc-mobile {
+  margin: 0.5rem 0 1.25rem;
+  border: 1px solid color-mix(in srgb, var(--ifm-color-primary) 18%, var(--ifm-color-emphasis-200));
+  border-radius: var(--totvs-radius-lg);
+  background: color-mix(in srgb, var(--ifm-color-primary) 5%, transparent);
+  overflow: hidden;
+}
+
+.theme-doc-toc-mobile button {
+  font-family: var(--ifm-heading-font-family);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  color: var(--ifm-heading-color);
+}
+
+.theme-doc-toc-mobile .table-of-contents {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  padding-top: 0.25rem;
+}
+
+.theme-doc-toc-mobile .table-of-contents::before {
+  display: none;
 }
 
 /* Exemplo ref callout */

@@ -33,9 +33,10 @@ export default function SourceFile({
       ? normalizeTlppCode(code)
       : code.trim();
   const lineCount = displayCode ? displayCode.split('\n').length : 0;
+  const langLabel = (resolvedLanguage ?? 'text').toUpperCase();
 
   return (
-    <div className={styles.wrap}>
+    <div className={clsx(styles.wrap, open && styles.wrapOpen)}>
       <button
         type="button"
         className={clsx(styles.header, open && styles.headerOpen)}
@@ -43,13 +44,30 @@ export default function SourceFile({
         aria-controls={panelId}
         onClick={() => setOpen((value) => !value)}>
         <span className={styles.headerMain}>
-          <span className={styles.title}>{title}</span>
+          <span className={styles.titleRow}>
+            <span className={styles.title}>{title}</span>
+            <span className={styles.lang}>{langLabel}</span>
+          </span>
           <span className={styles.path}>{path}</span>
         </span>
         <span className={styles.meta}>
-          {lineCount} linhas
+          <span className={styles.lines}>{lineCount} linhas</span>
           <span className={styles.chevron} aria-hidden="true">
-            {open ? '▾' : '▸'}
+            <svg
+              viewBox="0 0 24 24"
+              width="16"
+              height="16"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.25"
+              strokeLinecap="round"
+              strokeLinejoin="round">
+              {open ? (
+                <path d="M6 9l6 6 6-6" />
+              ) : (
+                <path d="M9 6l6 6-6 6" />
+              )}
+            </svg>
           </span>
         </span>
       </button>
@@ -58,7 +76,6 @@ export default function SourceFile({
           <CodeBlock
             language={resolvedLanguage}
             showLineNumbers
-            title={path}
             className={styles.codeBlock}>
             {displayCode}
           </CodeBlock>

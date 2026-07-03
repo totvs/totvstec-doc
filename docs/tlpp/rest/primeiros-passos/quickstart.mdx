@@ -6,9 +6,19 @@ displayed_sidebar: restSidebar
 ---
 
 import SourceFile from '@site/src/components/SourceFile';
+import ExemploRef from '@site/src/components/ExemploRef';
 import {INI_BASICO} from '@site/src/snippets/tdn';
 
 Neste guia você sobe um serviço REST no AppServer e responde `Hello World` a uma requisição HTTP. Não é necessário conhecer OAuth, callbacks nem OpenAPI — só o básico de TLPP e do `appserver.ini`.
+
+## Trilha deste bloco (Começando)
+
+| Etapa | O que você aprende | Comece em |
+|-------|-------------------|-----------|
+| **1 — Quickstart** | Primeiro endpoint em minutos | Esta página |
+| **2 — Configuração** | INI vs JSON, seções do AppServer | [Configuração](/docs/tlpp/rest/primeiros-passos/configuracao) |
+| **3 — Composição da URL** | Path virtual + endpoint | [Composição da URL](/docs/tlpp/rest/primeiros-passos/composicao-url) |
+| **4 — Avisos e dicas** | Cuidados antes de avançar | [Avisos e dicas](/docs/tlpp/rest/primeiros-passos/avisos-dicas) |
 
 ## O que é REST (em uma frase)
 
@@ -86,5 +96,11 @@ Se você configurou um `Path` diferente (ex.: `/api`), a URL fica `http://localh
 | 404 | RPO recompilado e ambiente recarregado; URL com o `Path` correto do INI |
 | Conexão recusada | AppServer rodando e `port=` igual ao que você testa |
 | 500 | Console do AppServer — erro na função `hello` |
+
+## Exemplos no GitHub
+
+Mais variações (função, classe, start do serviço) em [Primeiros passos](/docs/tlpp/rest/exemplos-repositorio/primeiros-passos):
+
+<ExemploRef repo="rest-samples" file="exemplo_funcao.tlpp" path="primeiros-passos" />
 
 **Próximo passo:** [Configuração INI e JSON](/docs/tlpp/rest/primeiros-passos/configuracao) — entenda cada seção do INI e o caminho alternativo via JSON.

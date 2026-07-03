@@ -1,9 +1,20 @@
 .wrap {
   margin: 1.5rem 0;
   border: 1px solid var(--ifm-color-emphasis-200);
-  border-radius: 10px;
+  border-radius: var(--totvs-radius-xl);
   overflow: hidden;
   background: var(--ifm-background-surface-color);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--totvs-azul-escuro) 4%, transparent);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.wrapOpen {
+  border-color: color-mix(in srgb, var(--ifm-color-primary) 28%, var(--ifm-color-emphasis-200));
+  box-shadow:
+    0 1px 2px color-mix(in srgb, var(--totvs-azul-escuro) 4%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--ifm-color-primary) 8%, transparent);
 }
 
 .header {
@@ -12,35 +23,66 @@
   justify-content: space-between;
   gap: 1rem;
   width: 100%;
-  padding: 0.85rem 1rem;
+  padding: 0.9rem 1.1rem;
   border: 0;
-  background: var(--ifm-color-emphasis-100);
+  border-left: 3px solid transparent;
+  background: color-mix(in srgb, var(--ifm-color-emphasis-100) 70%, transparent);
   color: var(--ifm-font-color-base);
   cursor: pointer;
   text-align: left;
-  transition: background-color 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
 }
 
-.header:hover,
+.header:hover {
+  background: color-mix(in srgb, var(--ifm-color-primary) 6%, var(--ifm-background-surface-color));
+}
+
 .headerOpen {
-  background: rgba(var(--totvs-azul-rgb), 0.08);
+  border-left-color: var(--ifm-color-primary);
+  background: color-mix(in srgb, var(--ifm-color-primary) 7%, var(--ifm-background-surface-color));
 }
 
 .headerMain {
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 0.3rem;
   min-width: 0;
 }
 
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
 .title {
-  font-weight: 600;
-  font-size: 0.95rem;
+  font-weight: var(--totvs-weight-semibold);
+  font-size: 0.9375rem;
+  line-height: 1.3;
+  color: var(--ifm-heading-color);
+}
+
+.lang {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.1rem 0.4rem;
+  border-radius: 999px;
+  font-size: 0.625rem;
+  font-weight: var(--totvs-weight-bold);
+  letter-spacing: 0.06em;
+  line-height: 1.3;
+  color: var(--ifm-color-primary);
+  background: color-mix(in srgb, var(--ifm-color-primary) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--ifm-color-primary) 18%, transparent);
 }
 
 .path {
   font-family: var(--ifm-font-family-monospace);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
+  line-height: 1.35;
   color: var(--ifm-color-content-secondary);
   word-break: break-all;
 }
@@ -48,26 +90,56 @@
 .meta {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.65rem;
   flex-shrink: 0;
-  font-size: 0.8rem;
+}
+
+.lines {
+  font-size: 0.75rem;
   color: var(--ifm-color-content-secondary);
+  white-space: nowrap;
 }
 
 .chevron {
-  color: var(--totvs-cyan);
-  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 999px;
+  color: var(--ifm-color-primary);
+  background: color-mix(in srgb, var(--ifm-color-primary) 10%, transparent);
+  transition:
+    background-color 0.15s ease,
+    transform 0.15s ease;
 }
 
-.panel :global(pre) {
+.header:hover .chevron,
+.headerOpen .chevron {
+  background: color-mix(in srgb, var(--ifm-color-primary) 16%, transparent);
+}
+
+.panel {
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
+/* CodeBlock embutido: sem moldura/título duplicados */
+.panel :global(div[class*='codeBlockContainer']),
+.codeBlock:global(div[class*='codeBlockContainer']),
+.panel :global(.theme-code-block) {
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.panel :global(pre),
+.codeBlock :global(pre) {
   margin: 0;
   border-radius: 0;
+  border-left: 0;
 }
 
-.panel :global(.theme-code-block) {
-  margin-bottom: 0;
-}
-
-.codeBlock :global(pre) {
-  border-left: 3px solid var(--totvs-cyan);
+.panel :global(div[class*='codeBlockTitle']) {
+  display: none !important;
 }
