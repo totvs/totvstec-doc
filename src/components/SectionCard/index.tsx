@@ -107,11 +107,20 @@ export default function SectionCard({
                 ))}
               </ul>
             )}
-            <span className={styles.ctaBtn}>
-              <Translate id="home.card.cta">Acessar seção</Translate>
-              <span className={styles.ctaArrow} aria-hidden>
-                →
-              </span>
+            <span className={styles.ctaBtn} aria-hidden>
+              <svg
+                className={styles.ctaIcon}
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.25"
+                strokeLinecap="round"
+                strokeLinejoin="round">
+                <path d="M5 12h14" />
+                <path d="M13 6l6 6-6 6" />
+              </svg>
             </span>
           </div>
         </div>

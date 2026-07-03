@@ -51,6 +51,15 @@ body,
 }
 
 [data-theme='light'] {
+  /* Mesma família do azul TOTVS (#00dbff), mais fechada p/ contraste em fundo claro */
+  --ifm-color-primary: #007a99;
+  --ifm-color-primary-dark: #006680;
+  --ifm-color-primary-darker: #005566;
+  --ifm-color-primary-darkest: #004455;
+  --ifm-color-primary-light: #0099c2;
+  --ifm-color-primary-lighter: #00b8e6;
+  --ifm-color-primary-lightest: #00dbff;
+
   --ifm-background-color: var(--totvs-surface-bg);
   --ifm-background-surface-color: var(--totvs-surface);
   --ifm-footer-background-color: #eef1f4;
@@ -58,8 +67,8 @@ body,
   --ifm-font-color-base: var(--totvs-texto);
   --ifm-hover-overlay: rgba(var(--totvs-azul-rgb), 0.06);
   --ifm-menu-color: var(--totvs-text-muted);
-  --ifm-menu-color-active: var(--totvs-azul-dim);
-  --ifm-menu-color-background-active: rgba(var(--totvs-azul-rgb), 0.1);
+  --ifm-menu-color-active: var(--ifm-color-primary);
+  --ifm-menu-color-background-active: rgba(0, 122, 153, 0.1);
   --ifm-toc-border-color: #e2e8ef;
   --ifm-table-border-color: #dde3ea;
   --ifm-table-stripe-background: #f7f9fc;
@@ -274,14 +283,6 @@ html {
 .navbar__items--right .navbar__link:hover {
   color: var(--totvs-azul-claro);
   background: transparent;
-}
-
-/* Tools na navbar — roxo quando ativo */
-.navbar__link[href$='/tools'].navbar__link--active,
-.navbar__link[href*='/tools/'].navbar__link--active {
-  color: var(--totvs-branco);
-  background: var(--totvs-tools-accent-soft);
-  box-shadow: inset 0 -2px 0 var(--totvs-tools-accent);
 }
 
 .navbar a.navbar__link svg {
@@ -569,7 +570,7 @@ html {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--totvs-cyan);
+  color: var(--ifm-color-primary);
   margin-bottom: 0.35rem;
 }
 
@@ -590,11 +591,11 @@ html {
 .exemplo-ref__body a {
   color: inherit;
   text-decoration: underline;
-  text-decoration-color: rgba(var(--totvs-azul-rgb), 0.45);
+  text-decoration-color: color-mix(in srgb, var(--ifm-color-primary) 45%, transparent);
 }
 
 .exemplo-ref__body a:hover code {
-  color: var(--totvs-cyan);
+  color: var(--ifm-color-primary);
 }
 
 [data-theme='dark'] .exemplo-ref__body code {
@@ -603,8 +604,13 @@ html {
 }
 
 [data-theme='light'] .exemplo-ref__body code {
-  color: #0099c2;
+  color: var(--ifm-color-primary);
   background: #e6fbff;
+}
+
+[data-theme='light'] .exemplo-ref {
+  border-color: color-mix(in srgb, var(--ifm-color-primary) 28%, transparent);
+  background: color-mix(in srgb, var(--ifm-color-primary) 6%, transparent);
 }
 
 /* Hero — dark */

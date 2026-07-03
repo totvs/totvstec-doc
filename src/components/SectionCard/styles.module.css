@@ -302,40 +302,39 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.35rem;
   align-self: flex-start;
   margin-top: auto;
-  padding: 0.3rem 0.55rem;
-  border-radius: var(--totvs-radius-sm);
-  font-size: 0.6875rem;
-  font-weight: var(--totvs-weight-medium);
-  letter-spacing: 0.02em;
-  text-transform: none;
-  color: color-mix(in srgb, var(--totvs-branco) 92%, transparent);
-  background: color-mix(in srgb, var(--totvs-branco) 8%, transparent);
-  border: 1px solid color-mix(in srgb, var(--totvs-branco) 28%, transparent);
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 999px;
+  color: var(--totvs-branco);
+  background: color-mix(in srgb, var(--totvs-branco) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--totvs-branco) 32%, transparent);
   box-shadow: none;
   transition:
-    transform 0.2s ease,
-    border-color 0.2s ease,
-    background 0.2s ease;
+    transform 0.25s cubic-bezier(0.4, 0.15, 0.2, 1),
+    border-color 0.25s ease,
+    background 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.ctaIcon {
+  display: block;
+  transition: transform 0.25s cubic-bezier(0.4, 0.15, 0.2, 1);
 }
 
 .card:hover .ctaBtn {
-  transform: translateX(2px);
-  background: color-mix(in srgb, var(--totvs-branco) 14%, transparent);
-  border-color: color-mix(in srgb, var(--totvs-branco) 45%, transparent);
-  box-shadow: none;
+  color: var(--totvs-azul-escuro);
+  background: var(--card-accent);
+  border-color: var(--card-accent);
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--card-accent) 28%, transparent),
+    0 6px 16px color-mix(in srgb, var(--card-accent) 35%, transparent);
+  transform: translateX(3px);
 }
 
-.ctaArrow {
-  font-size: 0.8rem;
-  line-height: 1;
-  opacity: 0.85;
-  transition: transform 0.2s ease;
-}
-
-.card:hover .ctaArrow {
+.card:hover .ctaIcon {
   transform: translateX(2px);
 }
 
