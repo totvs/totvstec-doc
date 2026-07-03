@@ -1,0 +1,52 @@
+.intro {
+  margin-bottom: 1.5rem;
+  line-height: 1.65;
+}
+
+.index {
+  margin: 1.5rem 0 2rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 10px;
+  background: var(--ifm-background-surface-color);
+}
+
+.indexTitle {
+  margin: 0 0 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ifm-color-content-secondary);
+}
+
+.indexList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.65rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.indexList a {
+  display: inline-block;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.82rem;
+  text-decoration: none;
+  background: var(--ifm-color-emphasis-100);
+  color: var(--ifm-color-primary);
+}
+
+.indexList a:hover {
+  background: rgba(var(--totvs-azul-rgb), 0.12);
+  text-decoration: none;
+}
+
+.count {
+  margin-top: 0.75rem;
+  font-size: 0.82rem;
+  color: var(--ifm-color-content-secondary);
+}

@@ -1,0 +1,66 @@
+{
+  "$comment": "Fonte única de verdade para URLs GitHub, sync de MDX e deploy.",
+  "site": {
+    "owner": "totvs",
+    "name": "totvstec-doc",
+    "branch": "main",
+    "pagesHost": "https://totvs.github.io",
+    "baseUrl": "/totvstec-doc/"
+  },
+  "repos": [
+    {
+      "id": "doc-generate",
+      "owner": "totvs",
+      "name": "tlpp-sample-rest-documentation",
+      "branch": "main",
+      "label": "Doc Generate — metadados e OpenAPI",
+      "description": "Código TLPP das quatro abordagens de metadados, rotas dinâmicas, `tlpp.doc.generate()` e snapshot OpenAPI. Inclui MDX de Metadados e Doc Generate.",
+      "tags": ["openapi", "metadados", "doc-generate"],
+      "srcRoot": "src",
+      "openApiPath": "output/api_doc_8080.yaml",
+      "highlights": [
+        {"label": "Annotation tradicional", "path": "src/rest/01_traditional_annotation"},
+        {"label": "Dicionário i18n", "path": "src/rest/02_dictionary_i18n"},
+        {"label": "Função DOC dedicada", "path": "src/rest/03_dedicated_function_doc"},
+        {"label": "Rotas dinâmicas", "path": "src/rest/04_dynamic_mapping"},
+        {"label": "Gerador OpenAPI", "path": "src/rest/generator"}
+      ],
+      "sync": {
+        "submodulePath": "deps/tlpp-sample-rest-documentation",
+        "submoduleUrl": "https://github.com/totvs/tlpp-sample-rest-documentation.git",
+        "mdxSources": [
+          {"from": "docs/metadados", "to": "docs/tlpp/rest/metadados"},
+          {"from": "docs/doc-generate", "to": "docs/tlpp/rest/doc-generate"}
+        ]
+      },
+      "notifyHub": {
+        "eventType": "doc-generate-updated"
+      }
+    },
+    {
+      "id": "rest-samples",
+      "owner": "totvs",
+      "name": "tlpp-sample-rest",
+      "branch": "master",
+      "label": "REST TLPP — exemplos TDN",
+      "description": "Exemplos TLPP extraídos do TDN oficial: oREST, verbos HTTP, configs, callbacks e primeiros passos.",
+      "tags": ["rest", "orest", "tdn"],
+      "srcRoot": "src",
+      "highlights": [
+        {"label": "Primeiros passos", "path": "src/primeiros-passos"},
+        {"label": "oREST", "path": "src/orest"},
+        {"label": "Verbos HTTP", "path": "src/verbs"}
+      ],
+      "sync": {
+        "submodulePath": "deps/tlpp-sample-rest",
+        "submoduleUrl": "https://github.com/totvs/tlpp-sample-rest.git",
+        "mdxSources": [
+          {"from": "docs/exemplos", "to": "docs/tlpp/rest/exemplos-repositorio"}
+        ]
+      },
+      "notifyHub": {
+        "eventType": "rest-samples-updated"
+      }
+    }
+  ]
+}

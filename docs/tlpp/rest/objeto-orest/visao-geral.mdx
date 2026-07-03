@@ -1,0 +1,38 @@
+---
+title: Visão geral do oRest
+description: Objeto injetado automaticamente em cada thread.
+sidebar_position: 1
+displayed_sidebar: restSidebar
+---
+
+`oRest` é instanciado **automaticamente** por thread — não construa manualmente com `New()`.
+
+Cada requisição recebe um objeto isolado para leitura de entrada e montagem da resposta. Quando a requisição termina, o objeto é descartado.
+
+:::tip Em outras palavras
+No [Quickstart](/docs/tlpp/rest/primeiros-passos/quickstart) você usou `oRest:setResponse()` sem explicar o objeto. Pense no `oRest` como o **mensageiro** entre o HTTP e o seu código: ele traz o que o cliente enviou e leva de volta o que você quer responder.
+:::
+
+## Ciclo de uma requisição
+
+1. **Cliente** envia HTTP — ex.: `GET /api/users/1`.
+2. **AppServer** recebe na porta REST, aloca uma thread do pool e injeta o `oRest` nessa thread.
+3. **Sua função** (`@Get`, handler de `LoadURNs`, etc.) executa — lê entrada com `oRest:getPathParamsRequest()`, `getQueryRequest()`, etc.
+4. **Sua função** monta a saída — `oRest:setResponse()`, `setStatusResponse()`, headers.
+5. **AppServer** devolve HTTP ao cliente (status + body + headers).
+6. **Thread** encerra; o `oRest` daquela requisição é descartado (objeto novo na próxima chamada).
+
+## Responsabilidades
+
+| Área | O que fazer |
+|------|-------------|
+| [Leitura da requisição](/docs/tlpp/rest/objeto-orest/leitura-requisicao) | Body, headers, path, query, IP, método HTTP |
+| [Leitura da resposta](/docs/tlpp/rest/objeto-orest/leitura-resposta) | Inspecionar body, status e headers já montados |
+| [Escrita da resposta](/docs/tlpp/rest/objeto-orest/escrita-resposta) | `setResponse`, status, chunked, reset |
+| [Cabeçalhos de resposta](/docs/tlpp/rest/objeto-orest/cabecalhos-resposta) | Criar, atualizar e remover headers HTTP |
+| [Pool e serviço](/docs/tlpp/rest/objeto-orest/pool-servidor) | TlppData, UserData, thread pool, entry points |
+| [Utilitários](/docs/tlpp/rest/objeto-orest/utilitarios) | Finalizar chamada HTTP, fechar conexão |
+
+Cada página lista os métodos com explicação, sintaxe, retorno e exemplo de código. Sugestão: comece pela [Leitura da requisição](/docs/tlpp/rest/objeto-orest/leitura-requisicao), depois [Escrita da resposta](/docs/tlpp/rest/objeto-orest/escrita-resposta).
+
+**Próximo passo:** [Leitura da requisição](/docs/tlpp/rest/objeto-orest/leitura-requisicao)

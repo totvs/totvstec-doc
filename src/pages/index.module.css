@@ -1,0 +1,141 @@
+/* Homepage — TOTVSTec */
+
+.page {
+  --home-muted: var(--ifm-color-content-secondary);
+  position: relative;
+  min-height: calc(100vh - var(--ifm-navbar-height));
+  background-color: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+}
+
+.page::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: linear-gradient(
+      rgba(var(--totvs-azul-escuro-rgb), 0.035) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(var(--totvs-azul-escuro-rgb), 0.035) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+
+:global([data-theme='dark']) .page::before {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+}
+
+/* ── Hero ───────────────────────────────────────── */
+
+.hero {
+  position: relative;
+  z-index: 1;
+  padding: clamp(2.75rem, 6vw, 4rem) 0 clamp(1rem, 2.5vw, 1.5rem);
+}
+
+.heroInner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.625rem;
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+.platformLabel {
+  margin: 0;
+  font-size: clamp(0.75rem, 1.6vw, var(--totvs-text-sm));
+  font-weight: var(--totvs-weight-semibold);
+  letter-spacing: 0.18em;
+  text-transform: lowercase;
+  color: var(--totvs-azul);
+}
+
+.title {
+  font-size: clamp(1.875rem, 4vw + 0.5rem, 3rem);
+  font-weight: var(--totvs-weight-bold);
+  letter-spacing: 0.04em;
+  line-height: 1.08;
+  margin: 0;
+  color: var(--totvs-azul-escuro);
+}
+
+:global([data-theme='dark']) .title {
+  color: var(--totvs-branco);
+}
+
+.subtitle {
+  margin: 0.125rem 0 0;
+  font-size: clamp(0.9375rem, 1.8vw, 1.125rem);
+  line-height: var(--totvs-leading-relaxed);
+  font-weight: var(--totvs-weight-regular);
+  color: var(--home-muted);
+  max-width: 34rem;
+}
+
+/* ── Cards ──────────────────────────────────────── */
+
+.cards {
+  position: relative;
+  z-index: 1;
+  padding: clamp(0.75rem, 2vw, 1.25rem) 0 clamp(3.5rem, 7vw, 5rem);
+}
+
+.cardsInner {
+  max-width: 58rem;
+  margin: 0 auto;
+}
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.35rem;
+}
+
+.cardGrid :global(.section-card) {
+  height: 100%;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: clamp(2.25rem, 7vw, 3rem) 0 0.75rem;
+  }
+
+  .heroInner {
+    gap: 0.5rem;
+    padding-inline: 0.25rem;
+  }
+
+  .platformLabel {
+    letter-spacing: 0.14em;
+  }
+
+  .title {
+    font-size: clamp(1.625rem, 7.5vw, 2.125rem);
+    letter-spacing: 0.03em;
+  }
+
+  .subtitle {
+    font-size: clamp(0.875rem, 3.6vw, 1rem);
+    max-width: 22rem;
+  }
+
+  .cardGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 2.25rem 0;
+  }
+
+  .title {
+    font-size: 1.625rem;
+  }
+}

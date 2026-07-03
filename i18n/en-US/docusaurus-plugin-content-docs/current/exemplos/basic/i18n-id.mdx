@@ -1,0 +1,32 @@
+---
+sidebar_position: 3
+title: "03 — i18n por ID"
+---
+
+import CodeToOpenAPI from '@site/src/components/CodeToOpenAPI';
+
+# Exemplo 03 — Documentação via i18n
+
+## Objetivo
+
+Centralizar a documentação no arquivo **i18n** usando `description="<1>"`.
+
+## Arquivos
+
+- `src/rest/basic/sample_03_basic_by_id.tlpp`
+- `src/rest/basic/sample_03_basic_by_id-i18n.tlpp`
+
+<CodeToOpenAPI
+tlpp={`@Get(endpoint="/rest/sample/doc/basic/03", description="<1>")
+function U_rest_sample_03_basic() as logical`}
+yaml={`/rest/sample/doc/basic/03:
+  get:
+    summary: simple DOC 03
+    description: Example REST documentation using i18n with ID`}
+yamlTitle="OpenAPI (locale en-us no snapshot)"
+/>
+
+## Passos no AppServer
+
+1. Compile **ambos** os arquivos (principal + i18n)
+2. Passe locales em `tlpp.doc.generate(..., {'en-us','pt-br'})`

@@ -1,0 +1,20 @@
+---
+title: Repositórios GitHub
+description: Projetos de código referenciados pela documentação TLPP Docs.
+sidebar_position: 7
+displayed_sidebar: restSidebar
+---
+
+import RepoCatalog from '@site/src/components/RepoCatalog';
+
+O **TLPP Docs** é só o site de documentação. O código de exemplo vive em repositórios separados — cada um com um propósito.
+
+<RepoCatalog intro="Clique no repositório para abrir no GitHub ou use os atalhos para pastas específicas." />
+
+## Adicionar outro projeto
+
+1. Edite `src/data/external-repos.ts` no repositório do site
+2. Inclua um item em `EXTERNAL_REPOS` com `owner`, `name`, `branch`, `highlights` etc.
+3. Nos MDX, use `<ExemploRef repo="seu-id" file="..." path="..." />` para apontar exemplos
+
+**Próximo passo:** [Metadados — introdução](/docs/tlpp/rest/metadados/visao-geral) · [Exemplos REST](/docs/tlpp/rest/exemplos-repositorio) · [Exemplos metadados](/docs/tlpp/rest/metadados/exemplos/basic/description-only)

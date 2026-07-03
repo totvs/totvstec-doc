@@ -1,0 +1,15 @@
+{
+  "title.tagline": {
+    "message": "Virtual documentation for the native tlppCore REST API generator",
+    "description": "Homepage tagline"
+  },
+  "link.title.TOTVS": {
+    "message": "TOTVS"
+  },
+  "link.item.label.TOTVS": {
+    "message": "TOTVS"
+  },
+  "link.item.label.TOTVS Developers": {
+    "message": "TOTVS Developers"
+  }
+}

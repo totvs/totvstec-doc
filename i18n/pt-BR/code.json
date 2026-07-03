@@ -1,0 +1,331 @@
+{
+  "docs.navbar.label": {
+    "message": "Documentação",
+    "description": "Navbar docs link"
+  },
+  "docs.navbar.apiExplorer": {
+    "message": "API Explorer",
+    "description": "Navbar API explorer link"
+  },
+  "footer.docs.title": {
+    "message": "Documentação"
+  },
+  "footer.docs.intro": {
+    "message": "Introdução"
+  },
+  "footer.docs.gettingStarted": {
+    "message": "Primeiros passos"
+  },
+  "footer.docs.metadata": {
+    "message": "Metadados"
+  },
+  "footer.project.title": {
+    "message": "Projeto"
+  },
+  "footer.project.fileMap": {
+    "message": "Mapa de arquivos"
+  },
+  "footer.project.github": {
+    "message": "GitHub"
+  },
+  "footer.docs.apiExplorer": {
+    "message": "API Explorer"
+  },
+  "footer.ecosystem.title": {
+    "message": "Ecossistema"
+  },
+  "footer.ecosystem.oncaPreta": {
+    "message": "AppServer Onça Preta"
+  },
+  "footer.ecosystem.tlpp": {
+    "message": "TLPP e tlppCore"
+  },
+  "footer.more.title": {
+    "message": "Mais"
+  },
+  "footer.more.github": {
+    "message": "GitHub"
+  },
+  "footer.more.issues": {
+    "message": "Issues"
+  },
+  "footer.more.swagger": {
+    "message": "Swagger Editor"
+  },
+  "components.totvsDivider.default": {
+    "message": "TOTVS"
+  },
+  "components.clawDivider.default": {
+    "message": "TOTVS"
+  },
+  "components.betaDisclaimer.title": {
+    "message": "Aviso — REST-DOC em evolução"
+  },
+  "components.betaDisclaimer.body": {
+    "message": "O módulo REST-DOC é recente no tlppCore e ainda está em implementação. O motor de geração é propriedade da TOTVS S.A. e não está sob licença MIT. Para dúvidas, abra uma issue no repositório."
+  },
+  "components.virtualBanner": {
+    "message": "Documentação virtual — os exemplos .tlpp executam no seu AppServer, não neste site."
+  },
+  "home.cta.start": {
+    "message": "Ver metadados"
+  },
+  "home.platform": {
+    "message": "plataforma"
+  },
+  "home.brand": {
+    "message": "TOTVSTec"
+  },
+  "home.tagline": {
+    "message": "Documentação, Exemplos e ferramentas"
+  },
+  "home.sections.eyebrow": {
+    "message": "Hub TLPP"
+  },
+  "home.sections.title": {
+    "message": "Escolha uma seção"
+  },
+  "home.card.cta": {
+    "message": "Acessar seção"
+  },
+  "home.card.flipHint": {
+    "message": "Passe o mouse"
+  },
+  "home.card.rest.backDesc": {
+    "message": "Documentação completa da API REST nativa do tlppCore — da configuração do servidor até exemplos prontos para produção."
+  },
+  "home.card.rest.highlight1": {
+    "message": "Trilha guiada do básico ao avançado"
+  },
+  "home.card.rest.highlight2": {
+    "message": "oREST, rotas, callbacks e autenticação"
+  },
+  "home.card.rest.highlight3": {
+    "message": "Exemplos reais no AppServer"
+  },
+  "home.card.docGenerate.backDesc": {
+    "message": "Aprenda a documentar APIs direto no código TLPP e gerar especificações OpenAPI automaticamente."
+  },
+  "home.card.docGenerate.highlight1": {
+    "message": "Annotations e descrições no código"
+  },
+  "home.card.docGenerate.highlight2": {
+    "message": "tlpp.doc.generate() e pipeline OpenAPI"
+  },
+  "home.card.docGenerate.highlight3": {
+    "message": "Metadados, i18n e componentes"
+  },
+  "home.card.github.backDesc": {
+    "message": "Código-fonte aberto para estudar, clonar e adaptar nos seus projetos TLPP."
+  },
+  "home.card.github.highlight1": {
+    "message": "Samples oficiais de REST e metadados"
+  },
+  "home.card.github.highlight2": {
+    "message": "Projetos do ecossistema TOTVS"
+  },
+  "home.card.github.highlight3": {
+    "message": "Pronto para fork e customização"
+  },
+  "home.card.tools.backDesc": {
+    "message": "Utilitários interativos para acelerar o desenvolvimento e validar suas APIs sem sair do navegador."
+  },
+  "home.card.tools.highlight1": {
+    "message": "Explorador OpenAPI interativo"
+  },
+  "home.card.tools.highlight2": {
+    "message": "Utilitários para desenvolvimento TLPP"
+  },
+  "home.card.tools.highlight3": {
+    "message": "Sem instalação — direto no browser"
+  },
+  "home.card.rest.title": {
+    "message": "REST"
+  },
+  "home.card.rest.desc": {
+    "message": "Servidor, rotas, oREST, autenticação, callbacks e exemplos no AppServer."
+  },
+  "home.card.docGenerate.title": {
+    "message": "DOC GENERATE"
+  },
+  "home.card.docGenerate.desc": {
+    "message": "Metadados no código, tlpp.doc.generate() e geração do OpenAPI."
+  },
+  "home.card.github.title": {
+    "message": "GITHUB"
+  },
+  "home.card.github.desc": {
+    "message": "Repositórios com código TLPP de REST, metadados e projetos relacionados."
+  },
+  "home.card.tools.title": {
+    "message": "TOOLS"
+  },
+  "home.card.tools.desc": {
+    "message": "Ferramentas no navegador — explorador OpenAPI e utilitários para TLPP."
+  },
+  "home.cta.map": {
+    "message": "Mapa completo"
+  },
+  "home.cta.api": {
+    "message": "Explorar API gerada"
+  },
+  "home.footer.oncaSuffix": {
+    "message": "binário AppServer da release Protheus 12.1.2410"
+  },
+  "home.footer.learnMore": {
+    "message": "Saiba mais"
+  },
+  "home.features.description.title": {
+    "message": "description"
+  },
+  "home.features.description.desc": {
+    "message": "O metadado central — texto, função ou ID i18n."
+  },
+  "home.features.annotation.title": {
+    "message": "Annotation REST"
+  },
+  "home.features.annotation.desc": {
+    "message": "endpoint, title, params e responses nos exemplos 01–02."
+  },
+  "home.features.json.title": {
+    "message": "JSON DOC"
+  },
+  "home.features.json.desc": {
+    "message": "Estrutura retornada pelas funções *_DOC."
+  },
+  "home.features.complete.title": {
+    "message": "Exemplo completo"
+  },
+  "home.features.complete.desc": {
+    "message": "Todos os metadados em sample_complete_*."
+  },
+  "home.features.dynamic.title": {
+    "message": "tlpp.doc.List"
+  },
+  "home.features.dynamic.desc": {
+    "message": "Documentação de REST dinâmico sem annotation."
+  },
+  "home.features.api.title": {
+    "message": "OpenAPI gerado"
+  },
+  "home.features.api.desc": {
+    "message": "Navegue o OpenAPI gerado pelos exemplos deste repositório."
+  },
+  "tools.eyebrow": {
+    "message": "Ferramentas para o ecossistema TLPP"
+  },
+  "tools.pageTitle": {
+    "message": "Tools"
+  },
+  "tools.lead": {
+    "message": "Utilitários no navegador para explorar documentação OpenAPI e acelerar o desenvolvimento com TLPP — sem depender do AppServer local."
+  },
+  "tools.backHome": {
+    "message": "← Voltar ao menu principal"
+  },
+  "tools.openapi.badge": {
+    "message": "Ferramenta no navegador"
+  },
+  "tools.openapi.title": {
+    "message": "Explorador OpenAPI"
+  },
+  "tools.openapi.description": {
+    "message": "Cole ou envie o YAML gerado pelo tlpp.doc.generate() e navegue pelos endpoints, parâmetros e respostas da sua API — sem precisar subir o AppServer."
+  },
+  "tools.openapi.feature.paste": {
+    "message": "Colar YAML"
+  },
+  "tools.openapi.feature.upload": {
+    "message": "Enviar arquivo"
+  },
+  "tools.openapi.feature.browse": {
+    "message": "Navegar endpoints"
+  },
+  "tools.openapi.feature.try": {
+    "message": "Testar requisições"
+  },
+  "tools.openapi.cta": {
+    "message": "Abrir explorador"
+  },
+  "yamlViewer.back": {
+    "message": "← Tools"
+  },
+  "yamlViewer.title": {
+    "message": "Explorador OpenAPI"
+  },
+  "yamlViewer.subtitle": {
+    "message": "Cole ou envie o YAML gerado pelo tlpp.doc.generate(), navegue pelos endpoints e dispare requisições reais contra o seu AppServer."
+  },
+  "yamlViewer.paste": {
+    "message": "Colar YAML"
+  },
+  "yamlViewer.upload": {
+    "message": "Enviar arquivo"
+  },
+  "yamlViewer.dropHint": {
+    "message": "Arraste um .yaml aqui ou clique para selecionar"
+  },
+  "yamlViewer.visualize": {
+    "message": "Visualizar"
+  },
+  "yamlViewer.sample": {
+    "message": "Carregar exemplo do repositório"
+  },
+  "yamlViewer.sampleLoading": {
+    "message": "Carregando…"
+  },
+  "yamlViewer.endpointCount": {
+    "message": "endpoints"
+  },
+  "yamlViewer.noMatch": {
+    "message": "Nenhum endpoint corresponde ao filtro."
+  },
+  "yamlViewer.empty": {
+    "message": "Cole seu YAML, faça upload ou carregue o exemplo do repositório para começar."
+  },
+  "yamlViewer.baseUrl": {
+    "message": "URL base do AppServer"
+  },
+  "yamlViewer.baseUrlHint": {
+    "message": "Use HTTP (ex.: http://localhost:8080). O hub em npm start e o AppServer na mesma máquina costumam funcionar sem configuração extra."
+  },
+  "yamlViewer.tab.try": {
+    "message": "Testar"
+  },
+  "yamlViewer.tab.docs": {
+    "message": "Documentação"
+  },
+  "yamlViewer.try.url": {
+    "message": "URL"
+  },
+  "yamlViewer.try.headers": {
+    "message": "Headers"
+  },
+  "yamlViewer.try.query": {
+    "message": "Query"
+  },
+  "yamlViewer.try.path": {
+    "message": "Path"
+  },
+  "yamlViewer.try.addRow": {
+    "message": "Adicionar linha"
+  },
+  "yamlViewer.try.bodyHint": {
+    "message": "Deixe vazio em GET se não houver corpo na requisição"
+  },
+  "yamlViewer.try.emptyResponse": {
+    "message": "Resposta vazia"
+  },
+  "yamlViewer.try.addHeader": {
+    "message": "+ Adicionar header"
+  },
+  "yamlViewer.try.body": {
+    "message": "Body"
+  },
+  "yamlViewer.try.send": {
+    "message": "Enviar"
+  },
+  "yamlViewer.try.sending": {
+    "message": "Enviando…"
+  }
+}

@@ -1,0 +1,346 @@
+{
+  "docs.navbar.label": {
+    "message": "Documentation",
+    "description": "Navbar docs link"
+  },
+  "docs.navbar.apiExplorer": {
+    "message": "API Explorer",
+    "description": "Navbar API explorer link"
+  },
+  "footer.docs.title": {
+    "message": "Documentation"
+  },
+  "footer.docs.intro": {
+    "message": "Introduction"
+  },
+  "footer.docs.metadata": {
+    "message": "Metadata"
+  },
+  "footer.project.title": {
+    "message": "Project"
+  },
+  "footer.project.fileMap": {
+    "message": "File map"
+  },
+  "footer.project.github": {
+    "message": "GitHub"
+  },
+  "home.cta.map": {
+    "message": "Full map"
+  },
+  "home.features.description.title": {
+    "message": "description"
+  },
+  "home.features.description.desc": {
+    "message": "The central metadata — text, function or i18n ID."
+  },
+  "home.features.annotation.title": {
+    "message": "REST annotation"
+  },
+  "home.features.annotation.desc": {
+    "message": "endpoint, title, params and responses in samples 01–02."
+  },
+  "home.features.json.title": {
+    "message": "DOC JSON"
+  },
+  "home.features.json.desc": {
+    "message": "Structure returned by *_DOC functions."
+  },
+  "footer.docs.apiExplorer": {
+    "message": "API Explorer"
+  },
+  "footer.ecosystem.title": {
+    "message": "Ecosystem"
+  },
+  "footer.ecosystem.oncaPreta": {
+    "message": "Onça Preta AppServer"
+  },
+  "footer.ecosystem.tlpp": {
+    "message": "TLPP and tlppCore"
+  },
+  "footer.more.title": {
+    "message": "More"
+  },
+  "footer.more.github": {
+    "message": "GitHub"
+  },
+  "footer.more.issues": {
+    "message": "Issues"
+  },
+  "footer.more.swagger": {
+    "message": "Swagger Editor"
+  },
+  "components.totvsDivider.default": {
+    "message": "TOTVS"
+  },
+  "components.clawDivider.default": {
+    "message": "TOTVS"
+  },
+  "components.betaDisclaimer.title": {
+    "message": "Notice — REST-DOC in development"
+  },
+  "components.betaDisclaimer.body": {
+    "message": "The REST-DOC module is recent in tlppCore and still under implementation. The generation engine is property of TOTVS S.A. and is not under the MIT license. Open an issue in the repository for questions."
+  },
+  "components.virtualBanner": {
+    "message": "Virtual documentation — .tlpp examples run on your Onça Preta AppServer, not in this site."
+  },
+  "home.cta.start": {
+    "message": "Get started"
+  },
+  "home.cta.api": {
+    "message": "Explore generated API"
+  },
+  "home.footer.oncaSuffix": {
+    "message": "AppServer binary from Protheus release 12.1.2410"
+  },
+  "home.footer.learnMore": {
+    "message": "Learn more"
+  },
+  "home.features.basic01.title": {
+    "message": "Description only"
+  },
+  "home.features.basic01.desc": {
+    "message": "The simplest path: a string in the @Get annotation."
+  },
+  "home.features.basic02.title": {
+    "message": "Full annotation"
+  },
+  "home.features.basic02.desc": {
+    "message": "title, params and responses directly in the REST annotation."
+  },
+  "home.features.i18n.title": {
+    "message": "i18n and DOC functions"
+  },
+  "home.features.i18n.desc": {
+    "message": "Documentation via i18n ID or function returning JSON."
+  },
+  "home.features.complete.title": {
+    "message": "Complete example"
+  },
+  "home.features.complete.desc": {
+    "message": "REST + DOC + components + localization in a single service."
+  },
+  "home.features.dynamic.title": {
+    "message": "Dynamic endpoints"
+  },
+  "home.features.dynamic.desc": {
+    "message": "REST created via JSON, documented with tlpp.doc.List()."
+  },
+  "home.features.api.title": {
+    "message": "YAML VIEWER"
+  },
+  "home.features.api.desc": {
+    "message": "Paste or upload your .yaml and browse endpoints."
+  },
+  "home.platform": {
+    "message": "platform"
+  },
+  "home.brand": {
+    "message": "TOTVSTec"
+  },
+  "home.tagline": {
+    "message": "Documentation, examples and tools"
+  },
+  "home.sections.eyebrow": {
+    "message": "TLPP Hub"
+  },
+  "home.sections.title": {
+    "message": "Choose a section"
+  },
+  "home.card.cta": {
+    "message": "Open section"
+  },
+  "home.card.flipHint": {
+    "message": "Hover to explore"
+  },
+  "home.card.rest.backDesc": {
+    "message": "Full documentation for the native tlppCore REST API — from server setup to production-ready examples."
+  },
+  "home.card.rest.highlight1": {
+    "message": "Guided path from basics to advanced"
+  },
+  "home.card.rest.highlight2": {
+    "message": "oREST, routes, callbacks and authentication"
+  },
+  "home.card.rest.highlight3": {
+    "message": "Real AppServer examples"
+  },
+  "home.card.docGenerate.backDesc": {
+    "message": "Learn to document APIs in TLPP code and generate OpenAPI specs automatically."
+  },
+  "home.card.docGenerate.highlight1": {
+    "message": "Annotations and descriptions in code"
+  },
+  "home.card.docGenerate.highlight2": {
+    "message": "tlpp.doc.generate() and OpenAPI pipeline"
+  },
+  "home.card.docGenerate.highlight3": {
+    "message": "Metadata, i18n and components"
+  },
+  "home.card.github.backDesc": {
+    "message": "Open-source code to study, clone and adapt in your TLPP projects."
+  },
+  "home.card.github.highlight1": {
+    "message": "Official REST and metadata samples"
+  },
+  "home.card.github.highlight2": {
+    "message": "Projects from the TOTVS ecosystem"
+  },
+  "home.card.github.highlight3": {
+    "message": "Ready to fork and customize"
+  },
+  "home.card.tools.backDesc": {
+    "message": "Interactive utilities to speed up development and validate APIs right in the browser."
+  },
+  "home.card.tools.highlight1": {
+    "message": "Interactive OpenAPI explorer"
+  },
+  "home.card.tools.highlight2": {
+    "message": "Utilities for TLPP development"
+  },
+  "home.card.tools.highlight3": {
+    "message": "No install — runs in the browser"
+  },
+  "home.card.rest.title": {
+    "message": "REST"
+  },
+  "home.card.rest.desc": {
+    "message": "Server, routes, oREST, authentication, callbacks and examples on the AppServer."
+  },
+  "home.card.docGenerate.title": {
+    "message": "DOC GENERATE"
+  },
+  "home.card.docGenerate.desc": {
+    "message": "In-code metadata, tlpp.doc.generate() and OpenAPI output."
+  },
+  "home.card.github.title": {
+    "message": "GITHUB"
+  },
+  "home.card.github.desc": {
+    "message": "Repositories with TLPP sample code for REST, metadata and related projects."
+  },
+  "home.card.tools.title": {
+    "message": "TOOLS"
+  },
+  "home.card.tools.desc": {
+    "message": "Browser tools — OpenAPI explorer and utilities for TLPP."
+  },
+  "tools.pageTitle": {
+    "message": "Tools"
+  },
+  "yamlViewer.title": {
+    "message": "OpenAPI Explorer"
+  },
+  "yamlViewer.back": {
+    "message": "← Tools"
+  },
+  "yamlViewer.subtitle": {
+    "message": "Paste or upload YAML from tlpp.doc.generate(), browse endpoints, and send real requests to your AppServer."
+  },
+  "yamlViewer.paste": {
+    "message": "Paste YAML"
+  },
+  "yamlViewer.upload": {
+    "message": "Upload file"
+  },
+  "yamlViewer.dropHint": {
+    "message": "Drag a .yaml here or click to select"
+  },
+  "yamlViewer.visualize": {
+    "message": "Visualize"
+  },
+  "yamlViewer.sample": {
+    "message": "Load sample from repository"
+  },
+  "yamlViewer.sampleLoading": {
+    "message": "Loading…"
+  },
+  "yamlViewer.endpointCount": {
+    "message": "endpoints"
+  },
+  "yamlViewer.noMatch": {
+    "message": "No endpoints match the filter."
+  },
+  "yamlViewer.empty": {
+    "message": "Paste YAML, upload a file, or load the repository sample to get started."
+  },
+  "yamlViewer.baseUrl": {
+    "message": "AppServer base URL"
+  },
+  "yamlViewer.baseUrlHint": {
+    "message": "Use HTTP (e.g. http://localhost:8080). With npm start and the AppServer on the same machine, this usually works without extra setup."
+  },
+  "yamlViewer.tab.try": {
+    "message": "Try it"
+  },
+  "yamlViewer.tab.docs": {
+    "message": "Documentation"
+  },
+  "yamlViewer.try.url": {
+    "message": "URL"
+  },
+  "yamlViewer.try.headers": {
+    "message": "Headers"
+  },
+  "yamlViewer.try.query": {
+    "message": "Query"
+  },
+  "yamlViewer.try.path": {
+    "message": "Path"
+  },
+  "yamlViewer.try.addRow": {
+    "message": "Add row"
+  },
+  "yamlViewer.try.bodyHint": {
+    "message": "Leave empty on GET when there is no request body"
+  },
+  "yamlViewer.try.emptyResponse": {
+    "message": "Empty response"
+  },
+  "yamlViewer.try.addHeader": {
+    "message": "+ Add header"
+  },
+  "yamlViewer.try.body": {
+    "message": "Body"
+  },
+  "yamlViewer.try.send": {
+    "message": "Send"
+  },
+  "yamlViewer.try.sending": {
+    "message": "Sending…"
+  },
+  "tools.eyebrow": {
+    "message": "Utilities for the TLPP ecosystem"
+  },
+  "tools.lead": {
+    "message": "Browser tools to explore OpenAPI documentation and speed up TLPP development — without a local AppServer."
+  },
+  "tools.backHome": {
+    "message": "← Back to home"
+  },
+  "tools.openapi.badge": {
+    "message": "Interactive tool"
+  },
+  "tools.openapi.title": {
+    "message": "OpenAPI Explorer"
+  },
+  "tools.openapi.description": {
+    "message": "Paste or upload YAML from tlpp.doc.generate() and browse endpoints, parameters, and responses — no AppServer required."
+  },
+  "tools.openapi.feature.paste": {
+    "message": "Paste YAML"
+  },
+  "tools.openapi.feature.upload": {
+    "message": "File upload"
+  },
+  "tools.openapi.feature.browse": {
+    "message": "Browse endpoints"
+  },
+  "tools.openapi.feature.try": {
+    "message": "Send requests"
+  },
+  "tools.openapi.cta": {
+    "message": "Open explorer"
+  }
+}

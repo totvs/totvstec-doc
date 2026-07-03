@@ -1,0 +1,62 @@
+{
+  "name": "totvstec-doc",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "docusaurus": "docusaurus",
+    "sync:deps": "node scripts/sync-deps.mjs",
+    "ecosystem:export": "node scripts/export-ecosystem.mjs",
+    "validate:repos": "node scripts/validate-repos.mjs",
+    "audit:remote": "node scripts/audit-remote-safe.mjs",
+    "prestart": "npm run sync:deps",
+    "prebuild": "npm run sync:deps",
+    "setup": "git submodule update --init --remote && npm run sync:deps",
+    "start": "docusaurus start --host 0.0.0.0",
+    "build": "docusaurus build",
+    "tdn:import": "node scripts/tdn-import/parse-tdn-rest.mjs --publish --output docs/tlpp/rest",
+    "tdn:draft": "node scripts/tdn-import/parse-tdn-rest.mjs",
+    "swizzle": "docusaurus swizzle",
+    "deploy": "docusaurus deploy",
+    "clear": "docusaurus clear",
+    "serve": "docusaurus serve",
+    "write-translations": "docusaurus write-translations",
+    "write-heading-ids": "docusaurus write-heading-ids",
+    "typecheck": "tsc"
+  },
+  "dependencies": {
+    "@docusaurus/core": "3.10.1",
+    "@docusaurus/faster": "3.10.1",
+    "@docusaurus/plugin-client-redirects": "^3.10.1",
+    "@docusaurus/preset-classic": "3.10.1",
+    "@easyops-cn/docusaurus-search-local": "^0.55.2",
+    "@mdx-js/react": "^3.0.0",
+    "@types/js-yaml": "^4.0.9",
+    "clsx": "^2.0.0",
+    "js-yaml": "^5.2.0",
+    "prism-react-renderer": "^2.3.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@docusaurus/module-type-aliases": "3.10.1",
+    "@docusaurus/tsconfig": "3.10.1",
+    "@docusaurus/types": "3.10.1",
+    "@types/react": "^19.0.0",
+    "typescript": "~6.0.2"
+  },
+  "browserslist": {
+    "production": [
+      ">0.5%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 3 chrome version",
+      "last 3 firefox version",
+      "last 5 safari version"
+    ]
+  },
+  "engines": {
+    "node": ">=20.0"
+  }
+}

@@ -1,0 +1,39 @@
+---
+sidebar_position: 1
+slug: /intro
+title: Introduction
+---
+
+import BetaDisclaimer from '@site/src/components/BetaDisclaimer';
+import VirtualBanner from '@site/src/components/VirtualBanner';
+import ClawDivider from '@site/src/components/ClawDivider';
+
+<VirtualBanner />
+
+# REST-DOC metadata in this repository
+
+This site documents **only what exists in this project**: metadata used in TLPP samples to generate OpenAPI documentation via `tlpp.doc.generate()`.
+
+It is not a general TLPP or AppServer manual — it is the **metadata guide** for sources under `src/`.
+
+<ClawDivider label="Scope" />
+
+## What we document
+
+| Type | Where in the project |
+|------|----------------------|
+| REST **annotation** metadata | `endpoint`, `description`, `title`, `params`, `responses` |
+| **`description` modes** | Plain text, `[DOC_function]`, `<i18n_id>` |
+| **DOC function JSON** | `title`, `descriptionN`, `params`, `requestBody`, `responses` |
+| **i18n** | `Localize()`, `TRANSLATE`, `translate:` |
+| **`TLPP COMPONENT`** | `sample_components.tlpp` |
+| **Dynamic list** | `tlpp.doc.List()` in `dynamic_list_functions.tlpp` |
+| **Generation** | `tlpp.doc.generate()` in `main.tlpp` |
+
+## Start here
+
+1. [Metadata overview](/docs/metadados/visao-geral)
+2. [`description` metadata](/docs/metadados/description)
+3. [Examples](/docs/exemplos/basic/description-only)
+
+<BetaDisclaimer />

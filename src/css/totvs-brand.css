@@ -1,0 +1,178 @@
+/**
+ * Tokens de identidade visual TOTVS
+ * Fontes: https://marca.totvs.com/downloads/ (Fonte-TOTVS.zip)
+ * Cores e regras: https://marca.totvs.com/identidade-visual/
+ */
+
+/* ── Tipografia institucional (TTF oficial) ───── */
+
+@font-face {
+  font-family: 'TOTVS';
+  src:
+    local('TOTVS Regular'),
+    url('../fonts/totvs/TOTVS-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TOTVS';
+  src:
+    local('TOTVS SemiBold'),
+    url('../fonts/totvs/TOTVS-SemiBold.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TOTVS';
+  src:
+    local('TOTVS SemiBold'),
+    url('../fonts/totvs/TOTVS-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TOTVS';
+  src:
+    local('TOTVS Bold'),
+    url('../fonts/totvs/TOTVS-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ── Paleta primária (55–70% da comunicação) ───── */
+  --totvs-azul-escuro: #002233;
+  --totvs-azul-escuro-mid: #003044;
+  --totvs-azul: #00dbff;
+  --totvs-azul-claro: #00dbff;
+  --totvs-azul-dim: #00b8e6;
+
+  /* ── Paleta secundária (15–20%) ────────────────── */
+  --totvs-roxo: #a44dff;
+
+  /* ── Paleta terciária (10–15%, uso ocasional) ── */
+  --totvs-verde: #00ffd4;
+  --totvs-limao: #d9ff65;
+  --totvs-laranja: #ff8900;
+  --totvs-rosa: #ff009e;
+
+  /* RGB para overlays semânticos */
+  --totvs-azul-rgb: 0, 219, 255;
+  --totvs-azul-escuro-rgb: 0, 34, 51;
+  --totvs-roxo-rgb: 164, 77, 255;
+
+  /* Tools — acento roxo institucional (destaques da área /tools) */
+  --totvs-tools-accent: var(--totvs-roxo);
+  --totvs-tools-accent-bright: color-mix(
+    in srgb,
+    var(--totvs-roxo) 70%,
+    #ffffff
+  );
+  --totvs-tools-accent-soft: color-mix(
+    in srgb,
+    var(--totvs-roxo) 14%,
+    transparent
+  );
+  --totvs-tools-accent-mid: color-mix(
+    in srgb,
+    var(--totvs-roxo) 32%,
+    transparent
+  );
+
+  /* ── Neutros e texto ─────────────────────────── */
+  --totvs-branco: #ffffff;
+  --totvs-preto: #000000;
+  --totvs-texto: #151a23;
+  --totvs-cinza: #939bae;
+  --totvs-cinza-claro: #eef3f8;
+  --totvs-erro: #dc343b;
+  --totvs-sucesso: var(--totvs-verde);
+
+  /* ── Superfícies de UI (tema claro — padrão) ─── */
+  --totvs-surface-bg: #f0f4f8;
+  --totvs-surface: #ffffff;
+  --totvs-surface-elevated: #f5f8fb;
+  --totvs-text-muted: #5a6578;
+  --totvs-glow: rgba(var(--totvs-azul-rgb), 0.08);
+
+  /* ── Aliases legados (evitar em código novo) ─── */
+  --totvs-navy: var(--totvs-azul-escuro);
+  --totvs-navy-mid: var(--totvs-azul-escuro-mid);
+  --totvs-cyan: var(--totvs-azul);
+  --totvs-cyan-bright: var(--totvs-azul-claro);
+  --totvs-cyan-dim: var(--totvs-azul-dim);
+
+  /* ── Tipografia ──────────────────────────────── */
+  --totvs-font-institutional: 'TOTVS', ui-sans-serif, system-ui, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --totvs-font-system: ui-sans-serif, system-ui, sans-serif, 'Segoe UI', Arial,
+    Helvetica, 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji';
+  --totvs-font-mono: ui-monospace, 'Cascadia Code', 'Segoe UI Mono', Consolas,
+    'Liberation Mono', monospace;
+
+  --totvs-font-body: var(--totvs-font-institutional);
+  --totvs-font-heading: var(--totvs-font-institutional);
+
+  --totvs-text-xs: 0.75rem;
+  --totvs-text-sm: 0.875rem;
+  --totvs-text-md: 1rem;
+  --totvs-text-lg: 1.125rem;
+  --totvs-text-xl: 1.25rem;
+  --totvs-text-2xl: 1.5rem;
+  --totvs-text-3xl: 2rem;
+  --totvs-text-4xl: 2.5rem;
+  --totvs-text-5xl: 3rem;
+
+  --totvs-leading-tight: 1.25;
+  --totvs-leading-normal: 1.5;
+  --totvs-leading-relaxed: 1.65;
+
+  --totvs-weight-regular: 400;
+  --totvs-weight-medium: 500;
+  --totvs-weight-semibold: 600;
+  --totvs-weight-bold: 700;
+
+  --totvs-radius-sm: 4px;
+  --totvs-radius-md: 6px;
+  --totvs-radius-lg: 8px;
+  --totvs-radius-xl: 12px;
+
+  --totvs-border-subtle: rgba(21, 26, 35, 0.12);
+  --totvs-focus-ring: rgba(var(--totvs-azul-rgb), 0.35);
+
+  --totvs-gradient-corporativo: linear-gradient(
+    135deg,
+    var(--totvs-azul-escuro) 0%,
+    var(--totvs-azul) 100%
+  );
+
+  /* Home — acentos por seção (doc = azul TOTVS; tools = roxo institucional) */
+  --totvs-home-rest: var(--totvs-azul);
+  --totvs-home-doc-generate: var(--totvs-azul);
+  --totvs-home-github: var(--totvs-azul);
+  --totvs-home-tools: var(--totvs-tools-accent);
+}
+
+[data-theme='dark'] {
+  --totvs-surface-bg: #001820;
+  --totvs-surface: #002233;
+  --totvs-surface-elevated: #003044;
+  --totvs-texto: #e8f4f8;
+  --totvs-text-muted: #8aa3b0;
+  --totvs-glow: rgba(var(--totvs-azul-rgb), 0.14);
+}
+
+[data-theme='light'] {
+  --totvs-surface-bg: #f0f4f8;
+  --totvs-surface: #ffffff;
+  --totvs-surface-elevated: #f5f8fb;
+  --totvs-text-muted: #5a6578;
+  --totvs-glow: rgba(var(--totvs-azul-rgb), 0.08);
+}

@@ -1,0 +1,847 @@
+{
+  "generatedAt": "2026-07-02",
+  "groups": [
+    {
+      "id": "leitura-requisicao",
+      "title": "Leitura da requisição",
+      "sidebarPosition": 2,
+      "description": "Extrair body, headers, path, query e metadados da URL da requisição HTTP.",
+      "methods": [
+        {
+          "id": "getBodyRequest",
+          "name": "getBodyRequest",
+          "signature": "oRest:getBodyRequest()",
+          "summary": "Este método é responsável por extrair e retornar o conteúdo integral enviado no corpo (Body) da requisição HTTP efetuada pelo cliente.",
+          "returnDescription": "O método devolve sempre o conteúdo em formato de texto bruto, independentemente de ser um JSON, XML ou Texto Plano. O parse dos dados (por exemplo, a conversão para um objeto JSON) fica ao critério da lógica do desenvolvedor.",
+          "exampleFile": "exemplo_getbodyrequest.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/getBodyRequest\")\nUser Function fGetBodyRequest() As Logical\n \nLocal cBody := oRest:getBodyRequest() As Character\nLocal cResp := \"\"                     As Character\n \ncResp := '{'\ncResp +=   '\"getBodyRequest\": ' + If(Empty(cBody), 'false', 'true')\ncResp +=   ','\ncResp +=   '\"length\": '         + cValToChar(Len(cBody))\ncResp += '}'\n \nConOut(' # EndPoint: /documentation/getBodyRequest')\nConOut(' # Body....: ' + cBody)\nConOut(' # Response: ' + cResp)\n \noRest:setKeyHeaderResponse('Content-Type', 'application/json')\noRest:setResponse(cResp)\n \nReturn .T."
+        },
+        {
+          "id": "getHeaderRequest",
+          "name": "getHeaderRequest",
+          "signature": "oRest:getHeaderRequest()",
+          "summary": "Método `oRest:getHeaderRequest()` do namespace tlpp.rest.",
+          "returnType": "JsonObject",
+          "returnDescription": "Objeto JSON que contém o header da requisição.",
+          "exampleFile": "exemplo_getHeaderRequest.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/getHeaderRequest\")\nUser Function fGetHeaderRequest()\n \nLocal cResponse := \"\"\nLocal jHeader\n \njHeader := oRest:getHeaderRequest()\n \nIf (ValType(jHeader) == 'J')\n    cResponse := '{\"Header\":['\n    cResponse += jHeader:toJson()\n    cResponse += ']}'\nElse\n    cResponse := '{\"getHeaderRequest\": \"método getHeaderRequest não foi executado\"}'\nEndIf\n \noRest:setResponse(cResponse)\n \n \nReturn .T."
+        },
+        {
+          "id": "getQueryRequest",
+          "name": "getQueryRequest",
+          "signature": "oRest:getQueryRequest()",
+          "summary": "Método `oRest:getQueryRequest()` do namespace tlpp.rest.",
+          "returnType": "JsonObject",
+          "returnDescription": "Objeto JSON contendo os parâmetros (query param) da requisição.",
+          "exampleFile": "exemplo_getQueryRequest.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/getQueryRequest/user\")\nUser Function fGetQueryRequest()\n \nLocal cResponse := \"\"\nLocal cRet      := \"\"\nLocal jParams   := JsonObject():New()\n \njParams := oRest:getQueryRequest()\n \nIf (ValType(jParams) == 'J')\n    cRet := jParams['user']\nEndIf\n \nIf (ValType(cRet) == 'C')\n    cResponse := '{\"getQueryRequest\":\"' + cValToChar(cRet) + '\"}'\nElse\n    cResponse := '{\"getQueryRequest\": \"metodo getQueryRequest nao foi executado\"}'\nEndIf\n \noRest:setResponse(cResponse)\n \n \nReturn .T."
+        },
+        {
+          "id": "getPathParamsRequest",
+          "name": "getPathParamsRequest",
+          "signature": "oRest:getPathParamsRequest()",
+          "summary": "Método `oRest:getPathParamsRequest()` do namespace tlpp.rest.",
+          "returnType": "JsonObject",
+          "returnDescription": "Objeto JSON contendo os parâmetros (path param) da requisição.",
+          "exampleFile": "exemplo_getPathParamsRequest.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/getPathParamsRequest/:cKey\")\nUser Function fGetPathParamsRequest()\n \nLocal cResponse := \"\"\nLocal cRet      := \"\"\nLocal jParams   := oRest:getPathParamsRequest()\n \nIf (ValType(jParams) == 'J')\n    cRet := jParams['cKey']\nEndIf\n \nIf (ValType(cRet) == 'C' .And. !Empty(cRet))\n    cResponse := '{\"getPathParamsRequest\": \"' + cValToChar(cRet) + '\"}'\nElse\n    cResponse := '{\"getPathParamsRequest\": \"metodo getPathParamsRequest nao foi executado\"}'\nEndIf\n \noRest:setResponse(cResponse)\n \n \nReturn .T."
+        },
+        {
+          "id": "getMethodRequest",
+          "name": "getMethodRequest",
+          "signature": "oRest:getMethodRequest()",
+          "summary": "Este método é responsável por retornar qual foi o método (verbo HTTP) executado pelo cliente para acessar o endpoint da requisição corrente.",
+          "returnType": "String",
+          "returnDescription": "Retorna o verbo HTTP utilizado na requisição (Ex: GET, POST, PUT, DELETE, PATCH, etc).",
+          "exampleFile": "exemplo_getMethodRequest.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n// Chamada: http://localhost:9090/documentation/getFullURLRequest\n \n@Get(\"/documentation/getFullURLRequest\")\nUser Function getMethodExample()\n \nLocal cReturn := \"\"\n \ncReturn := oRest:getMethodRequest()\n \nConOut(cReturn)\n \ncReturn := '{\"method\": \"' + cReturn + '\"}'\n \noRest:SetResponse(cReturn)\n \n \nReturn .T."
+        },
+        {
+          "id": "getPathRequest",
+          "name": "getPathRequest",
+          "signature": "oRest:getPathRequest()",
+          "summary": "Método `oRest:getPathRequest()` do namespace tlpp.rest.",
+          "returnType": "Character",
+          "returnDescription": "O endereço do path da requisição.",
+          "exampleFile": "exemplo_getPathRequest.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n// http://localhost:9090/mypath/teste\n@Get(\"/mypath/teste\")\nUser Function getPathExample()\n \nLocal cReturn := \"\"\n \ncReturn := oRest:getPathRequest()\n \nConOut(cReturn) // Vai exibir a URN da requisição, por exemplo /api/mypath/teste\n \ncReturn := '{\"path\": \"' + cReturn + '\"}'\n \noRest:SetResponse(cReturn)\n \n \nReturn .T."
+        },
+        {
+          "id": "getProtocolRequest",
+          "name": "getProtocolRequest",
+          "signature": "oRest:getProtocolRequest()",
+          "summary": "Método `oRest:getProtocolRequest()` do namespace tlpp.rest.",
+          "returnType": "Character",
+          "returnDescription": "Protocolo utilizado na requisição. Poderá assumir valores como HTTP, HTTPS, etc.",
+          "exampleFile": "exemplo_getProtocolRequest.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n// Chamada: http://localhost:9090/protocolo\n@Get(\"/protocolo\")\nUser Function getProtocolExample()\n \nLocal cReturn := \"\"\n \ncReturn := oRest:getProtocolRequest()\n \nConOut(cReturn) // Vai exibir o protocolo utilizado na requisição, por exemplo HTTP\n \ncReturn := '{\"protocol\": \"' + cReturn + '\"}'\n \noRest:SetResponse(cReturn)\n \n \nReturn .T."
+        },
+        {
+          "id": "getFullURLRequest",
+          "name": "getFullURLRequest",
+          "signature": "oRest:getFullURLRequest()",
+          "summary": "Este método é responsável por retornar a URL completa da requisição corrente (atual). O retorno engloba toda a estrutura do endereço utilizado pelo cliente, seguindo o padrão: esquema_ou_protocolo://dominio:porta/caminho/recurso.",
+          "returnType": "String",
+          "returnDescription": "A URL completa utilizada pelo cliente na requisição atual.",
+          "exampleFile": "exemplo_getFullURLRequest.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n// Exemplo de chamada: http://localhost:9090/documentation/getFullURLRequest\n@Get(\"/documentation/getFullURLRequest\")\nUser Function fGetFullURLRequest()\n \nLocal cReturn := \"\"\nLocal cURL    := \"\"\n \ncURL := oRest:getFullURLRequest()\n \ncReturn := '{\"url\": \"' + cURL + '\"}'\n \nConOut(\"URL capturada: \" + cURL) \n \noRest:SetResponse(cReturn)\n \nReturn .T."
+        },
+        {
+          "id": "getURLRequest",
+          "name": "getURLRequest",
+          "signature": "oRest:getURLRequest()",
+          "summary": "Este método é responsável por retornar a URN (Universal Resource Name) correspondente à requisição corrente. Este nome é obtido por meio da concatenação do caminho virtual da Location base com o Endpoint correspondente a cada serviço REST acionado pelo cliente.",
+          "returnType": "String",
+          "returnDescription": "A URN simplificada utilizada na requisição atual (Location + Endpoint).",
+          "exampleFile": "exemplo_getURLRequest.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n// Chamada: http://localhost:9090/documentation/getURLRequest\n@Get(\"/documentation/getURLRequest\")\nUser Function fGetURLRequest()\nLocal cReturn := \"\"\n \ncReturn := oRest:getURLRequest()\n \nConOut(\"URN da requisicao capturada: \" + cReturn)  // Vai exibir: /documentation/getURLRequest\n \ncReturn := '{\"url\": \"' + cReturn + '\"}'\n \n \nReturn oRest:SetResponse(cReturn)"
+        },
+        {
+          "id": "getConnectionRequest",
+          "name": "getConnectionRequest",
+          "signature": "oRest:getConnectionRequest()",
+          "summary": "Este método é responsável por retornar o valor que identifica a conexão utilizada na requisição atual.",
+          "returnType": "Integer",
+          "returnDescription": "Valor numérico inteiro correspondente à conexão utilizada na requisição.",
+          "exampleFile": "exemplo_getConnectionRequest.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/getConnectionRequest\")\nUser Function fGetConnectionRequest()\n \nLocal cResponse   := \"\"\nLocal nConnection := 0\n \nnConnection := oRest:getConnectionRequest()\n \nIf (ValType(nConnection) == 'N')\n    cResponse := '{\"getConnectionRequest\": \"' + cValToChar(nConnection) + '\"}'\nElse\n    cResponse := '{\"getConnectionRequest\": \"Método getConnectionRequest não obteve um retorno numérico válido.\"}'\nEndIf\n \noRest:setResponse(cResponse)\n \nReturn .T."
+        },
+        {
+          "id": "getClientIP",
+          "name": "getClientIP",
+          "signature": "oRest:getClientIP()",
+          "summary": "Este método é responsável por capturar e retornar o endereço IP do cliente (origem) que efetuou a requisição HTTP atual para o servidor REST.",
+          "returnType": "String",
+          "returnDescription": "Retorna uma string contendo o endereço IP do requisitante. Dependendo da topologia de rede e da chamada, pode assumir o formato IPv4 (ex: 192.168.0.1) ou IPv6.",
+          "exampleFile": "exemplo_getClientIP.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/getClientIP\")\nUser Function fGetClientIP()\n \nLocal cResponse As Character\nLocal cClientIP As Character\n \ncClientIP := oRest:getClientIP()\n \ncResponse := '{\"client_ip\": \"' + cClientIP + '\"}'\n \noRest:SetResponse(cResponse)\n \n \nReturn .T."
+        },
+        {
+          "id": "getThreadIdRequest",
+          "name": "getThreadIdRequest",
+          "signature": "oRest:getThreadIdRequest()",
+          "summary": "Este método é responsável por retornar o identificador (ID) da thread de processamento responsável pelo atendimento da requisição atual no servidor.",
+          "returnType": "Integer",
+          "returnDescription": "Valor numérico inteiro correspondente ao ID da thread da requisição.",
+          "exampleFile": "exemplo_getThreadIdRequest.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/getThreadIdRequest\")\nUser Function fGetThreadIdRequest()\n \nLocal cResponse := \"\"\nLocal nThreadId := 0\n \nnThreadId := oRest:getThreadIdRequest()\n \nIf (ValType(nThreadId) == 'N')\n    cResponse := '{\"getThreadIdRequest\": \"' + cValToChar(nThreadId) + '\"}'\nElse\n    cResponse := '{\"getThreadIdRequest\": \"Método getThreadIdRequest não obteve um retorno numérico válido.\"}'\nEndIf\n \noRest:setResponse(cResponse)\n \n \nReturn .T."
+        },
+        {
+          "id": "getXhrRequest",
+          "name": "getXhrRequest",
+          "signature": "oRest:getXhrRequest()",
+          "summary": "Este método é responsável por retornar se a requisição HTTP atual possui ou foi identificada com o objeto XHR (XML Http Request) em seus cabeçalhos de controle.",
+          "returnType": "Logical",
+          "returnDescription": "Retorna verdadeiro (.T.) se o objeto XHR foi identificado na requisição atual, e falso (.F.) caso contrário.",
+          "exampleFile": "exemplo_getXhrRequest.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n// Chamada: http://localhost:9090/documentacao/getxhrrequest\n@Get(\"/documentacao/getxhrrequest\")\nUser Function fGetXhrRequest()\n \nLocal lRet      := oRest:getXhrRequest()\nLocal cResponse := \"\"\n \ncResponse := '{\"getXhrRequest\": ' + If(lRet, 'true', 'false') + '}'\n \n \nReturn oRest:setResponse(cResponse)"
+        }
+      ]
+    },
+    {
+      "id": "leitura-resposta",
+      "title": "Leitura da resposta",
+      "sidebarPosition": 3,
+      "description": "Inspecionar body, status e headers já montados na thread (útil em OnSend e logs).",
+      "methods": [
+        {
+          "id": "getBodyResponse",
+          "name": "getBodyResponse",
+          "signature": "oRest:getBodyResponse()",
+          "summary": "Este método é responsável por extrair e retornar o conteúdo do corpo (Body) correspondente à última resposta que foi definida ou enviada pelo servidor durante o ciclo de processamento da requisição atual. Ele é bastante útil quando necessita validar, efetuar log ou intercetar a mensagem de resposta que a sua própria API montou instantes antes de a devolver ao cliente (por exemplo, dentro de um Callback OnSend).",
+          "returnDescription": "O método devolve o exato conteúdo de texto que foi previamente injetado no objeto de resposta do servidor.",
+          "exampleFile": "exemplo_getbodyresponse.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/getBodyResponse\")\nUser Function fGetBodyResponse()\n \nLocal cResponse := \"\"\n \noRest:setResponse('test_getBodyResponse')\n \ncResponse := oRest:getBodyResponse()"
+        },
+        {
+          "id": "getStatusResponse",
+          "name": "getStatusResponse",
+          "signature": "oRest:getStatusResponse()",
+          "summary": "Este método é responsável por ler e retornar o Código de Status do HTTP (Status Code) que está configurado na memória da Thread e que será considerado como oficial no retorno da requisição até ao momento exato desta pesquisa. NOTA DE ARQUITETURA (TLPPCORE VS APPSERVER) Ao contrário da arquitetura legada, este código de status fica guardado isoladamente na camada do tlppCore. Ele só será empurrado para a camada física do AppServer no último milissegundo, no instante de efetivar o despacho da resposta ao requisitante. Isso garante uma flexibilidade gigantesca, permitindo que a sua aplicação altere e valide o status (entre 200, 400, 500) múltiplas vezes durante a lógica de negócio sem comprometer a resposta antes do tempo.",
+          "returnType": "Integer",
+          "returnDescription": "Código numérico de status HTTP (ex: 200, 201, 404, 500) que está definido na memória da resposta atual.",
+          "exampleFile": "exemplo_getStatusResponse.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/getStatusResponse\")\nUser Function fTestaGetStatus()\n \nLocal nCodeHttp := 0\nLocal cResponse := \"\"\n \noRest:setStatusCode(201)\n \nnCodeHttp := oRest:getStatusResponse()\n \nIf (ValType(nCodeHttp) == 'N')\n    cResponse := '{\"Sucesso\": true, \"Status_Atual_Na_Memoria\": ' + cValToChar(nCodeHttp) + '}'\nElse\n    oRest:setStatusCode(500)\n    cResponse := '{\"Sucesso\": false, \"Erro\": \"O metodo falhou em ler a memoria.\"}'\nEndIf\n \noRest:setResponse(cResponse)\n \nReturn .T."
+        },
+        {
+          "id": "getRetCodResponse",
+          "name": "getRetCodResponse",
+          "signature": "oRest:getRetCodResponse()",
+          "summary": "este método seja plenamente funcional, aconselhamos sempre utilizar o método equivalente oRest:getStatusResponse() para a consulta do valor de status que será retornado.",
+          "returnType": "Integer",
+          "returnDescription": "Código de status HTTP configurado para ser utilizado na resposta.",
+          "exampleFile": "exemplo_getRetCodResponse.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/getRetCodResponse\")\nUser Function fGetRetCodResponse()\n \nLocal cResponse := \"\"\nLocal nRet      := -1\n \noRest:setStatusCode(201)\n \nnRet := oRest:getRetCodResponse()\n \nIf (ValType(nRet) == 'N' .And. nRet >= 0)\n    cResponse := '{\"StatusLidoDaMemoria\": \"' + cValToChar(nRet) + '\"}'\nElse\n    cResponse := '{\"Erro\": \"metodo de leitura falhou\"}'\nEndIf\n \noRest:setResponse(cResponse)\n \n \nReturn .T."
+        },
+        {
+          "id": "getRetMsgResponse",
+          "name": "getRetMsgResponse",
+          "signature": "oRest:getRetMsgResponse()",
+          "summary": "Retorna a mensagem de retorno configurada na resposta HTTP atual — o texto que será (ou foi) enviado no body, antes ou depois de chamadas a setResponse.",
+          "returnType": "String",
+          "returnDescription": "Conteúdo textual da mensagem de resposta mantida em memória na thread.",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n\n@Get(\"/documentation/getRetMsgResponse\")\nUser Function fGetRetMsgResponse()\n\nLocal cMsg := oRest:getRetMsgResponse()\n\noRest:setResponse('{\"getRetMsgResponse\": \"' + cMsg + '\"}')\n\nReturn .T.",
+          "exampleFile": "exemplo_conceitual_getRetMsgResponse.tlpp"
+        },
+        {
+          "id": "getHeaderResponse",
+          "name": "getHeaderResponse",
+          "signature": "oRest:getHeaderResponse()",
+          "summary": "Este método é responsável por retornar o conteúdo do cabeçalho de resposta (Header Response) da requisição atual.",
+          "returnType": "JsonObject",
+          "returnDescription": "Retorna um objeto JSON contendo todas as chaves e valores atualmente configurados no cabeçalho de resposta da requisição.",
+          "exampleFile": "exemplo_getHeaderResponse.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/getHeaderResponse\")\nUser Function fgetHeaderResponse()\n \nLocal cResponse := \"\"\nLocal jResp     := Nil\n \noRest:setKeyHeaderResponse(\"Meu-Header-Teste\", \"Protheus-TLPP\")\n \njResp := oRest:getHeaderResponse()\n \nIf (ValType(jResp) == \"J\")\n    cResponse := '{\"fgetHeaderResponse\": \"Metodo getHeaderResponse executado com sucesso\", \"Header Response Content\": ' + jResp:toJSON() + '}'\nElse\n    cResponse := '{\"fgetHeaderResponse\": \"Falha\", \"Motivo\": \"Nenhum header de saida encontrado.\"}'\nEndIf\n \noRest:setResponse(cResponse)\n \nReturn .T."
+        },
+        {
+          "id": "getKeyHeaderResponse",
+          "name": "getKeyHeaderResponse",
+          "signature": "oRest:getKeyHeaderResponse( < cKey >, @< cValue > )",
+          "summary": "Este método é responsável por extrair e retornar o valor de uma chave específica que já se encontra definida no cabeçalho de resposta (Header Response) da requisição HTTP atual.",
+          "returnType": "Logical",
+          "returnDescription": "Se verdadeiro (.T.), indica que a operação foi efetuada com sucesso e que a variável passada por referência foi devidamente preenchida.",
+          "exampleFile": "exemplo_getKeyHeaderResponse.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/getKeyHeaderResponse\")\nUser Function fgetKeyHeaderResponse()\n \nLocal lRet := .F.\nLocal cRet := \"\"\n \noRest:setKeyHeaderResponse(\"Meu-Header-Teste\", \"Protheus-TLPP\")\n \nlRet := oRest:getKeyHeaderResponse(\"Meu-Header-Teste\", @cRet)\n \nIf (lRet == .F. .Or. ValType(cRet) <> \"C\" .Or. cRet == Nil)\n    cRet := \"Valor nao encontrado\"\nEndIf\n \noRest:setResponse('[ {\"description\": \"fgetKeyHeaderResponse executado. Valor lido: ' + cRet + '\"} ]')\n \n \nReturn .T."
+        },
+        {
+          "id": "existKeyHeaderResponse",
+          "name": "existKeyHeaderResponse",
+          "signature": "oRest:existKeyHeaderResponse( < cKey > )",
+          "summary": "Este método é responsável por verificar se uma determinada chave já existe (já foi criada ou definida) no cabeçalho do objeto de resposta (Header Response) da requisição atual. ATENÇÃO AOS DEFAULT HEADERS Esse método não permite pesquisar por chaves de cabeçalhos padrão (Default Headers) do protocolo HTTP (como Content-Length, Date, etc), pois ele consulta apenas os cabeçalhos customizados inseridos na resposta da aplicação.",
+          "returnType": "Logical",
+          "returnDescription": "Se verdadeiro (.T.), indica que a chave procurada já foi inserida no header de resposta.",
+          "exampleFile": "exemplo_exist_header_response.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/existkeyheaderresponse\")\nUser Function fexistKeyHeaderResponse()\n \nLocal lReturn := .F.\nLocal cKey    := \"Meu-Header-Customizado\"\n \noRest:setKeyHeaderResponse(cKey, \"Top-Secret-Value\")\n \nlReturn := oRest:existKeyHeaderResponse( cKey )\n \noRest:setResponse('{\"existKeyHeaderResponse\":\"' + cValToChar(lReturn) + '\"}')\n \nReturn .T."
+        },
+        {
+          "id": "existKeyHeaderRequest",
+          "name": "existKeyHeaderRequest",
+          "signature": "oRest:existKeyHeaderRequest( < cKey > )",
+          "summary": "Este método é responsável por verificar de forma rápida e segura se uma determinada chave foi enviada pelo cliente dentro do cabeçalho (Header) da requisição HTTP atual. Ele é extremamente útil para validações primárias de segurança ou regras de negócio (por exemplo, garantir que o cliente enviou um token customizado antes de tentar extrair o valor dessa chave e correr o risco de erro).",
+          "returnType": "Logical",
+          "returnDescription": "Se verdadeiro (.T.), indica que a chave informada existe no cabeçalho da requisição.",
+          "exampleFile": "exemplo_exist_header.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/existKeyHeaderRequest\")\nUser Function fExistKeyHeaderRequest()\n \nLocal cKey      := \"Connection\"\nLocal cResponse := \"\"\nLocal lRet      := .F.\n \nlRet := oRest:existKeyHeaderRequest(cKey)\n \nIf (lRet)\n     \n    cResponse := '{\"existKeyHeaderRequest\": \"Chave ' + cKey + ' existe no header da requisição\"}'\n     \nElse\n     \n    cResponse := '{\"existKeyHeaderRequest\": \"A chave ' + cKey + ' não existe no header ou o método falhou.\"}'\n     \nEndIf\n \noRest:setResponse(cResponse)\n \nReturn .T."
+        },
+        {
+          "id": "getCloseAfterSend",
+          "name": "getCloseAfterSend",
+          "signature": "oRest:getCloseAfterSend()",
+          "summary": "Este método é responsável por retornar o valor de definição para o encerramento da sessão após a requisição.",
+          "returnType": "Logical",
+          "returnDescription": "Retorna o status booleano da propriedade. Se .T., significa que o servidor irá encerrar e desativar a sessão imediatamente após o despacho do payload de resposta.",
+          "exampleFile": "exemplo_getCloseAfterSend.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/getCloseAfterSend\")\nUser Function fGetCloseAfterSend()\n \nLocal cResponse := \"\"\nLocal lRet      := .F.\n \nlRet := oRest:getCloseAfterSend()\n \ncResponse := '{\"getCloseAfterSend\": \"Neste momento, a propriedade de encerramento de conexao (CloseAfterSend) é: ' + cValToChar(lRet) + '\"}'\n \noRest:setResponse(cResponse)\n \nReturn .T."
+        }
+      ]
+    },
+    {
+      "id": "escrita-resposta",
+      "title": "Escrita da resposta",
+      "sidebarPosition": 4,
+      "description": "Definir body, status HTTP, chunked e resetar a mensagem de saída.",
+      "methods": [
+        {
+          "id": "setResponse",
+          "name": "setResponse",
+          "signature": "oRest:setResponse( [ cMessage ] )",
+          "summary": "Este método é o responsável principal por inserir o conteúdo (payload) no corpo da mensagem (Body Response) que será devolvida ao cliente HTTP como resposta à requisição atual. REGRA DE CONCATENAÇÃO É plenamente possível executar este método múltiplas vezes dentro da mesma requisição. No entanto, é vital compreender que cada execução não sobrescreve o conteúdo anterior; o novo conteúdo recebido por parâmetro será sempre concatenado ao final da mensagem que já se encontrava na memória. Para limpar o conteúdo e iniciar uma nova mensagem do zero, deve utilizar o método oRest:resetMessageResponse() ou oRest:resetResponse().",
+          "returnType": "Logical",
+          "returnDescription": "Retorna verdadeiro (.T.) indicando que o método de injeção da resposta foi executado com êxito na memória do servidor.",
+          "exampleFile": "exemplo_setResponse.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/setResponse\")\nUser Function fSetResponse()\n \nLocal cResponse := \"\"\n \ncResponse := '{\"setResponse\": \"Metodo setResponse executado com sucesso\"}'\n \nReturn oRest:setResponse(cResponse)"
+        },
+        {
+          "id": "setStatusCode",
+          "name": "setStatusCode",
+          "signature": "oRest:setStatusCode( < nCode > )",
+          "summary": "Este método é responsável por customizar e sobrescrever o Código de Estado HTTP (HTTP Status Code) padrão da resposta do servidor REST. Sempre que uma requisição é processada sem erros de execução, o tlppCore assume nativamente que o Status Code de devolução será 200 (OK). A utilização do método setStatusCode() permite ao desenvolvedor intervir neste comportamento, determinando explicitamente qual será o código final devolvido ao cliente com base na lógica de negócio (por exemplo: forçar um 400 para parâmetros inválidos, ou 201 para a criação de um recurso).",
+          "returnType": "Logical",
+          "returnDescription": "Indica se a operação de alteração do código de status foi executada com sucesso na memória do servidor.",
+          "exampleFile": "exemplo_setStatusCode.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/setStatusCode\")\nUser Function fSetStatusCode()\n \nLocal cResponse := \"\"\nLocal lRet      := .F.\n \nlRet := oRest:setStatusCode(350)\n \nIf (lRet)\n    cResponse := '{\"setStatusCode\": \"Metodo setStatusCode executado com sucesso\"}'\nElse\n    cResponse := '{\"setStatusCode\": \"Nao foi possivel executar o metodo setStatusCode\"}'\nEndIf\n \nReturn oRest:setResponse(cResponse)"
+        },
+        {
+          "id": "setFault",
+          "name": "setFault",
+          "signature": "oRest:setFault( < cMessage > )",
+          "summary": "Este método é responsável por customizar a mensagem de retorno padrão do servidor REST, permitindo determinar qual será a resposta de erro final devolvida ao cliente em substituição ao payload original da requisição. Para que serve o setFault? (Explicação Simplificada) O método oRest:setFault() deve ser utilizado exclusivamente em cenários de erro ou falhas durante o processamento da requisição (sejam falhas de regras de negócio, como validação de dados inválidos, ou falhas técnicas graves). Ao ser invocado, ele realiza duas ações automáticas em cascata no servidor: Define a Mensagem de Retorno: Configura a string fornecida (geralmente um JSON contendo os detalhes do erro) diretamente no corpo (Body) da resposta. Seta o Status HTTP para 500: Por indicar uma falha no fluxo, o framework força automaticamente o Código de Status HTTP da resposta para o padrão 500 (Internal Server Error), poupando o desenvolvedor de ter de configurar este status manualmente.",
+          "returnType": "Logical",
+          "returnDescription": "Indica se a operação de injeção da mensagem de falha e alteração do status para 500 foi executada com sucesso na memória da Thread.",
+          "exampleFile": "exemplo_setFault.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/setFault\")\nUser Function fSetFault()\n \nLocal cResponse := \"\"\nLocal lRet      := .F.\n \ncResponse := '{\"setFault\": \"Metodo setFault executado com sucesso, mensagem de retorno padrao alterada e Status HTTP definido como 500\"}'\n \nlRet := oRest:setFault(cResponse)\n \n \nReturn lRet"
+        },
+        {
+          "id": "setChunkedResponse",
+          "name": "setChunkedResponse",
+          "signature": "oRest:setChunkedResponse( < cMessage > )",
+          "summary": "Este método é responsável por definir e transmitir fragmentos (pedaços) de dados de volta ao cliente HTTP utilizando o mecanismo de Chunked Transfer Encoding. Esta abordagem é ideal para cenários em que o volume total de dados a ser transmitido é desconhecido no início do processo, ou quando o envio de um payload massivo em uma única transação de rede é inviável devido a limitações físicas de memória ou latência de infraestrutura.",
+          "returnType": "Logical",
+          "returnDescription": "Retorna verdadeiro (.T.) se o pedaço de dados foi transmitido com sucesso pela rede, e falso (.F.) em caso de falhas de envio.",
+          "exampleFile": "exemplo_chunked.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/chunked/ctry/:ctry\")\nFunction u_Chunked()\nLocal jParams  := oRest:getPathParamsRequest() As Object\nLocal cContent := \"\"                           As Character\nLocal nTry     := 0                            As Numeric\nLocal nA       := 0                            As Numeric\n \nIf (jParams <> Nil .And. jParams['ctry'] <> Nil .And. !Empty(jParams['ctry']))\n    nTry := Val(jParams['ctry'])\n    If (nTry > 0)\n         \n        For nA := 1 To nTry\n            cContent := StrTran(sPutChunkedValue(), \"#change!\", cValToChar(nA))\n             \n            If (nA == nTry)\n                oRest:setLastChunkedResponse(cContent)\n            Else\n                oRest:setChunkedResponse(cContent)\n            EndIf\n        Next\n         \n    EndIf\nEndIf\n \n \nReturn .T."
+        },
+        {
+          "id": "setLastChunkedResponse",
+          "name": "setLastChunkedResponse",
+          "signature": "oRest:setLastChunkedResponse( < cMessage > )",
+          "summary": "Encerra o envio chunked da resposta: envia o último pedaço do body e define Content-Length: 0 no header, sinalizando o fim da transmissão.",
+          "returnType": "Logical",
+          "returnDescription": "lRet\tlógico\tIndica se o método foi executado(.T.) ou (.F.) caso tenha ocorrido algum problema",
+          "exampleFile": "exemplo_chunked.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n\n@Get(\"/chunked/ctry/:ctry\")\nFunction u_Chunked()\nLocal jParams  := oRest:getPathParamsRequest() As Object\nLocal cContent := \"\"                           As Character\nLocal nTry     := 0                            As Numeric\nLocal nA       := 0                            As Numeric\n\nIf (ValType(jParams) == \"J\")\n    nTry := Val(jParams[\"ctry\"])\n    If (nTry > 0)\n        For nA := 1 To nTry\n            cContent := \"Chunk \" + cValToChar(nA)\n            If (nA == nTry)\n                oRest:setLastChunkedResponse(cContent)\n            Else\n                oRest:setChunkedResponse(cContent)\n            EndIf\n        Next\n    EndIf\nEndIf\n\nReturn .T.",
+          "note": "Use junto com oRest:setChunkedResponse() — veja também esse método."
+        },
+        {
+          "id": "resetResponse",
+          "name": "resetResponse",
+          "signature": "oRest:resetResponse()",
+          "summary": "Este método é responsável por restaurar o valor padrão do código de status HTTP de volta para 200 (OK) e limpar o corpo da resposta (Body Response) para uma string vazia, independente do momento em que seja utilizado no ciclo de vida da requisição HTTP. IMPORTANTE: ESCOPO DE LIMPEZA TOTAL Este método realiza uma limpeza profunda. Ao ser executado, ele apaga o conteúdo do corpo da mensagem e força a redefinição de qualquer código de status customizado (como 400, 401, 500, etc.) que tenha sido previamente configurado de volta para o padrão de sucesso 200 (OK).",
+          "returnType": "Logical",
+          "returnDescription": "Indica se a operação de reset total da resposta e do código de status foi executada com êxito.",
+          "exampleFile": "exemplo_resetResponse.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/resetResponse\")\nUser Function fResetResponse()\n \nLocal cResponse := \"\"\nLocal lRet      := .F.\n \nlRet := oRest:resetResponse()\n \nIf (lRet)\n    cResponse := '{\"resetResponse\": \"Metodo resetResponse executado com sucesso\"}'\nElse\n    cResponse := '{\"resetResponse\": \"Nao foi possivel executar o metodo resetResponse\"}'\nEndIf\n \n \nReturn oRest:setResponse(cResponse)"
+        },
+        {
+          "id": "resetMessageResponse",
+          "name": "resetMessageResponse",
+          "signature": "oRest:resetMessageResponse()",
+          "summary": "Este método é responsável por restaurar o valor padrão do corpo da resposta (Body Response) para uma string vazia, limpando qualquer buffer de mensagens ou conteúdos textuais acumulados até o momento da execução, independente do instante do ciclo HTTP em que seja acionado. IMPORTANTE: ESCOPO DE LIMPEZA LIMITADO Este método realiza a limpeza exclusiva do buffer de caracteres da mensagem de retorno. Ele não altera e não redefine o Código de Status HTTP configurado na Thread até o momento.",
+          "returnType": "Logical",
+          "returnDescription": "Indica se a operação de limpeza e restauração do buffer de texto da mensagem foi executada com êxito.",
+          "exampleFile": "exemplo_resetMessageResponse.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/resetMessageResponse\")\nUser Function fResetMessageResponse()\n \nLocal cResponse := \"\"\nLocal lRet      := .F.\n \nlRet := oRest:resetMessageResponse()\n \nIf (lRet)\n    cResponse := '{\"resetMessageResponse\": \"Metodo resetMessageResponse executado com sucesso\"}'\nElse\n    cResponse := '{\"resetMessageResponse\": \"Nao foi possivel executar o metodo resetMessageResponse\"}'\nEndIf\n \n \nReturn oRest:setResponse(cResponse)"
+        },
+        {
+          "id": "resetStatusCode",
+          "name": "resetStatusCode",
+          "signature": "oRest:resetStatusCode()",
+          "summary": "Este método é responsável por restaurar os valores padrões para o código de status HTTP (Status Code), tanto para as parametrizações internas automáticas do servidor quanto para as customizações aplicadas manualmente pelo usuário na Thread atual, independente do momento em que seja utilizado no ciclo REST.",
+          "returnType": "Logical",
+          "returnDescription": "Indica se a operação de restauração padrão do código de status HTTP foi executada com êxito na Thread.",
+          "exampleFile": "exemplo_resetStatusCode.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/resetStatusCode\")\nUser Function fResetStatusCode()\n \nLocal cResponse := \"\"\nLocal lRet      := .F.\n \ncResponse := '['\nlRet      := oRest:setStatusCode(400)\n \nIf (lRet)\n    cResponse += '{\"setStatusCode\": \"Metodo setStatusCode executado com sucesso\"}'\nElse\n    cResponse += '{\"setStatusCode\": \"Nao foi possivel executar o metodo setStatusCode\"}'\nEndIf\n \nlRet := oRest:resetStatusCode()\n \nIf (lRet)\n    cResponse += ',{\"resetStatusCode\": \"Metodo resetStatusCode executado com sucesso\"}'\nElse\n    cResponse += ',{\"resetStatusCode\": \"Nao foi possivel executar o metodo resetStatusCode\"}'\nEndIf\n \ncResponse += ']'\n \n \nReturn oRest:setResponse(cResponse)"
+        },
+        {
+          "id": "sendZipped",
+          "name": "sendZipped",
+          "signature": "oRest:sendZipped( < aModes > )",
+          "summary": "Este método é responsável por definir que o conteúdo do corpo da resposta (Body Response) do serviço REST atual será enviado ao cliente de forma compactada (reduzindo o consumo de banda de rede).",
+          "returnType": "Logical",
+          "returnDescription": "Indica se a parametrização do modo de compactação do payload foi executada com sucesso na Thread.",
+          "exampleFile": "exemplo_sendZippedGzip.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/sendZipped\")\nUser Function fSendZippedGzip()\nLocal lRet := .F.\nLocal cMsg := \"\"\n \nlRet := oRest:sendZipped({\"GZIP\"})\ncMsg := '{\"Send Zipped GZIP\": \"' + cValToChar(lRet) + '\"}'\n \n \nReturn oRest:setResponse(cMsg)\nExemplo 2: Compactação via COMPRESS\nexemplo_sendZippedCompress.tlpp\n#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/sendZippedCompress\")\nUser Function fSendZippedCompress()\nLocal cResponse := \"\"\nLocal lRet      := .F.\n \nlRet := oRest:sendZipped({\"COMPRESS\"})\n \nIf (lRet)\n    cResponse := '{\"sendZipped\": \"Metodo sendZipped executado com sucesso\"}'\nElse\n    cResponse := '{\"sendZipped\": \"Metodo sendZipped nao foi executado\"}'\nEndIf\n \n \nReturn oRest:setResponse(cResponse)"
+        }
+      ]
+    },
+    {
+      "id": "cabecalhos-resposta",
+      "title": "Cabeçalhos de resposta",
+      "sidebarPosition": 5,
+      "description": "Criar, atualizar, concatenar ou remover headers HTTP da resposta.",
+      "methods": [
+        {
+          "id": "setHeaderResponse",
+          "name": "setHeaderResponse",
+          "signature": "oRest:setHeaderResponse( < jValue > )",
+          "summary": "Este método é responsável por definir o cabeçalho de resposta (Header Response) da requisição HTTP de forma estruturada. Ele permite injetar múltiplos campos de cabeçalho simultaneamente, sendo ideal para fornecer um contexto mais detalhado e controlado sobre a resposta que está a ser devolvida ao cliente.",
+          "returnType": "JsonObject",
+          "returnDescription": "Retorna um objeto JSON contendo todas as chaves e valores de cabeçalhos que foram definidos com sucesso na requisição atual.",
+          "exampleFile": "exemplo_setHeaderResponse.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/setHeaderResponse\")\nUser Function fSetHeaderResponse()\n \nLocal cJson     := '{\"Content-Type\": \"application/json\", \"X-Meu-Cabecalho-Teste\": \"Funcionou perfeitamente!\"}'\nLocal cResponse := \"\"\nLocal jHeaders  := Nil\nLocal jRet      := Nil\nLocal uRet      := .F.\n \njHeaders := JsonObject():New()\nuRet     := jHeaders:fromJson(cJson)\n \nIf (ValType(uRet) == 'U')\n     \n    jRet := oRest:setHeaderResponse(jHeaders)\n \n    If (ValType(jRet) == 'J')\n        cResponse := '{\"setHeaderResponse\": ' + jRet:toJson() + '}'\n    Else\n        cResponse := '{\"setHeaderResponse\": \"metodo setHeaderResponse falhou\"}'\n    EndIf\n     \nElse\n    cResponse := '{\"setHeaderResponse\": \"falha ao ler a string JSON inicial\"}'\nEndIf\n \n \nReturn oRest:setResponse(cResponse)"
+        },
+        {
+          "id": "setKeyHeaderResponse",
+          "name": "setKeyHeaderResponse",
+          "signature": "oRest:setKeyHeaderResponse( < cKey >, < cValue > )",
+          "summary": "Este método é responsável por definir (adicionar) o valor de uma nova chave no cabeçalho da resposta (Header Response) da requisição HTTP. ATENÇÃO IMPORTANTE: RISCO DE DUPLICAÇÃO Esta função não atualiza chaves que já existam previamente no cabeçalho. Caso informe o nome de uma chave idêntica a uma que já esteja registada na memória da resposta, o valor será duplicado no Header (criando uma nova entrada com a mesma chave). Para atualizar ou sobrescrever o valor de uma chave que já se encontre definida, é obrigatório utilizar a função oRest:updateKeyHeaderResponse().",
+          "returnType": "Logical",
+          "returnDescription": "Indica se a operação de inserção da chave no cabeçalho foi efetuada com sucesso.",
+          "exampleFile": "exemplo_setKeyHeaderResponse.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n// http://localhost:9090/testSetKeyHeaderResponse\n@Get(\"/testSetKeyHeaderResponse\")\nUser Function setKeyHeaderResponseExample()\n \nLocal lRet := .F.\nLocal cRet := \"Erro. Nao foi possivel definir a chave\"\n \nlRet := oRest:setKeyHeaderResponse(\"Content-Type\", \"text/plain\")\n \nIf (lRet)\n    cRet := \"Chave definida com sucesso\"\nEndIf\n \n \nReturn oRest:setResponse(cRet)"
+        },
+        {
+          "id": "updateKeyHeaderResponse",
+          "name": "updateKeyHeaderResponse",
+          "signature": "oRest:updateKeyHeaderResponse( < cKey >, < cValue > )",
+          "summary": "Este método permite que o desenvolvedor realize a manutenção (atualização ou sobrescrita) do valor de uma determinada chave que já tenha sido previamente definida no cabeçalho de resposta (Header Response) da requisição atual. Diferente do método setKeyHeaderResponse (que duplica a chave se a mesma já existir), este método garante que o valor seja efetivamente atualizado na chave correspondente.",
+          "returnType": "Logical",
+          "returnDescription": "Indica se a operação de atualização no cabeçalho HTTP foi efetuada com sucesso (.T.).",
+          "exampleFile": "exemplo_updateKeyHeaderResponse.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/testUpdateKeyHeader\")\nUser Function UpdateKeyHeaderExample()\n \nLocal lRet := .F.\nLocal cRet := \"Update realizado com sucesso\"\n \nlRet := oRest:updateKeyHeaderResponse(\"Content-Type\", \"application/json\")\n \nIf !lRet\n    cRet := \"Fail - Nao foi possivel atualizar a chave de cabecalho\"\nEndIf\n \noRest:setResponse(cRet)\n \nReturn .T."
+        },
+        {
+          "id": "appendKeyHeaderResponse",
+          "name": "appendKeyHeaderResponse",
+          "signature": "oRest:appendKeyHeaderResponse( < cKey >, < cValue > )",
+          "summary": "Este método é responsável por adicionar um novo valor a uma chave já existente no cabeçalho de resposta da requisição (Header Response). Diferente do método nativo de set tradicional, o valor antigo da chave não é eliminado ou sobrescrito; o novo valor fornecido é concatenado à informação já existente.",
+          "returnType": "Logical",
+          "returnDescription": "Indica se a operação de concatenação no cabeçalho foi efetuada com sucesso.",
+          "exampleFile": "exemplo_append_header.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n// Chamada: http://localhost:9090/api/testAppendKeyHeader\n@Get(\"testAppendKeyHeader\")\nUser Function appendKeyHeaderExample()\n \nLocal lRet := .F.\nLocal cRet := \"Append OK - Verifique o Header Response\"\n \nIf !oRest:setKeyHeaderResponse(\"Content-Type\", \"text/html\")\n     \n    cRet := \"Erro ao setar valor base na chave Content-Type\"\n     \nElse\n     \n    If !oRest:appendKeyHeaderResponse(\"Content-Type\", \"charset=utf-8\")\n        cRet := \"Erro ao efetuar o append na chave Content-Type\"\n    EndIf\n     \nEndIf\n \n \nReturn oRest:setResponse(cRet)"
+        },
+        {
+          "id": "deleteKeyHeaderResponse",
+          "name": "deleteKeyHeaderResponse",
+          "signature": "oRest:deleteKeyHeaderResponse( < cKey > )",
+          "summary": "Este método é responsável por eliminar (remover) uma chave específica que já se encontra definida no cabeçalho de resposta (Header Response) da requisição HTTP atual. ATENÇÃO ÀS REGRAS DE PROTOCOLO (RFC) Em conformidade com a especificação RFC sobre Response Header Fields, observe que alguns campos restritos do protocolo HTTP não podem ser eliminados ou omitidos da resposta, sob o risco de quebrar a comunicação com o cliente requisitante.",
+          "returnType": "Logical",
+          "returnDescription": "Se verdadeiro (.T.), indica que o campo foi localizado e eliminado do cabeçalho com sucesso.",
+          "exampleFile": "exemplo_delete_header.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n// Chamada: http://localhost:9090/api/testDeleteKeyHeader\n@Get(\"testDeleteKeyHeader\")\nUser Function DeleteKeyHeaderExample()\n \nLocal cRet := \"Fail\"\n \noRest:setKeyHeaderResponse(\"Allow\", \"metodos_permitidos\")\n \nIf !Empty(oRest:getKeyHeaderResponse(\"Allow\"))\n     \n    oRest:deleteKeyHeaderResponse(\"Allow\")\n     \n    cRet := \"Header criado, lido e depois deletado com sucesso!\"\n \nEndIf\n \noRest:setResponse(cRet)\n \n \nReturn .T."
+        }
+      ]
+    },
+    {
+      "id": "pool-servidor",
+      "title": "Pool, serviço e entry point",
+      "sidebarPosition": 6,
+      "description": "Ler TlppData, UserData, configuração do thread pool e entry points do AppServer.",
+      "methods": [
+        {
+          "id": "getThreadPoolTlppData",
+          "name": "getThreadPoolTlppData",
+          "signature": "oRest:getThreadPoolTlppData()",
+          "summary": "Retorna o objeto JSON com a chave TlppData configurada no thread pool que atende a requisição. Usado pelo framework para recursos nativos (ex.: Authorization).",
+          "returnType": "JsonObject",
+          "returnDescription": "Referência ao JSON de TlppData do pool — não manipule o objeto diretamente; leia propriedades sem alterá-las.",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n\n@Get(\"/documentation/getThreadPoolTlppData\")\nUser Function fGetThreadPoolTlppData()\n\nLocal jData := oRest:getThreadPoolTlppData()\nLocal cResp := \"\"\n\nIf (ValType(jData) == \"J\")\n    cResp := '{\"TlppData\": ' + jData:ToJson() + \"}\"\nElse\n    cResp := '{\"TlppData\": null}'\nEndIf\n\noRest:setResponse(cResp)\n\nReturn .T.",
+          "exampleFile": "exemplo_conceitual_getThreadPoolTlppData.tlpp"
+        },
+        {
+          "id": "getServerTlppData",
+          "name": "getServerTlppData",
+          "signature": "oRest:getServerTlppData()",
+          "summary": "Retorna o objeto JSON com a chave TlppData definida no nível do servidor REST (seção [general] do INI ou JSON de configuração).",
+          "returnType": "JsonObject",
+          "returnDescription": "Referência ao JSON de TlppData do servidor — compartilhado entre pools; trate como somente leitura.",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n\n@Get(\"/documentation/getServerTlppData\")\nUser Function fGetServerTlppData()\n\nLocal jData := oRest:getServerTlppData()\nLocal cResp := \"\"\n\nIf (ValType(jData) == \"J\")\n    cResp := '{\"ServerTlppData\": ' + jData:ToJson() + \"}\"\nElse\n    cResp := '{\"ServerTlppData\": null}'\nEndIf\n\noRest:setResponse(cResp)\n\nReturn .T.",
+          "exampleFile": "exemplo_conceitual_getServerTlppData.tlpp"
+        },
+        {
+          "id": "getThreadPoolUserData",
+          "name": "getThreadPoolUserData",
+          "signature": "oRest:getThreadPoolUserData()",
+          "summary": "Este método é responsável por retornar a configuração exclusiva do desenvolvedor parametrizada especificamente no Thread Pool do seu serviço REST.",
+          "returnType": "JsonObject",
+          "returnDescription": "Objeto JSON contendo a configuração realizada pelo usuário. Se as parametrizações não tiverem sido definidas no ambiente, o método retornará um objeto vazio (\"{}\").",
+          "exampleFile": "exemplo_getThreadPoolUserData.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/getThreadPoolUserData\")\nFunction u_fGetThreadPoolUserData()\n \nLocal cResponse := \"\"\nLocal jRet      := Nil\n \njRet := oRest:getThreadPoolUserData()\n \nIf (ValType(jRet) == 'J')\n    cResponse := '{\"getThreadPoolUserData\": ' + jRet:toJSON() + '}'\nElse\n    cResponse := '{\"getThreadPoolUserData\": \"metodo getThreadPoolUserData nao foi executado\"}'\nEndIf\n \noRest:setResponse(cResponse)\n \n \nReturn oRest:setResponse(cResponse)"
+        },
+        {
+          "id": "getThreadPoolServerUserData",
+          "name": "getThreadPoolServerUserData",
+          "signature": "oRest:getThreadPoolServerUserData()",
+          "summary": "Este método é responsável por retornar o objeto JSON contendo as configurações exclusivas parametrizadas pelo desenvolvedor (via chave UserData ou parametrização correspondente) especificamente para o servidor REST que recebeu a requisição atual.",
+          "returnType": "JsonObject",
+          "returnDescription": "Objeto JSON contendo as configurações de usuário definidas no servidor. Se as parametrizações não tiverem sido definidas no ambiente, retornará um objeto vazio (\"{}\").",
+          "exampleFile": "exemplo_getThreadPoolServerUserData.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/getThreadPoolServerUserData\")\nUser Function fGetThreadPoolServerUserData()\n \nLocal cResponse := \"\"\nLocal jRet      := Nil\n \njRet := oRest:getThreadPoolServerUserData()\n \nIf (ValType(jRet) == 'J')\n    cResponse := '{\"getThreadPoolServerUserData\": ' + jRet:toJSON() + '}'\nElse\n    cResponse := '{\"getThreadPoolServerUserData\": \"Metodo getThreadPoolServerUserData nao foi executado\"}'\nEndIf\n \noRest:setResponse(cResponse)\n \n \nReturn .T."
+        },
+        {
+          "id": "getThreadPoolEnvironment",
+          "name": "getThreadPoolEnvironment",
+          "signature": "oRest:getThreadPoolEnvironment()",
+          "summary": "Este método é responsável por retornar em qual ambiente (environment do Dicionário de Dados/RPO) o Thread Pool que recebeu a requisição atual está configurado para operar.",
+          "returnType": "String",
+          "returnDescription": "Nome do ambiente (environment) onde o thread pool está configurado.",
+          "exampleFile": "exemplo_getThreadPoolEnvironment.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/getThreadPoolEnvironment\")\nUser Function fGetThreadPoolEnvironment()\n \nLocal cResponse := \"\"\nLocal cRet      := oRest:getThreadPoolEnvironment()\n \nIf (ValType(cRet) == 'C')\n    cResponse := '{\"getThreadPoolEnvironment\": \"' + cRet + ' e o environment (ambiente) onde o threadpool ' + oRest:getThreadPoolName() + ' esta configurado\"}'\nElse\n    cResponse := '{\"getThreadPoolEnvironment\": \"Metodo getThreadPoolEnvironment nao foi executado\"}'\nEndIf\n \noRest:setResponse(cResponse)\n \n \nReturn .T."
+        },
+        {
+          "id": "getThreadPoolName",
+          "name": "getThreadPoolName",
+          "signature": "oRest:getThreadPoolName()",
+          "summary": "Este método é responsável por retornar o nome do Thread Pool que recebeu e está a processar a requisição atual. Este valor corresponde exatamente à identificação da seção ThreadPool declarada no arquivo de configuração do AppServer para o serviço REST em uso.",
+          "returnType": "String",
+          "returnDescription": "Nome da seção do Thread Pool correspondente à configuração ativa.",
+          "exampleFile": "exemplo_getThreadPoolName.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get('/documentation/getThreadPoolName')\nUser Function fGetThreadPoolName()\n \nLocal cResponse := \"\"\nLocal cRet      := oRest:getThreadPoolName()\n \nIf (ValType(cRet) == 'C')\n    cResponse := '{\"getThreadPoolName\": \"Nome do threadpool: ' + cRet + '\"}'\nElse\n    cResponse := '{\"getThreadPoolName\": \"Metodo getThreadPoolName nao foi executado\"}'\nEndIf\n \noRest:setResponse(cResponse)\n \n \nReturn .T."
+        },
+        {
+          "id": "getThreadPoolId",
+          "name": "getThreadPoolId",
+          "signature": "oRest:getThreadPoolId()",
+          "summary": "Este método é responsável por retornar o identificador numérico único (ID) do Thread Pool que recebeu e está a processar a requisição atual.",
+          "returnType": "Integer",
+          "returnDescription": "Identificador único numérico atribuído ao thread pool da requisição.",
+          "exampleFile": "exemplo_getThreadPoolId.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/getThreadPoolId\")\nUser Function fGetThreadPoolId()\n \nLocal cResponse := \"\"\nLocal nRet      := oRest:getThreadPoolId()\n \nIf (ValType(nRet) == 'N')\n    cResponse := '{\"getThreadPoolId\": \"O ID do threadpool ' + oRest:getThreadPoolName() + ' e: ' + cValToChar(nRet) + '\"}'\nElse\n    cResponse := '{\"getThreadPoolId\": \"Metodo getThreadPoolId nao foi executado\"}'\nEndIf\n \noRest:setResponse(cResponse)\n \n \nReturn .T."
+        },
+        {
+          "id": "getThreadPoolType",
+          "name": "getThreadPoolType",
+          "signature": "oRest:getThreadPoolType()",
+          "summary": "Este método é responsável por retornar qual é o tipo de arquitetura do Thread Pool (grupo de threads) que recebeu e está a processar a requisição atual no servidor.",
+          "returnDescription": "cThreadPoolType",
+          "exampleFile": "exemplo_getThreadPoolType.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get('/documentation/getThreadPoolType')\nFunction u_fGetThreadPoolType()\n \nLocal cResponse := \"\"\nLocal cRet      := oRest:getThreadPoolType()\n \nIf (ValType(cRet) == 'C')\n    cResponse := '{\"getThreadPoolType\": \"' + cRet + ' e o tipo do threadpool ' + oRest:getThreadPoolName() + ' que esta ativo\"}'\nElse\n    cResponse := '{\"getThreadPoolType\": \"Metodo getThreadPoolType nao foi executado\"}'\nEndIf\n \noRest:setResponse(cResponse)\n \n \nReturn oRest:setResponse(cResponse)"
+        },
+        {
+          "id": "getThreadPoolStatus",
+          "name": "getThreadPoolStatus",
+          "signature": "oRest:getThreadPoolStatus()",
+          "summary": "Este método é responsável por retornar o estado físico atual de execução do Thread Pool que recebeu e está a processar a requisição ativa no servidor.",
+          "returnType": "Integer",
+          "returnDescription": "Código numérico inteiro correspondente ao estado do Thread Pool.",
+          "exampleFile": "exemplo_getThreadPoolStatus.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get('/documentation/getThreadPoolStatus')\nUser Function fGetThreadPoolStatus()\n \nLocal aStatus   := {\"STOPPED\", \"STARTING\", \"STARTED\", \"STOPPING\"}\nLocal cResponse := \"\"\nLocal nRet      := oRest:getThreadPoolStatus()\n \nIf (ValType(nRet) == 'N')\n    // Efetuamos a soma de \"+ 1\" para alinhar o retorno numérico (0 a 3) com o índice do array (1 a 4)\n    cResponse := '{\"getThreadPoolStatus\": \"O status do threadpool ' + oRest:getThreadPoolName() + ' e: ' + cValToChar(nRet) + ' (' + aStatus[nRet + 1] + ')\"}'\nElse\n    cResponse := '{\"getThreadPoolStatus\": \"Metodo getThreadPoolStatus nao foi executado\"}'\nEndIf\n \noRest:setResponse(cResponse)\n \n \nReturn .T."
+        },
+        {
+          "id": "getThreadPoolMinThreads",
+          "name": "getThreadPoolMinThreads",
+          "signature": "oRest:getThreadPoolMinThreads()",
+          "summary": "Este método é responsável por retornar a quantidade mínima de threads que devem permanecer ativas (ficarão no ar) para o Thread Pool que está a processar a requisição atual.",
+          "returnType": "Integer",
+          "returnDescription": "Quantidade mínima de threads configurada para o thread pool atual.",
+          "exampleFile": "exemplo_getThreadPoolMinThreads.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get('/documentation/getThreadPoolMinThreads')\nUser Function fGetThreadPoolMinThreads()\n \nLocal cResponse := \"\"\nLocal nQtd      := oRest:getThreadPoolMinThreads()\n \nIf (ValType(nQtd) == 'N')\n    cResponse := '{\"getThreadPoolMinThreads\": \"' + cValToChar(nQtd) + ' e o numero minimo de threads que atendem o thread pool ' + oRest:getThreadPoolName() + '\"}'\nElse\n    cResponse := '{\"getThreadPoolMinThreads\": \"Metodo getThreadPoolMinThreads nao foi executado\"}'\nEndIf\n \noRest:setResponse(cResponse)\n \n \nReturn .T."
+        },
+        {
+          "id": "getThreadPoolMaxThreads",
+          "name": "getThreadPoolMaxThreads",
+          "signature": "oRest:getThreadPoolMaxThreads()",
+          "summary": "Este método é responsável por retornar a quantidade máxima de threads que poderão ser inicializadas e mantidas simultaneamente em execução para o Thread Pool que está a processar a requisição atual.",
+          "returnType": "Integer",
+          "returnDescription": "Quantidade máxima de threads configurada para o thread pool atual.",
+          "exampleFile": "exemplo_getThreadPoolMaxThreads.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get('/documentation/getThreadPoolMaxThreads')\nUser Function fGetThreadPoolMaxThreads()\n \nLocal cResponse := \"\"\nLocal nQtd      := oRest:getThreadPoolMaxThreads()\n \nIf (ValType(nQtd) == 'N')\n    cResponse := '{\"getThreadPoolMaxThreads\": \"' + cValToChar(nQtd) + ' e o numero maximo de threads que atendem o thread pool ' + oRest:getThreadPoolName() + '\"}'\nElse\n    cResponse := '{\"getThreadPoolMaxThreads\": \"Metodo getThreadPoolMaxThreads nao foi executado\"}'\nEndIf\n \noRest:setResponse(cResponse)\n \n \nReturn .T."
+        },
+        {
+          "id": "getThreadPoolMinFreeThreads",
+          "name": "getThreadPoolMinFreeThreads",
+          "signature": "oRest:getThreadPoolMinFreeThreads()",
+          "summary": "Este método é responsável por retornar a quantidade mínima de threads que devem permanecer ativas e livres (ociosas/disponíveis) para o Thread Pool que está a processar a requisição atual.",
+          "returnDescription": "nMinFreeThreads",
+          "exampleFile": "exemplo_getThreadPoolMinFreeThreads.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get('/documentation/getThreadPoolMinFreeThreads')\nUser Function fGetThreadPoolMinFreeThreads()\n \nLocal cResponse := \"\"\nLocal nRet      := oRest:getThreadPoolMinFreeThreads()\n \nIf (ValType(nRet) == 'N')\n    cResponse := '{\"getThreadPoolMinFreeThreads\": \"' + cValToChar(nRet) + ' e o numero minimo de threads configurado para ficarem disponiveis no thread pool ' + oRest:getThreadPoolName() + '\"}'\nElse\n    cResponse := '{\"getThreadPoolMinFreeThreads\": \"Metodo getThreadPoolMinFreeThreads nao foi executado\"}'\nEndIf\n \noRest:setResponse(cResponse)\n \n \nReturn .T."
+        },
+        {
+          "id": "getThreadPoolGrowthFactor",
+          "name": "getThreadPoolGrowthFactor",
+          "signature": "oRest:getThreadPoolGrowthFactor()",
+          "summary": "Este método é responsável por retornar o Fator de Crescimento (Growth Factor) configurado para o Thread Pool que recebeu e está a processar a requisição atual.",
+          "returnDescription": "nGrowthFactor",
+          "exampleFile": "exemplo_getThreadPoolGrowthFactor.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/getThreadPoolGrowthFactor\")\nUser Function fGetThreadPoolGrowthFactor()\n \nLocal cResponse := \"\"\nLocal nRet      := oRest:getThreadPoolGrowthFactor()\n \nIf (ValType(nRet) == 'N')\n    cResponse := '{\"getThreadPoolGrowthFactor\": \"' + cValToChar(nRet) + ' e o growth factor (fator de crescimento das threads) configurado para o thread pool ' + oRest:getThreadPoolName() + '\"}'\nElse\n    cResponse := '{\"getThreadPoolGrowthFactor\": \"Metodo getThreadPoolGrowthFactor nao foi executado\"}'\nEndIf\n \noRest:setResponse(cResponse)\n \n \nReturn .T."
+        },
+        {
+          "id": "getThreadPoolInactiveTimeout",
+          "name": "getThreadPoolInactiveTimeout",
+          "signature": "oRest:getThreadPoolInactiveTimeout()",
+          "summary": "Este método é responsável por retornar o tempo limite de inatividade (Inactive Timeout) configurado para o Thread Pool que está a processar a requisição atual.",
+          "returnDescription": "nInactiveTimeout",
+          "exampleFile": "exemplo_getThreadPoolInactiveTimeout.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/getThreadPoolInactiveTimeout\")\nUser Function fGetThreadPoolInactiveTimeout()\n \nLocal cResponse := \"\"\nLocal nRet      := oRest:getThreadPoolInactiveTimeout()\n \nIf (ValType(nRet) == 'N')\n    cResponse := '{\"getThreadPoolInactiveTimeout\": \"' + cValToChar(nRet) + ' ms e o inactive timeout configurado para o thread pool ' + oRest:getThreadPoolName() + '\"}'\nElse\n    cResponse := '{\"getThreadPoolInactiveTimeout\": \"Metodo getThreadPoolInactiveTimeout nao foi executado\"}'\nEndIf\n \noRest:setResponse(cResponse)\n \n \nReturn .T."
+        },
+        {
+          "id": "getThreadPoolAcceptTimeout",
+          "name": "getThreadPoolAcceptTimeout",
+          "signature": "oRest:getThreadPoolAcceptTimeout()",
+          "summary": "Este método é responsável por retornar o tempo limite de aceitação (Accept Timeout) configurado para o thread pool que está processando a requisição atual.",
+          "returnType": "Integer",
+          "returnDescription": "nAcceptTimeout",
+          "exampleFile": "exemplo_getThreadPoolAcceptTimeout.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/getThreadPoolAcceptTimeout\")\nUser Function fGetThreadPoolAcceptTimeout()\n \nLocal cResponse := \"\"\nLocal nQtd      := oRest:getThreadPoolAcceptTimeout()\n \nIf (ValType(nQtd) == 'N')\n    cResponse := '{\"getThreadPoolAcceptTimeout\": \"' + cValToChar(nQtd) + ' ms e o accept timeout configurado para o thread pool ' + oRest:getThreadPoolName() + '\"}'\nElse\n    cResponse := '{\"getThreadPoolAcceptTimeout\": \"Metodo getThreadPoolAcceptTimeout nao foi executado\"}'\nEndIf\n \noRest:setResponse(cResponse)\n \n \nReturn .T."
+        },
+        {
+          "id": "getThreadPoolSlaves",
+          "name": "getThreadPoolSlaves",
+          "signature": "oRest:getThreadPoolSlaves()",
+          "summary": "Este método é responsável por retornar a lista de instâncias secundárias (Slaves) parametrizadas e ativas para o Thread Pool que recebeu a requisição atual.",
+          "returnType": "Array",
+          "returnDescription": "Retorna um array com as instâncias de slaves configuradas para o thread pool requisitado.",
+          "exampleFile": "exemplo_getThreadPoolSlaves.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/getThreadPoolSlaves\")\nUser Function fGetThreadPoolSlaves()\n \nLocal aSlaves\nLocal cResponse  := \"\"\nLocal nIndex     := 1\nLocal nLenSlaves := 0\n \naSlaves := oRest:getThreadPoolSlaves()\n \nIf (ValType(aSlaves) == 'A')\n \n    nLenSlaves := Len(aSlaves)\n     \n    If (nLenSlaves > 0)\n     \n        cResponse := '{\"ThreadPool\": \"' + oRest:getThreadPoolName() + '\", '\n        cResponse += '\"Total_Slaves\": ' + cValToChar(nLenSlaves) + ', '\n        cResponse += '\"Slaves_Ativos\": ['\n         \n        For nIndex := 1 To nLenSlaves\n            cResponse += '\"' + cValToChar(aSlaves[nIndex]:id) + '\"'\n             \n            If nIndex < nLenSlaves\n                cResponse += ', '\n            EndIf\n        Next\n         \n        cResponse += ']}'\n         \n    Else\n        cResponse := '{\"getThreadPoolSlaves\": \"Nao existem slaves configurados para o threadpool: ' + oRest:getThreadPoolName() + '\"}'\n    EndIf\n     \nElse\n    cResponse := '{\"getThreadPoolSlaves\": \"Metodo falhou ou retornou diferente de array\"}'\nEndIf\n \noRest:setResponse(cResponse)\n \n \nReturn .T."
+        },
+        {
+          "id": "getThreadPoolServiceId",
+          "name": "getThreadPoolServiceId",
+          "signature": "oRest:getThreadPoolServiceId()",
+          "summary": "Este método é responsável por retornar o identificador numérico único (ID) do servidor para o qual o Thread Pool corrente está processando as requisições ativas. No arquivo de configuração (INI) do AppServer, definimos quais servidores lógicos serão ativados no HttpServer e, para cada um deles, apontamos qual ou quais pools de threads processarão os pacotes de dados de suas respectivas rotas. Este método faz a ponte reversa via código, identificando a qual ID de servidor a thread de execução atual pertence.",
+          "returnType": "Integer",
+          "returnDescription": "Identificador numérico do servidor lógico em que a thread está sendo executada.",
+          "exampleFile": "exemplo_getThreadPoolServiceId.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get('/documentation/getThreadPoolServiceId')\nUser Function GetServiceId()\n \nLocal nRet      := oRest:getThreadPoolServiceId()\nLocal cResponse := \"\"\n \nConOut(\"O Id do servico do threadpool \" + oRest:getThreadPoolName() + \" e \" + cValToChar(nRet))\n \ncResponse := '{\"getThreadPoolServiceId\": ' + cValToChar(nRet) + '}'\n \noRest:setResponse(cResponse)\n \n \nReturn .T."
+        },
+        {
+          "id": "getThreadPoolServiceName",
+          "name": "getThreadPoolServiceName",
+          "signature": "oRest:getThreadPoolServiceName()",
+          "summary": "Este método é responsável por retornar o nome do servidor (HTTP ou HTTPS) para o qual o Thread Pool corrente está processando as requisições ativas. Este nome é aquele que foi informado na configuração do serviço, seja de maneira estática via arquivo de inicialização do AppServer (appserver.ini) ou dinamicamente por uma função TLPP que inicializa o servidor passando um objeto JSON como parâmetro.",
+          "returnType": "String",
+          "returnDescription": "Nome do servidor lógico para o qual o pool de threads está trabalhando.",
+          "exampleFile": "exemplo_getThreadPoolServiceName.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/getThreadPoolServiceName\")\nUser Function fGetThreadPoolServiceName()\n \nLocal cResponse := \"\"\nLocal cRet      := \"\"\n \ncRet := oRest:getThreadPoolServiceName()\n \nIf (ValType(cRet) == 'C')\n    cResponse := '{\"getThreadPoolServiceName\": \"' + cRet + '\"}'\nElse\n    cResponse := '{\"getThreadPoolServiceName\": \"Metodo getThreadPoolServiceName nao foi executado\"}'\nEndIf\n \noRest:setResponse(cResponse)\n \n \nReturn .T."
+        },
+        {
+          "id": "getThreadPoolServicePort",
+          "name": "getThreadPoolServicePort",
+          "signature": "oRest:getThreadPoolServicePort()",
+          "summary": "Este método é responsável por retornar o número da porta de rede (HTTP ou HTTPS) sob a qual o Thread Pool atual está processando as requisições ativas. Esta porta corresponde àquela que foi definida na configuração do serviço, seja estaticamente através do arquivo de inicialização do AppServer (appserver.ini) ou dinamicamente por uma função TLPP que inicializa o servidor passando um objeto JSON como parâmetro.",
+          "returnType": "Integer",
+          "returnDescription": "Porta na qual o serviço é acessado.",
+          "exampleFile": "exemplo_getThreadPoolServicePort.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/getThreadPoolServicePort\")\nUser Function fGetThreadPoolServicePort()\n \nLocal cResponse := \"\"\nLocal nRet      := -1\n \nnRet := oRest:getThreadPoolServicePort()\n \nIf (ValType(nRet) == 'N' .And. nRet >= 0)\n    cResponse := '{\"getThreadPoolServicePort\": ' + cValToChar(nRet) + '}'\nElse\n    cResponse := '{\"getThreadPoolServicePort\": \"Metodo getThreadPoolServicePort nao foi executado\"}'\nEndIf\n \noRest:setResponse(cResponse)\n \n \nReturn .T."
+        },
+        {
+          "id": "getThreadPoolServiceSSL",
+          "name": "getThreadPoolServiceSSL",
+          "signature": "oRest:getThreadPoolServiceSSL()",
+          "summary": "Este método é responsável por retornar se o serviço HTTP/REST corrente (para o qual o Thread Pool atual está processando a requisição ativa) utiliza o protocolo de segurança criptográfica SSL/TLS.",
+          "returnType": "Logical",
+          "returnDescription": "Retorna verdadeiro (.T.) se o servidor atual utiliza criptografia SSL/TLS (HTTPS). Retorna falso (.F.) caso contrário.",
+          "exampleFile": "exemplo_getThreadPoolServiceSSL.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/getThreadPoolServiceSSL\")\nUser Function fGetThreadPoolServiceSSL()\n \nLocal cResponse := \"\"\nLocal lRet      := oRest:getThreadPoolServiceSSL()\n \nIf (ValType(lRet) == 'L')\n    cResponse := '{\"getThreadPoolServiceSSL\": \"' + cValToChar(lRet) + '\"}'\nElse\n    cResponse := '{\"getThreadPoolServiceSSL\": \"metodo getThreadPoolServiceSSL nao foi executado\"}'\nEndIf\n \noRest:setResponse(cResponse)\n \n \nReturn .T."
+        },
+        {
+          "id": "getThreadPoolAuthorizationScheme",
+          "name": "getThreadPoolAuthorizationScheme",
+          "signature": "oRest:getThreadPoolAuthorizationScheme()",
+          "summary": "Este método é responsável por retornar qual é o tipo (esquema) de autenticação configurado especificamente para o Thread Pool que está processando a requisição atual.",
+          "returnType": "String",
+          "returnDescription": "Tipo de autenticação configurada (Exemplo: \"basic\", \"oAuth2\", etc).",
+          "exampleFile": "exemplo_getThreadPoolAuthorizationScheme.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/getThreadPoolAuthorizationScheme\")\nUser Function authorizationType()\n \nLocal cRet      := oRest:getThreadPoolAuthorizationScheme()\nLocal cResponse := \"\"\n \nConOut(\"O usuario deve implementar as regras de autenticacao do tipo \" + cRet)\n \ncResponse := '{\"getThreadPoolAuthorizationScheme\": \"' + cRet + '\"}'\n \noRest:setResponse(cResponse)\n \n \nReturn .T."
+        },
+        {
+          "id": "getThreadPoolAuthorizationOnAuth",
+          "name": "getThreadPoolAuthorizationOnAuth",
+          "signature": "oRest:getThreadPoolAuthorizationOnAuth()",
+          "summary": "Este método é responsável por retornar o nome da função configurada para realizar a autenticação do serviço (callback OnAuth) especificamente para o Thread Pool que está processando a requisição atual.",
+          "returnType": "String",
+          "returnDescription": "Nome da função que será executada no momento de autenticar o serviço.",
+          "exampleFile": "exemplo_getThreadPoolAuthorizationOnAuth.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/getThreadPoolAuthorizationOnAuth\")\nUser Function authorizationFunction()\n \nLocal cFunc     := oRest:getThreadPoolAuthorizationOnAuth()\nLocal cResponse := \"\"\n \nConOut(\"O usuario deve implementar as regras de autenticacao aqui: \" + cFunc)\n \ncResponse := '{\"getThreadPoolAuthorizationOnAuth\": \"' + cFunc + '\"}'\n \noRest:setResponse(cResponse)\n \n \nReturn .T."
+        },
+        {
+          "id": "getThreadPoolUserExitName",
+          "name": "getThreadPoolUserExitName",
+          "signature": "oRest:getThreadPoolUserExitName()",
+          "summary": "Este método é responsável por retornar o valor da chave UserExits configurada na Thread Pool ou na Thread Slave que está a processar a requisição atual. O conteúdo resgatado por este método é exatamente o nome da secção declarada no arquivo de inicialização (INI) ou no objeto JSON do REST Server, dentro da qual as funções customizadas de Callbacks (OnStart, OnStop, OnError, etc.) foram mapeadas pelo administrador do ambiente.",
+          "returnDescription": "cUserExitName",
+          "exampleFile": "exemplo_getThreadPoolUserExitName.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/getThreadPoolUserExitName\")\nFunction u_fGetTPUserExitName()\n \nLocal cResponse := \"\"\nLocal cUsrName  := \"\"\n \ncUsrName := oRest:getThreadPoolUserExitName()\n \nIf (ValType(cUsrName) == 'C' .And. !Empty(cUsrName))\n     \n    cResponse := '{\"getThreadPoolUserExitName\": \"' + cUsrName + '\", \"message\": \"Esta e a secao de UserExits configurada para o pool atual.\"}'\n     \nElse\n     \n    cResponse := '{\"getThreadPoolUserExitName\": \"\", \"message\": \"Nenhuma secao de UserExits foi configurada para este Thread Pool.\"}'\n     \nEndIf\n \noRest:setResponse(cResponse)\n \nReturn .T."
+        },
+        {
+          "id": "getThreadPoolUserExitOnStart",
+          "name": "getThreadPoolUserExitOnStart",
+          "signature": "oRest:getThreadPoolUserExitOnStart()",
+          "summary": "Este método é responsável por retornar o valor configurado na chave OnStart dentro da secção mapeada como UserExits para o Thread Pool atual. O conteúdo resgatado representa o nome da função customizada de utilizador que será executada como rotina de arranque do serviço. O tlppCore invocará automaticamente esta função no exato momento em que as Threads do serviço REST estiverem sendo inicializadas (processo comummente utilizado para preparar o ambiente de dados, abrir empresas e filiais).",
+          "returnType": "String",
+          "returnDescription": "O valor (nome da função) configurado na chave de inicialização do pool atual. Retornará vazio (\"\") caso não exista nenhuma função mapeada.",
+          "exampleFile": "exemplo_getThreadPoolUserExitOnStart.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/getThreadPoolUserExitOnStart\")\nFunction u_fGetTPUserExitOnStart()\n \nLocal cResponse  := \"\"\nLocal cFuncStart := \"\"\n \ncFuncStart := oRest:getThreadPoolUserExitOnStart()\n \nIf (ValType(cFuncStart) == 'C' .And. !Empty(cFuncStart))\n     \n    cResponse := '{\"getThreadPoolUserExitOnStart\": \"' + cFuncStart + '\", \"message\": \"Esta e a funcao de inicializacao de thread configurada para o pool.\"}'\n     \nElse\n     \n    cResponse := '{\"getThreadPoolUserExitOnStart\": \"\", \"message\": \"Nenhuma funcao de inicializacao (OnStart) foi configurada para este Thread Pool.\"}'\n     \nEndIf\n \noRest:setResponse(cResponse)\n \nReturn .T."
+        },
+        {
+          "id": "getThreadPoolUserExitOnStop",
+          "name": "getThreadPoolUserExitOnStop",
+          "signature": "oRest:getThreadPoolUserExitOnStop()",
+          "summary": "Este método é responsável por retornar o valor configurado na chave OnStop dentro da secção mapeada como UserExits para o Thread Pool atual. O conteúdo resgatado representa o nome da função customizada de utilizador que será executada como rotina de finalização do serviço. O tlppCore invocará automaticamente esta função no exato momento em que as Threads do serviço REST estiverem sendo encerradas ou destruídas (processo comumente utilizado para fechar o ambiente de dados, desalocar recursos e encerrar conexões externas).",
+          "returnType": "String",
+          "returnDescription": "O valor (nome da função) configurado na chave de finalização do pool atual. Retornará vazio (\"\") caso não exista nenhuma função mapeada.",
+          "exampleFile": "exemplo_getThreadPoolUserExitOnStop.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/getThreadPoolUserExitOnStop\")\nFunction u_fGetTPUserExitOnStop()\n \nLocal cResponse := \"\"\nLocal cFuncStop := \"\"\n \ncFuncStop := oRest:getThreadPoolUserExitOnStop()\n \nIf (ValType(cFuncStop) == 'C' .And. !Empty(cFuncStop))\n     \n    cResponse := '{\"getThreadPoolUserExitOnStop\": \"' + cFuncStop + '\", \"message\": \"Esta e a funcao de encerramento de thread configurada para o pool.\"}'\n     \nElse\n     \n    cResponse := '{\"getThreadPoolUserExitOnStop\": \"\", \"message\": \"Nenhuma funcao de finalizacao (OnStop) foi configurada para este Thread Pool.\"}'\n     \nEndIf\n \noRest:setResponse(cResponse)\n \nReturn .T."
+        },
+        {
+          "id": "getThreadPoolUserExitOnSelect",
+          "name": "getThreadPoolUserExitOnSelect",
+          "signature": "oRest:getThreadPoolUserExitOnSelect()",
+          "summary": "Este método é responsável por retornar o valor configurado na chave OnSelect dentro da secção mapeada como UserExits para o Thread Pool atual. O conteúdo resgatado representa o nome da função customizada de utilizador que será executada como o orquestrador (balanceador) do serviço. O tlppCore invocará automaticamente esta função sempre que o servidor REST receber uma nova requisição, transferindo-lhe a responsabilidade de decidir para qual Thread de atendimento ou Slave a requisição deverá ser encaminhada.",
+          "returnType": "String",
+          "returnDescription": "O valor (nome da função) configurado na chave de roteamento/seleção do pool atual. Retornará vazio (\"\") caso não exista nenhuma função mapeada.",
+          "exampleFile": "exemplo_getThreadPoolUserExitOnSelect.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/getThreadPoolUserExitOnSelect\")\nFunction u_fGetTPUserExitOnSelect()\n \nLocal cResponse   := \"\"\nLocal cFuncSelect := \"\"\n \ncFuncSelect := oRest:getThreadPoolUserExitOnSelect()\n \nIf (ValType(cFuncSelect) == 'C' .And. !Empty(cFuncSelect))\n     \n    cResponse := '{\"getThreadPoolUserExitOnSelect\": \"' + cFuncSelect + '\", \"message\": \"Esta e a funcao orquestradora (balanceador) configurada para o pool.\"}'\n     \nElse\n     \n    cResponse := '{\"getThreadPoolUserExitOnSelect\": \"\", \"message\": \"Nenhuma funcao de orquestracao (OnSelect) foi configurada para este Thread Pool.\"}'\n     \nEndIf\n \noRest:setResponse(cResponse)\n \nReturn .T."
+        },
+        {
+          "id": "getThreadPoolUserExitOnError",
+          "name": "getThreadPoolUserExitOnError",
+          "signature": "oRest:getThreadPoolUserExitOnError()",
+          "summary": "Este método é responsável por retornar o valor configurado na chave OnError dentro da secção mapeada como UserExits para o Thread Pool atual. O conteúdo resgatado representa o nome da função de utilizador que será executada como Callback caso ocorra uma falha de execução (runtime error) na thread. O tlppCore assumirá o desvio de fluxo e invocará automaticamente esta função, injetando o objeto de classe de erro (oError) como parâmetro para que o desenvolvedor realize o tratamento customizado.",
+          "returnType": "String",
+          "returnDescription": "O valor (nome da função) configurado na chave de tratamento de erro do pool atual. Retornará vazio caso não exista nenhuma função mapeada.",
+          "exampleFile": "exemplo_getThreadPoolUserExitOnError.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/getThreadPoolUserExitOnError\")\nFunction u_fGetTPUserExitOnError()\n \nLocal cResponse  := \"\"\nLocal cFuncError := \"\"\n \ncFuncError := oRest:getThreadPoolUserExitOnError()\n \nIf (ValType(cFuncError) == 'C' .And. !Empty(cFuncError))\n     \n    cResponse := '{\"getThreadPoolUserExitOnError\": \"' + cFuncError + '\", \"message\": \"Esta e a funcao de tratamento de falhas configurada para o pool.\"}'\n     \nElse\n     \n    cResponse := '{\"getThreadPoolUserExitOnError\": \"\", \"message\": \"Nenhuma funcao de tratamento de erro (OnError) foi configurada para este Thread Pool.\"}'\n     \nEndIf\n \noRest:setResponse(cResponse)\n \nReturn .T."
+        },
+        {
+          "id": "getThreadPool_SvcId_TPType",
+          "name": "getThreadPool_SvcId_TPType",
+          "signature": "oRest:getThreadPool_SvcId_TPType()",
+          "summary": "Este método é responsável por retornar o identificador do serviço em conjunto com o tipo do thread pool (grupo de processamento) que recebeu e está a processar a requisição atual.",
+          "returnType": "String contendo o identificador do serviço e qual é o tipo do thread pool em uso.",
+          "returnDescription": "Exemplo Prático de Utilização",
+          "exampleFile": "exemplo_getThreadPool_SvcId_TPType.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/getThreadPool_SvcId_TPType\")\nUser Function fGetThreadPool_SvcId_TPType()\n \nLocal cResponse := \"\"\nLocal cRet      := oRest:getThreadPool_SvcId_TPType()\n \nIf (ValType(cRet) == 'C')\n    cResponse := '{\"getThreadPool_SvcId_TPType\": \"As informacoes do threadpool ' + oRest:getThreadPoolName() + ' sao: ' + cRet + '\"}'\nElse\n    cResponse := '{\"getThreadPool_SvcId_TPType\": \"Metodo getThreadPool_SvcId_TPType nao foi executado\"}'\nEndIf\n \noRest:setResponse(cResponse)\n \n \nReturn .T."
+        },
+        {
+          "id": "getCEntryPointAuthorizationOnAuth",
+          "name": "getCEntryPointAuthorizationOnAuth",
+          "signature": "oRest:getCEntryPointAuthorizationOnAuth()",
+          "summary": "Este método é responsável por resgatar e retornar o nome da função customizada (User Function) que foi previamente configurada para atuar como o Callback de autenticação e validação do servidor REST (parâmetro OnAuth). PRÉ-REQUISITO: CONFIGURAÇÃO .INI OU JSON Atenção: O método oRest não define qual é a função de autenticação; ele apenas \"lê\" o que foi configurado na infraestrutura. Para que este método retorne um valor válido, é estritamente necessário que a camada de segurança do servidor tenha sido previamente parametrizada (no arquivo appserver.ini ou via carga de JSON em código) através da chave TlppData, definindo o esquema e a função OnAuth. Contexto Arquitetural (Basic e OAuth2) Embora seja muito comum em implementações de Basic Auth (onde a função valida utilizador e senha), o retorno deste método é vital em arquiteturas modernas baseadas no protocolo OAuth2. No contexto do oAuth, a função cujo nome é devolvido por este método atua como o filtro de segurança primário: é ela a responsável técnica por decriptar, avaliar as permissões (scopes) e checar a validade do Access Token ou Refresh Token enviado no cabeçalho da requisição HTTP, decidindo se a chamada deve ser barrada (HTTP 401/403) ou permitida.",
+          "returnType": "String",
+          "returnDescription": "cEntryPointAuthorizationOnAuth",
+          "exampleFile": "exemplo_getCEntryPointAuth.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/getEntryPointAuth\")\nUser Function getEntryPointAuth()\n \nLocal cRet := \"\"\n \ncRet := oRest:getCEntryPointAuthorizationOnAuth()\n \nIf (cRet != \"\")\n     \n    ConOut(\"O ponto de função para realizar a autenticação para as requisições HTTP é: \" + cRet)\n     \nElse\n     \n    ConOut(\"Atenção: Não foi configurado um ponto de função (OnAuth) para validar as requisições HTTP neste ambiente.\")\n     \nEndIf\n \noRest:setResponse(cRet)\n \nReturn .T."
+        },
+        {
+          "id": "getCEntryPointAuthorizationScheme",
+          "name": "getCEntryPointAuthorizationScheme",
+          "signature": "oRest:getCEntryPointAuthorizationScheme()",
+          "summary": "Este método é responsável por resgatar e retornar o valor da propriedade privada referente ao Esquema de Autenticação (Scheme) configurado no servidor para a requisição atual. Em cenários normais, os retornos mais comuns para este método são as strings \"basic\" ou \"oAuth2\", refletindo o protocolo de segurança exigido pela infraestrutura. PRÉ-REQUISITO: CONFIGURAÇÃO .INI OU JSON Atenção: Tal como outros métodos de leitura de configuração de infraestrutura, este método requer que o servidor possua uma parametrização prévia ativa. Para que o método retorne um valor preenchido, é obrigatório que a camada de segurança do servidor tenha sido previamente parametrizada (no arquivo appserver.ini ou via carga de JSON em código) através da chave TlppData, definindo a propriedade scheme no nó de Authorization.",
+          "returnType": "String",
+          "returnDescription": "Retorna uma string contendo o nome do esquema de autenticação (ex: \"basic\" ou \"oAuth2\"). Retornará vazio ou Nil caso a propriedade não esteja configurada no ambiente.",
+          "exampleFile": "exemplo_getCEntryPointScheme.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/getCentryPointAuthorizationScheme\")\nUser Function getCentryPointAuthScheme()\n \nLocal cResponse := \"\"\nLocal cScheme   := \"\"\n \ncScheme := cValToChar(oRest:getCEntryPointAuthorizationScheme())\n \ncResponse := '{\"getCentryPointAuthorizationScheme\": \"Metodo executado com sucesso, retornando: [' + cScheme + ']\"}'\n \noRest:setResponse(cResponse)\n \nReturn .T."
+        },
+        {
+          "id": "getCentryPointEnvironment",
+          "name": "getCentryPointEnvironment",
+          "signature": "oRest:getCentryPointEnvironment()",
+          "summary": "Este método é responsável por resgatar e retornar o nome da função customizada de Callback que foi configurada no servidor para ser executada no momento da criação de uma nova Thread destinada ao REST. No ecossistema do tlppCore, este callback é tecnicamente mapeado através da chave OnStart. PRÉ-REQUISITO: CONFIGURAÇÃO DE USEREXITS Atenção: Este método atua apenas como um \"leitor\" da infraestrutura. Para que ele retorne um valor válido, é estritamente obrigatório que o administrador do servidor tenha previamente configurado a secção de UserExits (seja no appserver.ini ou via carga de JSON em código) e mapeado o nome de uma função válida na chave OnStart.",
+          "returnType": "String",
+          "returnDescription": "cEntryPointEnvironment",
+          "exampleFile": "exemplo_getCentryPointEnvironment.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/getEntryPoint\")\nUser Function getEntryPoint()\n \nLocal cRet := \"\"\nLocal cMsg := \"\"\n \ncRet := oRest:getCentryPointEnvironment()\n \nIf (cRet != \"\")\n     \n    cMsg := \"O ponto de função para preparação de ambiente (OnStart) é: [\" + cRet + \"]\"\n    ConOut(cMsg)\n     \nElse\n     \n    cMsg := \"Atenção: Não foi configurado um ponto de função (OnStart) para preparação de ambiente neste servidor.\"\n    ConOut(cMsg)\n     \nEndIf\n \noRest:setResponse('{\"status_ambiente\": \"' + cMsg + '\"}')\n \nReturn .T."
+        },
+        {
+          "id": "getCentryPointError",
+          "name": "getCentryPointError",
+          "signature": "oRest:getCentryPointError()",
+          "summary": "Este método é responsável por resgatar e retornar o nome da função customizada de Callback que foi configurada no servidor para atuar como o tratamento global de falhas e interceção de erros de execução (Runtime Errors). No ecossistema do tlppCore, este callback é tecnicamente mapeado através da chave OnError. A utilização deste recurso é vital para equipes que desejam customizar a mensagem de erro (JSON) devolvida ao cliente sempre que a aplicação recebe um erro. PRÉ-REQUISITO: CONFIGURAÇÃO DE USEREXITS Atenção: Este método atua apenas como um \"leitor\" da infraestrutura. Para que ele retorne um valor válido, é estritamente obrigatório que o administrador do servidor tenha previamente configurado a secção de UserExits (seja no appserver.ini ou via carga de JSON em código) e mapeado o nome de uma função válida na chave OnError.",
+          "returnType": "String",
+          "returnDescription": "cEntryPointError",
+          "exampleFile": "exemplo_getCentryPointError.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/getEntryPointError\")\nUser Function getEntryPointError()\n \nLocal cRet := \"\"\nLocal cMsg := \"\"\n \ncRet := oRest:getCentryPointError()\n \nIf (cRet != \"\")\n     \n    cMsg := \"O ponto de função para tratamento de erros (OnError) é: [\" + cRet + \"]\"\n    ConOut(cMsg)\n     \nElse\n     \n    cMsg := \"Atenção: Não foi configurado um ponto de função (OnError) para tratamento de falhas neste servidor.\"\n    ConOut(cMsg)\n     \nEndIf\n \noRest:setResponse('{\"status_error_handler\": \"' + cMsg + '\"}')\n \nReturn .T."
+        },
+        {
+          "id": "getCEntryPointExit",
+          "name": "getCEntryPointExit",
+          "signature": "oRest:getCEntryPointExit()",
+          "summary": "Este método é responsável por resgatar e retornar o nome da função de Callback customizada que foi configurada no servidor para ser executada no momento da finalização e destruição de uma Thread de atendimento REST. No ecossistema do tlppCore, esta rotina de saída (Exit) é tecnicamente mapeada através da chave OnStop. Ela permite que o desenvolvedor realize o processamento final necessário antes de a thread morrer (como fechar ambientes, desalocar memória, gravar logs ou encerrar conexões a bancos de dados externos). PRÉ-REQUISITO: CONFIGURAÇÃO DE USEREXITS Atenção: Este método atua apenas como um \"leitor\" da infraestrutura. Para que ele retorne um valor válido, é estritamente obrigatório que o administrador do servidor tenha previamente configurado a secção de UserExits (seja no appserver.ini ou via carga de JSON em código) e mapeado o nome de uma função válida na chave OnStop.",
+          "returnType": "String",
+          "returnDescription": "cEntryPointExit",
+          "exampleFile": "exemplo_getCEntryPointExit.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/getEntryPointExit\")\nUser Function getEntryPointExit()\n \nLocal cRet := \"\"\nLocal cMsg := \"\"\n \ncRet := oRest:getCEntryPointExit()\n \nIf (cRet != \"\")\n     \n    cMsg := \"O ponto de função para realizar tratamento na finalização da thread (OnStop) é: [\" + cRet + \"]\"\n    ConOut(cMsg)\n     \nElse\n     \n    cMsg := \"Atenção: Não foi configurado um ponto de função para tratamento na finalização da thread.\"\n    ConOut(cMsg)\n     \nEndIf\n \noRest:setResponse('{\"status_onstop\": \"' + cMsg + '\"}')\n \nReturn .T."
+        },
+        {
+          "id": "getCEntryPointGrader",
+          "name": "getCEntryPointGrader",
+          "signature": "oRest:getCEntryPointGrader()",
+          "summary": "Este método é responsável por resgatar e retornar o nome da função de Callback customizada que foi configurada no servidor para assumir a responsabilidade de avaliar, orquestrar e realizar o balanceamento de carga (load balancing) das requisições entre as threads ativas. No ecossistema do tlppCore, o avaliador (conhecido internamente como Grader) é tecnicamente mapeado através da chave OnSelect. PRÉ-REQUISITO: CONFIGURAÇÃO DE USEREXITS Atenção: Este método atua apenas como um \"leitor\" da infraestrutura. Para que ele retorne um valor válido, é estritamente obrigatório que o administrador do servidor tenha previamente configurado a secção de UserExits (seja no appserver.ini ou via carga de JSON em código) e mapeado o nome de uma função válida na chave OnSelect. REQUISITO ARQUITETURAL: USO DE SLAVES Vale ressaltar que, para este método funcionar e o servidor identificar corretamente a rotina de balanceamento, é obrigatória a existência de instâncias secundárias (Slaves) configuradas atreladas ao seu Thread Pool. Sem a presença de Slaves, não há distribuição de carga a ser orquestrada pelo motor.",
+          "returnType": "String",
+          "returnDescription": "cEntryPointGrader",
+          "exampleFile": "exemplo_getCEntryPointGrader.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/getEntryPointGrader\")\nUser Function getEntryPointGrader()\n \nLocal cRet := \"\"\nLocal cMsg := \"\"\n \ncRet := oRest:getCEntryPointGrader()\n \nIf (cRet != \"\")\n     \n    cMsg := \"O ponto de função para realizar o balanceamento de threads (OnSelect) é: [\" + cRet + \"]\"\n    ConOut(cMsg)\n     \nElse\n     \n    cMsg := \"Atenção: Não foi configurado um ponto de função para orquestração/balanceamento de threads.\"\n    ConOut(cMsg)\n     \nEndIf\n \noRest:setResponse('{\"status_balancer\": \"' + cMsg + '\"}')\n \nReturn .T."
+        },
+        {
+          "id": "getLEntryPointAuthorization",
+          "name": "getLEntryPointAuthorization",
+          "signature": "oRest:getLEntryPointAuthorization()",
+          "summary": "Este método atua como o validador lógico do método irmão oRest:getCEntryPointAuthorizationOnAuth(). Ele é responsável por verificar e retornar de forma booleana se existe uma função de Callback configurada no servidor para assumir a verificação de segurança e autenticação (como a validação de utilizador/senha em Basic Auth ou validação de tokens em oAuth2) da requisição atual. PRÉ-REQUISITO: CONFIGURAÇÃO TLPPDATA Atenção: Este método atua apenas como um leitor da infraestrutura de segurança. Para que ele retorne verdadeiro (.T.), é obrigatório que a camada de segurança do servidor tenha sido previamente parametrizada através da chave TlppData (definindo o esquema e a função OnAuth).",
+          "returnType": "Logical",
+          "returnDescription": "Retorna verdadeiro (.T.) se houver um callback de autenticação configurado na infraestrutura para esta requisição, e falso (.F.) caso contrário.",
+          "exampleFile": "exemplo_getLEntryPointAuth.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/existEntryPointAuth\")\nUser Function existEntryPointAuth()\n \nLocal lRet      := .F.\nLocal cResponse := \"\"\n \nlRet := oRest:getLEntryPointAuthorization()\n \nIf (lRet)\n    ConOut(\"Foi configurado um ponto de função para realizar a autenticação para as requisições HTTP: \" + oRest:getCEntryPointAuthorizationOnAuth())\n    cResponse := '{\"existEntryPointAuth\": true}'\nElse\n    ConOut(\"Nao foi configurado ponto de função para realizar a autenticação para as requisições HTTP.\")\n    cResponse := '{\"existEntryPointAuth\": false}'\nEndIf\n \noRest:setResponse(cResponse)\n \n \nReturn .T."
+        },
+        {
+          "id": "getLEntryPointEnvironment",
+          "name": "getLEntryPointEnvironment",
+          "signature": "oRest:getLEntryPointEnvironment()",
+          "summary": "Este método atua como o validador lógico do método irmão oRest:getCEntryPointEnvironment(). Ele é responsável por verificar e retornar de forma booleana se existe uma função customizada de Callback configurada no servidor para ser executada na inicialização de uma nova Thread (momento em que habitualmente se realiza a preparação do ambiente, abertura de filiais, etc.). No ecossistema do tlppCore, esta validação incide sobre a chave OnStart. PRÉ-REQUISITO: CONFIGURAÇÃO DE USEREXITS Atenção: Este método atua apenas como um \"leitor\" da infraestrutura. Para que ele retorne verdadeiro (.T.), é estritamente obrigatório que o administrador do servidor tenha previamente configurado a secção de UserExits (no appserver.ini ou via carga de JSON em código) e mapeado o nome de uma função válida na chave OnStart.",
+          "returnType": "Logical",
+          "returnDescription": "Retorna verdadeiro (.T.) se houver um callback de preparação de ambiente (OnStart) configurado na infraestrutura, e falso (.F.) caso contrário.",
+          "exampleFile": "exemplo_getLEntryPointEnv.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/existEntryPoint\")\nUser Function existEntryPoint()\n \nLocal lRet      := .F.\nLocal cResponse := \"\"\n \nlRet := oRest:getLEntryPointEnvironment()\n \nIf (lRet)\n    ConOut(\"Foi configurado um ponto de função para preparação de ambiente: \" + oRest:getCEntryPointEnvironment())\n    cResponse := '{\"existEntryPoint\": true}'\nElse\n    ConOut(\"Nao foi configurado ponto de função para preparação de ambiente\")\n    cResponse := '{\"existEntryPoint\": false}'\nEndIf\n \noRest:setResponse(cResponse)\n \n \nReturn .T."
+        },
+        {
+          "id": "getLEntryPointError",
+          "name": "getLEntryPointError",
+          "signature": "oRest:getLEntryPointError()",
+          "summary": "Este método atua como o validador lógico do método irmão oRest:getCEntryPointError(). Ele é responsável por verificar e retornar de forma booleana se existe uma função customizada de Callback configurada no servidor para assumir o tratamento de falhas e erros de execução (runtime errors) da requisição atual. No ecossistema do tlppCore, esta validação incide sobre a chave OnError. PRÉ-REQUISITO: CONFIGURAÇÃO DE USEREXITS Atenção: Este método atua apenas como um \"leitor\" da infraestrutura. Para que ele retorne verdadeiro (.T.), é estritamente obrigatório que o administrador do servidor tenha previamente configurado a secção de UserExits (no appserver.ini ou via carga de JSON em código) e mapeado o nome de uma função válida na chave OnError.",
+          "returnType": "Logical",
+          "returnDescription": "Retorna verdadeiro (.T.) se houver um callback de tratamento de erros (OnError) configurado na infraestrutura, e falso (.F.) caso contrário.",
+          "exampleFile": "exemplo_getLEntryPointError.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/existEntryPointError\")\nUser Function existEntryPointError()\n \nLocal lRet      := .F.\nLocal cResponse := \"\"\n \nlRet := oRest:getLEntryPointError()\n \nIf (lRet)\n    ConOut(\"Foi configurado um ponto de função para tratamento de erros: \" + oRest:getCEntryPointError())\n    cResponse := '{\"existEntryPointError\": true}'\nElse\n    ConOut(\"Nao foi configurado ponto de função para tratamento de erros.\")\n    cResponse := '{\"existEntryPointError\": false}'\nEndIf\n \noRest:setResponse(cResponse)\n \n \nReturn .T."
+        },
+        {
+          "id": "getLEntryPointExit",
+          "name": "getLEntryPointExit",
+          "signature": "oRest:getLEntryPointExit()",
+          "summary": "Este método atua como o validador lógico do método irmão oRest:getCEntryPointExit(). Ele é responsável por verificar e retornar de forma booleana se existe uma função customizada de Callback configurada no servidor para assumir o tratamento de finalização, encerramento ou destruição da Thread de atendimento REST atual. No ecossistema do tlppCore, esta validação incide sobre a chave OnStop. PRÉ-REQUISITO: CONFIGURAÇÃO DE USEREXITS Atenção: Este método atua apenas como um \"leitor\" da infraestrutura. Para que ele retorne verdadeiro (.T.), é estritamente obrigatório que o administrador do servidor tenha previamente configurado a secção de UserExits (no appserver.ini ou via carga de JSON em código) e mapeado o nome de uma função válida na chave OnStop.",
+          "returnType": "Logical",
+          "returnDescription": "Retorna verdadeiro (.T.) se houver um callback de finalização da thread (OnStop) configurado na infraestrutura, e falso (.F.) caso contrário.",
+          "exampleFile": "exemplo_getLEntryPointExit.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/existEntryPointExit\")\nUser Function existEntryPointExit()\n \nLocal lRet      := .F.\nLocal cResponse := \"\"\n \nlRet := oRest:getLEntryPointExit()\n \nIf (lRet)\n    ConOut(\"Foi configurado um ponto de função para finalização da thread (OnStop): \" + oRest:getCEntryPointExit())\n    cResponse := '{\"existEntryPointExit\": true}'\nElse\n    ConOut(\"Nao foi configurado ponto de função para finalização da thread.\")\n    cResponse := '{\"existEntryPointExit\": false}'\nEndIf\n \noRest:setResponse(cResponse)\n \n \nReturn .T."
+        },
+        {
+          "id": "getLEntryPointGrader",
+          "name": "getLEntryPointGrader",
+          "signature": "oRest:getLEntryPointGrader()",
+          "summary": "Este método atua como o validador lógico do método irmão oRest:getCEntryPointGrader(). Ele é responsável por verificar e retornar de forma booleana se existe uma função customizada de Callback configurada no servidor para assumir a responsabilidade de avaliar e realizar o balanceamento de carga (load balancing) das requisições. No ecossistema do tlppCore, esta validação incide sobre a chave OnSelect. PRÉ-REQUISITO: CONFIGURAÇÃO DE USEREXITS Atenção: Este método atua apenas como um \"leitor\" da infraestrutura. Para que ele retorne verdadeiro (.T.), é estritamente obrigatório que o administrador do servidor tenha previamente configurado a secção de UserExits (no appserver.ini ou via carga de JSON em código) e mapeado o nome de uma função válida na chave OnSelect. REQUISITO ARQUITETURAL: USO DE SLAVES Para que este método funcione e a rotina de balanceamento seja identificada corretamente pelo servidor, é obrigatória a existência de instâncias secundárias (Slaves) atreladas ao seu Thread Pool.",
+          "returnType": "Logical",
+          "returnDescription": "Retorna verdadeiro (.T.) se houver um callback de orquestração (OnSelect) configurado na infraestrutura, e falso (.F.) caso contrário.",
+          "exampleFile": "exemplo_getLEntryPointGrader.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/existEntryPointGrader\")\nUser Function existEntryPointGrader()\n \nLocal lRet      := .F.\nLocal cResponse := \"\"\n \nlRet := oRest:getLEntryPointGrader()\n \nIf (lRet)\n    ConOut(\"Foi configurado um ponto de função para o balanceamento de threads: \" + oRest:getCEntryPointGrader())\n    cResponse := '{\"exist_balancer\": true}'\nElse\n    ConOut(\"Nao foi configurado ponto de função para o balanceamento de threads.\")\n    cResponse := '{\"exist_balancer\": false}'\nEndIf\n \noRest:setResponse(cResponse)\n \n \nReturn .T."
+        },
+        {
+          "id": "getUserExit",
+          "name": "getUserExit",
+          "signature": "oRest:getUserExit()",
+          "summary": "Este método é um getter que retorna se houve a necessidade de forçar a saída lógica ou o encerramento da Thread de atendimento ativa no servidor REST.",
+          "returnType": "Logical",
+          "returnDescription": "Se verdadeiro (.T.), indica que a thread recebeu uma instrução para encerrar a espera por novas requisições e finalizar o processamento.",
+          "exampleFile": "exemplo_getUserExit.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n// Chamada: http://localhost:9090/documentation/getUserExit\n@Get(\"/documentation/getUserExit\")\nUser Function fgetUserExit()\n \nLocal lRet := .F.\n \n// Força o encerramento da espera por novas conexões na Thread atual\noRest:setUserExit(.T.)\n \n// Recupera a sinalização de saída gravada na memória\nlRet := oRest:getUserExit()\n \n \nReturn oRest:setResponse('{\"UserExit\": \"A proxima requisicao nao sera respondida. Status: ' + cValToChar(lRet) + '\"}')"
+        },
+        {
+          "id": "setUserExit",
+          "name": "setUserExit",
+          "signature": "oRest:setUserExit( < lSet > )",
+          "summary": "Este método é o setter responsável por alterar a flag interna utilizada no fluxo de processamento das requisições do servidor. Utilize-o caso exista a necessidade de forçar a Thread de atendimento a interromper imediatamente a espera por novas requisições.",
+          "returnType": "Logical",
+          "returnDescription": "Indica se o método foi executado e a flag de saída foi definida com sucesso na memória do servidor.",
+          "exampleFile": "exemplo_setUserExit.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/setUserExit\")\nUser Function fsetUserExit()\n \nLocal lRet := .F.\n \n// Força o encerramento da espera por novas requisições na Thread atual\nlRet := oRest:setUserExit(.T.)\n \n// Despacha a confirmação de interrupção\n \n \nReturn oRest:setResponse('{\"UserExit\": \"A proxima requisicao nao sera respondida. Status: ' + cValToChar(lRet) + '\"}')"
+        }
+      ]
+    },
+    {
+      "id": "utilitarios",
+      "title": "Utilitários",
+      "sidebarPosition": 7,
+      "description": "Finalizar chamada HTTP, controlar fechamento de conexão e user exits.",
+      "methods": [
+        {
+          "id": "httpCallEnd",
+          "name": "httpCallEnd",
+          "signature": "oRest:httpCallEnd()",
+          "summary": "Este método é responsável por realizar o fechamento físico da resposta HTTP no servidor REST. A sua execução realiza duas ações críticas em sequência: despacha o buffer de resposta pendente (runResponse) de volta ao cliente HTTP e efetua a limpeza e restauração de flags e recursos de controle do ciclo de vida da Thread ativa.",
+          "returnType": "Logical",
+          "returnDescription": "Indica se a rotina de envio e encerramento do ciclo HTTP foi concluída com sucesso.",
+          "exampleFile": "exemplo_httpCallEnd.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n \nUser Function fErrorRecover( oError )\n \nIf ( oRest != Nil )\n \n oRest:setStatusCode(500)\n \n oRest:setFault(\"Erro interno capturado e tratado pela funcao de callback do usuario.\")"
+        },
+        {
+          "id": "setHttpEnd",
+          "name": "setHttpEnd",
+          "signature": "oRest:setHttpEnd()",
+          "summary": "Este método é responsável por sinalizar internamente ao servidor REST que o processamento do ciclo de vida da requisição HTTP ativa foi concluído.",
+          "returnType": "Logical",
+          "returnDescription": "Indica se o método foi executado e a sinalização de encerramento da chamada foi registrada com sucesso na memória do servidor.",
+          "exampleFile": "exemplo_setHttpEnd.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/setHttpEnd\")\nUser Function fsetHttpEnd()\nLocal cResponse := \"\"\nLocal lRet      := .F.\n \nlRet := oRest:setHttpEnd()\n \nIf (lRet)\n    cResponse := '{\"setHttpEnd\": \"metodo setHttpEnd executado com sucesso\"}'\nElse\n    cResponse := '{\"setHttpEnd\": \"O metodo setHttpEnd nao foi executado\"}'\nEndIf\n \n \nReturn oRest:setResponse(cResponse)"
+        },
+        {
+          "id": "setCloseAfterSend",
+          "name": "setCloseAfterSend",
+          "signature": "oRest:setCloseAfterSend( < lSet > )",
+          "summary": "Este método é responsável por definir se o servidor REST deve forçar o encerramento físico da conexão/sessão HTTP atual imediatamente após a transmissão da resposta de volta ao cliente.",
+          "returnType": "Logical",
+          "returnDescription": "Indica se a parametrização de encerramento da sessão foi executada com êxito na Thread.",
+          "exampleFile": "exemplo_setCloseAfterSend.tlpp",
+          "exampleCode": "#include \"tlpp-core.th\"\n#include \"tlpp-rest.th\"\n \n@Get(\"/documentation/setCloseAfterSend\")\nUser Function fSetCloseAfterSend()\n \nLocal cResponse := \"\"\nLocal lRet      := .F.\n \ncResponse := '{\"setCloseAfterSend\": \"Metodo setCloseAfterSend executado com sucesso, forçado o encerramento para header keep-alive\"}'\n \nlRet := oRest:setCloseAfterSend(.T.)\n \n \nReturn oRest:setResponse(cResponse)\nCOMO TESTAR O EXEMPLO\n\nConfigure explicitamente o cabeçalho (Header) da requisição com a chave Connection definida como \"keep-alive\";\n\nDispare a requisição apontando para a URI: /documentation/setCloseAfterSend;"
+        }
+      ]
+    }
+  ]
+}

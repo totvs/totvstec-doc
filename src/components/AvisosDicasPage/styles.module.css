@@ -1,0 +1,26 @@
+.root {
+  margin-bottom: 0.5rem;
+}
+
+.kicker {
+  margin: 0 0 1.75rem;
+  padding: 0.65rem 0 0.65rem 0.85rem;
+  border-left: 3px solid var(--totvs-laranja);
+  font-size: var(--totvs-text-sm);
+  color: var(--totvs-text-muted);
+  line-height: var(--totvs-leading-normal);
+}
+
+.badge {
+  display: inline-block;
+  margin-right: 0.5rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--totvs-radius-sm);
+  background: rgba(255, 137, 0, 0.12);
+  color: var(--totvs-laranja);
+  font-size: var(--totvs-text-xs);
+  font-weight: var(--totvs-weight-bold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}

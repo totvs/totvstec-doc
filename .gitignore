@@ -1,0 +1,44 @@
+# Dependências
+node_modules/
+
+# Docusaurus
+.docusaurus/
+build/
+
+# --- Contexto local / IA (canonical: ../totvstec-doc-context) ---
+.cursor/
+.cursorignore
+.cursorrules
+**/.cursor/
+**/*.mdc
+AGENTS.md
+CLAUDE.md
+MIGRATION.md
+repos.config.totvs.example.json
+content-import/
+scripts/prepare-standalone-repo.mjs
+
+# Temporários / exports locais
+.tmp-*/
+.tmp-*
+*.zip
+
+# Dependências clonadas localmente (CI faz checkout; submodules opcionais)
+/deps/
+
+# Conteúdo sincronizado dos repositórios dependentes (npm run sync:deps)
+/docs/tlpp/rest/doc-generate/**
+!/docs/tlpp/rest/doc-generate/.gitkeep
+/docs/tlpp/rest/metadados/**
+!/docs/tlpp/rest/metadados/.gitkeep
+/docs/tlpp/rest/exemplos-repositorio/**
+!/docs/tlpp/rest/exemplos-repositorio/.gitkeep
+
+# Artefatos gerados — não versionar em static/
+/static/openapi/
+/static/**/*.yaml
+/static/**/*.yml
+/static/**/video/
+/static/**/videos/
+/static/**/*.mp4
+/static/**/*.webm

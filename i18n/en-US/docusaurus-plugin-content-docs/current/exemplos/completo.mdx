@@ -1,0 +1,54 @@
+---
+sidebar_position: 1
+title: Exemplo completo
+---
+
+import ClawDivider from '@site/src/components/ClawDivider';
+
+# Exemplo completo
+
+Centraliza **todos** os recursos REST-DOC: função DOC, i18n (REST e DOC), parâmetros (query, path, header, body), enums, múltiplos content-types e **TLPP COMPONENT**.
+
+<ClawDivider />
+
+## Arquivos
+
+```
+src/
+├── components/sample_components.tlpp
+└── rest/complete/
+    ├── sample_complete.tlpp
+    ├── sample_complete-i18n.tlpp
+    ├── sample_complete_DOC.tlpp
+    └── sample_complete_DOC-i18n.tlpp
+```
+
+## Endpoint
+
+`PUT /rest/sample/doc/complete/{param1}`
+
+## Destaques
+
+| Recurso | Onde |
+|---------|------|
+| `description="[U_rest_sample_complete_DOC]"` | `sample_complete.tlpp` |
+| `Localize()` nas mensagens REST | `sample_complete.tlpp` + `*-i18n.tlpp` |
+| JSON completo da doc | `sample_complete_DOC.tlpp` |
+| `translate:` na doc | `sample_complete_DOC-i18n.tlpp` |
+| Schemas body | `sample_components.tlpp` |
+
+## OpenAPI gerado
+
+Veja no [Explorador OpenAPI](/tools/explorador-openapi) o path `/rest/sample/doc/complete/{param1}` com:
+
+- Parâmetros query, path, header
+- Enum `log` (0/1) e `return` (json/xml)
+- Request body `sampleBodyIn`
+- Responses 200/400 com schemas `sampleBodyOutOk` / `sampleBodyOutError`
+
+## Passos no AppServer
+
+1. Compile componentes + os 4 fontes do complete
+2. Suba REST na porta 8080
+3. `tlpp.doc.generate('swagger', 'api_doc', {8080}, {'en-us','pt-br'})`
+4. Valide schemas em `components/schemas` no YAML

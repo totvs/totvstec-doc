@@ -1,0 +1,93 @@
+.card {
+  margin: 1.25rem 0;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 10px;
+  overflow: hidden;
+  scroll-margin-top: 5rem;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem 1.1rem;
+  border: 0;
+  background: var(--ifm-background-surface-color);
+  color: var(--ifm-font-color-base);
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.15s ease;
+}
+
+.header:hover,
+.headerOpen {
+  background: rgba(var(--totvs-azul-rgb), 0.06);
+}
+
+.headerMain {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.name {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ifm-color-primary);
+}
+
+.signature {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.82rem;
+  color: var(--ifm-color-content-secondary);
+  word-break: break-word;
+}
+
+.meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  font-size: 0.8rem;
+  color: var(--ifm-color-content-secondary);
+}
+
+.chevron {
+  color: var(--totvs-cyan);
+  font-size: 0.95rem;
+}
+
+.body {
+  padding: 0 1.1rem 1.1rem;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.summary {
+  margin: 1rem 0 0.75rem;
+  line-height: 1.6;
+}
+
+.returnTable {
+  width: 100%;
+  margin: 0.75rem 0 1rem;
+  font-size: 0.9rem;
+}
+
+.returnTable th {
+  text-align: left;
+  width: 7rem;
+  color: var(--ifm-color-content-secondary);
+  font-weight: 500;
+}
+
+.note {
+  margin: 0.75rem 0 0;
+  padding: 0.65rem 0.85rem;
+  border-left: 3px solid var(--totvs-cyan);
+  background: rgba(var(--totvs-azul-rgb), 0.06);
+  font-size: 0.9rem;
+}

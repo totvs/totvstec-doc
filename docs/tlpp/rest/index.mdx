@@ -1,0 +1,67 @@
+---
+title: REST TLPP
+description: Servidor REST nativo no AppServer — visão geral.
+sidebar_position: 1
+displayed_sidebar: restSidebar
+---
+
+import SectionCard from '@site/src/components/SectionCard';
+
+O REST TLPP roda **nativamente no AppServer**. Você declara rotas no código (ou via JSON), atende requisições HTTP com o objeto `oRest` e, quando quiser documentar a API, usa a trilha **Doc Generate** (repositório separado).
+
+## Como ler esta documentação
+
+Siga a ordem do menu **REST** no lateral — cada bloco termina em **Avisos e dicas** com os cuidados daquele tema antes de avançar.
+
+:::tip Trilha recomendada (do zero à API funcionando)
+1. [Quickstart](/docs/tlpp/rest/primeiros-passos/quickstart) — primeiro endpoint em minutos  
+2. [Começando](/docs/tlpp/rest/primeiros-passos/configuracao) — INI, JSON e como montar URLs  
+3. [Servidor e rotas](/docs/tlpp/rest/configuracoes/annotations) — `@Get`/`@Post`, rotas dinâmicas e referências de configuração  
+4. [oREST](/docs/tlpp/rest/objeto-orest/visao-geral) — ler a requisição e montar a resposta  
+5. [Autenticação](/docs/tlpp/rest/authorization) — Basic Auth e OAuth2 (depois de entender `TlppData` no pool)  
+6. [Callbacks](/docs/tlpp/rest/funcoes-usuario/callbacks) — hooks de ciclo de vida (opcional para o primeiro endpoint)  
+7. [Referência](/docs/tlpp/rest/apis/referencia) — APIs administrativas do servidor  
+8. [Exemplos REST](/docs/tlpp/rest/exemplos-repositorio) — código `.tlpp` no GitHub, espelhado por tema  
+:::
+
+| Etapa | O que você aprende | Comece em |
+|-------|-------------------|-----------|
+| **1 — Começando** | Subir o servidor, Hello World, montar URLs | [Quickstart](/docs/tlpp/rest/primeiros-passos/quickstart) |
+| **2 — Servidor e rotas** | Annotations, INI/JSON, rotas sem annotation | [Annotations](/docs/tlpp/rest/configuracoes/annotations) |
+| **3 — oREST** | Ler requisição, montar resposta, pool e utilitários | [Visão geral do oRest](/docs/tlpp/rest/objeto-orest/visao-geral) |
+| **4 — Autenticação** | Basic Auth e OAuth2 via `TlppData` | [Authorization](/docs/tlpp/rest/authorization) |
+| **5 — Callbacks** | OnBlock, OnError, OnSend… (User Exits) | [Callbacks](/docs/tlpp/rest/funcoes-usuario/callbacks) |
+| **6 — Referência** | Operação do servidor REST nativo | [Operação do servidor](/docs/tlpp/rest/apis/referencia) |
+| **7 — Exemplos REST** | Catálogo de `.tlpp` no repositório de samples | [Exemplos do repositório](/docs/tlpp/rest/exemplos-repositorio) |
+
+**Por que Autenticação vem depois do oREST?** A configuração de auth usa `TlppData` no servidor e métodos do `oRest` para inspecionar o esquema em runtime — conceitos introduzidos em [Pool e serviço](/docs/tlpp/rest/objeto-orest/pool-servidor).
+
+Se você já conhece REST em outros frameworks, as etapas 1–2 cobrem o que é específico do AppServer; a etapa 3 (`oRest`) equivale ao objeto request/response do seu framework.
+
+## Por que usar
+
+- **Performance** — sem camada HTTP externa; o AppServer atende direto
+- **Annotations** — rotas declaradas no código-fonte (`@Get`, `@Post`…)
+- **Dinâmico** — suba serviços em runtime com `tlpp.rest` e JSON
+- **Monitoramento** — logs, métricas e callbacks de ciclo de vida
+
+## Escolha um caminho
+
+<div className="row" style={{marginBottom: '1rem'}}>
+  <div className="col col--6">
+    <SectionCard
+      title="Quero expor uma API"
+      description="Do zero ao primeiro endpoint — trilha Começando → Servidor e rotas → oREST."
+      to="/docs/tlpp/rest/primeiros-passos/quickstart"
+    />
+  </div>
+  <div className="col col--6">
+    <SectionCard
+      title="Quero documentar com OpenAPI"
+      description="description → exemplos → tlpp.doc.generate() — trilha Doc Generate no menu lateral."
+      to="/docs/tlpp/rest/metadados/visao-geral"
+    />
+  </div>
+</div>
+
+**Próximo passo:** [Quickstart](/docs/tlpp/rest/primeiros-passos/quickstart)

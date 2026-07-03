@@ -1,0 +1,29 @@
+---
+sidebar_position: 4
+title: "04 — Função DOC"
+---
+
+import CodeToOpenAPI from '@site/src/components/CodeToOpenAPI';
+
+# Exemplo 04 — Função retornando JSON
+
+## Objetivo
+
+Separar implementação REST da documentação via `description="[U_rest_sample_04_basic_DOC]"`.
+
+## Arquivo
+
+`src/rest/basic/sample_04_basic_by_function.tlpp`
+
+<CodeToOpenAPI
+tlpp={`@Get(endpoint="/rest/sample/doc/basic/04",
+     description="[U_rest_sample_04_basic_DOC]")
+function U_rest_sample_04_basic() as logical
+
+function U_rest_sample_04_basic_DOC() as character
+  // retorna JSON via TOSTRING`}
+yaml={`/rest/sample/doc/basic/04:
+  get:
+    summary: DOC simples 04
+    description: Exemplo de documentação de REST utilizando função retornando um JSON`}
+/>

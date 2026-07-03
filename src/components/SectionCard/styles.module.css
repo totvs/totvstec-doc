@@ -1,0 +1,493 @@
+/* Flip card — frente chamativa, verso institucional TOTVS */
+
+.card {
+  --card-accent: var(--totvs-azul);
+  --card-accent-soft: color-mix(in srgb, var(--card-accent) 14%, transparent);
+  --card-accent-glow: color-mix(in srgb, var(--card-accent) 30%, transparent);
+  --card-back-bg: linear-gradient(
+    155deg,
+    var(--totvs-azul-escuro) 0%,
+    var(--totvs-azul-escuro-mid) 52%,
+    color-mix(in srgb, var(--card-accent) 22%, var(--totvs-azul-escuro)) 100%
+  );
+  --card-back-fg: var(--totvs-branco);
+  --card-back-muted: color-mix(in srgb, var(--totvs-branco) 72%, transparent);
+
+  display: block;
+  min-height: 252px;
+  perspective: 1200px;
+  text-decoration: none;
+  color: inherit;
+  border-radius: var(--totvs-radius-xl);
+}
+
+:global([data-theme='dark']) .card {
+  --card-back-bg: linear-gradient(
+    155deg,
+    #0f1820 0%,
+    var(--totvs-azul-escuro) 48%,
+    color-mix(in srgb, var(--card-accent) 18%, #1a2832) 100%
+  );
+  --card-back-fg: var(--totvs-branco);
+  --card-back-muted: color-mix(in srgb, var(--totvs-branco) 68%, transparent);
+}
+
+.flipInner {
+  position: relative;
+  width: 100%;
+  min-height: 252px;
+  transform-style: preserve-3d;
+  transition: transform 0.65s cubic-bezier(0.4, 0.15, 0.2, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card:hover .flipInner,
+  .card:focus-visible .flipInner {
+    transform: rotateY(180deg);
+  }
+}
+
+.front,
+.back {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--totvs-radius-xl);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+}
+
+/* ── Frente ─────────────────────────────────────── */
+
+.front {
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-left: 3px solid color-mix(in srgb, var(--card-accent) 55%, transparent);
+  background:
+    linear-gradient(
+      152deg,
+      color-mix(in srgb, var(--card-accent) 7%, var(--ifm-background-surface-color)) 0%,
+      var(--ifm-background-surface-color) 52%
+    ),
+    var(--ifm-background-surface-color);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--totvs-azul-escuro) 3%, transparent);
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.front::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--card-accent) 14%, transparent) 0.6px,
+    transparent 0.6px
+  );
+  background-size: 14px 14px;
+  opacity: 0.35;
+  mask-image: linear-gradient(135deg, black 0%, transparent 55%);
+  pointer-events: none;
+}
+
+:global([data-theme='dark']) .front {
+  background:
+    linear-gradient(
+      152deg,
+      color-mix(in srgb, var(--card-accent) 10%, var(--ifm-background-surface-color)) 0%,
+      var(--ifm-background-surface-color) 55%
+    ),
+    var(--ifm-background-surface-color);
+}
+
+:global([data-theme='dark']) .front::before {
+  opacity: 0.2;
+}
+
+.card:hover .front {
+  border-left-color: var(--card-accent);
+  box-shadow: 0 6px 20px color-mix(in srgb, var(--card-accent) 12%, transparent);
+}
+
+.accentBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--card-accent),
+    color-mix(in srgb, var(--card-accent) 50%, var(--totvs-branco))
+  );
+}
+
+.frontBody {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  padding: 2.75rem 1.55rem 1.45rem;
+  text-align: left;
+}
+
+.frontLogo {
+  position: absolute;
+  z-index: 2;
+  top: 1.1rem;
+  left: 1.25rem;
+  width: 3.75rem;
+  height: auto;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.frontTitle {
+  margin: 0;
+  font-size: clamp(1.2rem, 2.8vw, 1.45rem);
+  font-weight: var(--totvs-weight-semibold);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  color: var(--ifm-heading-color);
+  max-width: 85%;
+}
+
+.frontTeaser {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--ifm-color-content-secondary);
+  max-width: 92%;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.2rem 0.45rem;
+  border-radius: var(--totvs-radius-sm);
+  font-size: 0.625rem;
+  font-weight: var(--totvs-weight-bold);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  color: var(--card-accent);
+  background: var(--card-accent-soft);
+  border: 1px solid color-mix(in srgb, var(--card-accent) 28%, transparent);
+  white-space: nowrap;
+}
+
+/* ── Verso ────────────────────────────────────── */
+
+.back {
+  transform: rotateY(180deg);
+  background: var(--card-back-bg);
+  color: var(--card-back-fg);
+  border: 1px solid color-mix(in srgb, var(--card-accent) 35%, transparent);
+  box-shadow:
+    0 8px 32px color-mix(in srgb, var(--totvs-azul-escuro) 45%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--totvs-branco) 8%, transparent);
+}
+
+.back::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 80% 60% at 100% 0%,
+    color-mix(in srgb, var(--card-accent) 28%, transparent),
+    transparent 65%
+  );
+  pointer-events: none;
+}
+
+.totvsLogo {
+  position: absolute;
+  top: 1.1rem;
+  right: 1.1rem;
+  width: 4.5rem;
+  height: auto;
+  opacity: 0.92;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.totvsLogoDark {
+  display: none;
+}
+
+:global([data-theme='light']) .back {
+  --card-back-bg: linear-gradient(
+    155deg,
+    var(--totvs-azul-escuro) 0%,
+    var(--totvs-azul-escuro-mid) 55%,
+    color-mix(in srgb, var(--card-accent) 25%, var(--totvs-azul-escuro)) 100%
+  );
+}
+
+:global([data-theme='light']) .totvsLogoLight {
+  display: block;
+}
+
+:global([data-theme='light']) .totvsLogoDark {
+  display: none;
+}
+
+.backBody {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1.5rem 1.35rem;
+  gap: 0.65rem;
+}
+
+.backTitle {
+  margin: 0;
+  padding-right: 4.75rem;
+  font-size: 0.8125rem;
+  font-weight: var(--totvs-weight-bold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  color: color-mix(in srgb, var(--card-accent) 55%, var(--card-back-fg));
+}
+
+.backDescription {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--card-back-muted);
+  flex: 1;
+}
+
+.highlights {
+  margin: 0.25rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.highlights li {
+  position: relative;
+  padding-left: 1rem;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--card-back-fg);
+}
+
+.highlights li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--card-accent);
+  box-shadow: 0 0 6px color-mix(in srgb, var(--card-accent) 60%, transparent);
+}
+
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  align-self: flex-start;
+  margin-top: auto;
+  padding: 0.3rem 0.55rem;
+  border-radius: var(--totvs-radius-sm);
+  font-size: 0.6875rem;
+  font-weight: var(--totvs-weight-medium);
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: color-mix(in srgb, var(--totvs-branco) 92%, transparent);
+  background: color-mix(in srgb, var(--totvs-branco) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--totvs-branco) 28%, transparent);
+  box-shadow: none;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.card:hover .ctaBtn {
+  transform: translateX(2px);
+  background: color-mix(in srgb, var(--totvs-branco) 14%, transparent);
+  border-color: color-mix(in srgb, var(--totvs-branco) 45%, transparent);
+  box-shadow: none;
+}
+
+.ctaArrow {
+  font-size: 0.8rem;
+  line-height: 1;
+  opacity: 0.85;
+  transition: transform 0.2s ease;
+}
+
+.card:hover .ctaArrow {
+  transform: translateX(2px);
+}
+
+/* ── Acentos por seção ────────────────────────── */
+
+.accent_rest {
+  --card-accent: var(--totvs-home-rest);
+}
+
+.accent_docGenerate {
+  --card-accent: var(--totvs-home-doc-generate);
+}
+
+.accent_github {
+  --card-accent: var(--totvs-home-github);
+}
+
+.accent_tools {
+  --card-accent: var(--totvs-home-tools);
+}
+
+/* ── Card simples (docs) ──────────────────────── */
+
+.cardSimple {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 180px;
+  padding: 1.65rem 1.65rem 1.35rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  background: var(--ifm-background-surface-color);
+  box-shadow:
+    0 1px 2px color-mix(in srgb, var(--totvs-azul-escuro) 4%, transparent),
+    0 8px 24px color-mix(in srgb, var(--totvs-azul-escuro) 5%, transparent);
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+}
+
+.cardSimple:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--card-accent) 45%, var(--ifm-color-emphasis-200));
+  box-shadow:
+    0 4px 8px color-mix(in srgb, var(--totvs-azul-escuro) 6%, transparent),
+    0 16px 40px color-mix(in srgb, var(--card-accent-glow) 55%, transparent);
+  text-decoration: none;
+  color: inherit;
+}
+
+.cardSimple:hover .arrowBtn {
+  transform: translateX(2px);
+  background: var(--card-accent);
+  color: var(--totvs-branco);
+  border-color: var(--card-accent);
+}
+
+.simpleBody {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.simpleTitle {
+  margin: 0 0 0.55rem;
+  font-size: 1.05rem;
+  font-weight: var(--totvs-weight-bold);
+  letter-spacing: 0.04em;
+  line-height: 1.25;
+  color: var(--ifm-heading-color);
+}
+
+.simpleDescription {
+  flex: 1;
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--ifm-color-content-secondary);
+}
+
+.simpleFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 1.35rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.simpleCta {
+  font-size: 0.8125rem;
+  font-weight: var(--totvs-weight-semibold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--card-accent);
+}
+
+.arrowBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: var(--totvs-weight-bold);
+  line-height: 1;
+  color: var(--card-accent);
+  background: var(--card-accent-soft);
+  border: 1px solid color-mix(in srgb, var(--card-accent) 25%, transparent);
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+/* Mobile: sem flip — mostra verso como overlay ao toque não é ideal;
+   mantém frente clicável; hint escondido acima */
+
+@media (max-width: 768px) {
+  .card {
+    min-height: 228px;
+  }
+
+  .flipInner {
+    min-height: 228px;
+  }
+
+  .frontBody {
+    padding: 2.5rem 1.25rem 1.3rem;
+  }
+
+  .frontLogo {
+    width: 3.25rem;
+    top: 1rem;
+    left: 1rem;
+  }
+
+  .frontTitle {
+    max-width: 100%;
+    letter-spacing: 0.06em;
+  }
+
+  .frontTeaser {
+    -webkit-line-clamp: 2;
+  }
+}

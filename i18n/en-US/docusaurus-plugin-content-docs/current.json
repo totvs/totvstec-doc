@@ -1,0 +1,18 @@
+{
+  "sidebar.docsSidebar.category.Metadados": {
+    "message": "Metadata",
+    "description": "Sidebar category"
+  },
+  "sidebar.docsSidebar.category.Exemplos do repositório": {
+    "message": "Repository examples",
+    "description": "Sidebar category"
+  },
+  "sidebar.docsSidebar.category.Básicos": {
+    "message": "Basic",
+    "description": "Sidebar category"
+  },
+  "sidebar.docsSidebar.category.Referência": {
+    "message": "Reference",
+    "description": "Sidebar category"
+  }
+}

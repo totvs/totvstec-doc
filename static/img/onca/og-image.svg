@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#0B0B0F"/>
+  <path d="M0 400 Q300 350 600 380 T1200 400 L1200 630 L0 630Z" fill="#14141A"/>
+  <path d="M900 120 Q980 80 1050 100 Q1100 130 1080 180 Q1040 160 980 150 Q920 140 900 120Z" fill="#1a1a22" stroke="#C9A227" stroke-width="2"/>
+  <ellipse cx="1020" cy="135" rx="12" ry="8" fill="#C9A227"/>
+  <path d="M150 80 L170 140 M165 75 L190 130 M180 72 L205 125" stroke="#8B2635" stroke-width="4" stroke-linecap="round" opacity="0.6"/>
+  <text x="80" y="320" font-family="system-ui,sans-serif" font-size="64" font-weight="800" fill="#C9A227">REST-DOC em TLPP</text>
+  <text x="80" y="380" font-family="system-ui,sans-serif" font-size="28" fill="#9A9690">Documentação virtual · Onça Preta</text>
+</svg>

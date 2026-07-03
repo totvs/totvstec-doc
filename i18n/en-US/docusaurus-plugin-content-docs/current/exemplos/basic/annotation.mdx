@@ -1,0 +1,50 @@
+---
+sidebar_position: 2
+title: "02 — Annotation completa"
+---
+
+import CodeToOpenAPI from '@site/src/components/CodeToOpenAPI';
+
+# Exemplo 02 — Annotation completa
+
+## Objetivo
+
+Documentar **title**, **params** e **responses** diretamente na annotation REST.
+
+## Arquivo
+
+`src/rest/basic/sample_02_basic_by_annotation.tlpp`
+
+<CodeToOpenAPI
+tlpp={`@Get(;
+  endpoint="/rest/sample/doc/basic/02",;
+  description="Exemplo de documentação de REST diretamente na annotation",;
+  title="DOC simples 02",;
+  params='[{"name":"param1","description":"desc_param_1","in":"query","type":"character","required":true}]',;
+  responses='[{"statusCode":200,"description":"OK"},{"statusCode":400,"description":"Parâmetro inválido"}]';
+)
+function U_rest_sample_02_basic() as logical`}
+yaml={`/rest/sample/doc/basic/02:
+  get:
+    summary: DOC simples 02
+    description: Exemplo de documentação de REST diretamente na annotation
+    parameters:
+      - name: param1
+        in: query
+        required: true
+    responses:
+      200:
+        description: OK
+      400:
+        description: Parâmetro inválido`}
+/>
+
+## Passos no AppServer
+
+1. Compile o fonte e suba o REST
+2. Gere a documentação
+3. Compare com o [Explorador OpenAPI](/tools/explorador-openapi)
+
+:::warning
+`params` e `responses` são **strings JSON** dentro da annotation.
+:::

@@ -1,0 +1,41 @@
+---
+sidebar_position: 2
+title: Endpoints dinâmicos
+---
+
+# Endpoints dinâmicos (JSON)
+
+O REST tlppCore permite criar serviços **sem annotations**, via configuração JSON em runtime.
+
+## Arquivos
+
+| Arquivo | Função |
+|---------|--------|
+| `dynamic_rest_start.tlpp` | Infraestrutura HTTP + mapeamento URN (porta 8080) |
+| `dynamic_rest_services.tlpp` | Handlers (`U_FUNC_DYN`, `class_dyn`) |
+| `dynamic_list_functions.tlpp` | `tlpp.doc.List()` — registry doc dinâmico |
+| `dynamic_rest_services_DOC.tlpp` | Funções DOC por endpoint/método |
+
+## Endpoints de exemplo
+
+| Método | Path | Handler |
+|--------|------|---------|
+| GET | `/init/dyn` | `U_FUNC_DYN` |
+| PUT | `/init/dyn` | `U_FUNC_DYN` |
+| GET | `/class/{param1}` | `class_dyn.method_dyn` |
+
+## Documentação
+
+Como não há `@Get`/`@Put`, o motor usa **`tlpp.doc.List()`** para associar endpoint+método à função DOC.
+
+`U_sampleDOC()` em `main.tlpp` chama `U_dynamic_rest_start()` antes de `tlpp.doc.generate(..., "U_ListDOCFunctions")`.
+
+## OpenAPI
+
+Confira `/init/dyn` e `/class/{param1}` no [Explorador OpenAPI](/tools/explorador-openapi).
+
+## Passos no AppServer
+
+1. Compile todos os fontes da pasta `dynamic endpoints`
+2. Execute `U_dynamic_rest_start()` ou `U_sampleDOC()`
+3. Gere documentação com a função de lista dinâmica no 5º parâmetro

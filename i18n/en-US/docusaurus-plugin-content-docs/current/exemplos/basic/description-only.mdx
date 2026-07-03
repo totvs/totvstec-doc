@@ -1,0 +1,50 @@
+---
+sidebar_position: 1
+title: "01 — Somente descrição"
+---
+
+import CodeToOpenAPI from '@site/src/components/CodeToOpenAPI';
+
+# Exemplo 01 — Somente descrição
+
+## Objetivo
+
+A forma mais simples: informar apenas uma **descrição** na propriedade `description` da annotation `@Get`.
+
+## Quando usar
+
+APIs mínimas sem parâmetros documentados, respostas genéricas ou protótipos rápidos.
+
+## Arquivo
+
+`src/rest/basic/sample_01_basic.tlpp`
+
+## Código e OpenAPI gerado
+
+<CodeToOpenAPI
+tlpp={`#include 'tlpp-rest.th'
+
+@Get(;
+  endpoint="/rest/sample/doc/basic/01",;
+  description="Exemplo de documentação simples, somente descrição";
+)
+function U_rest_sample_01_basic() as logical
+return oRest:setResponse('')`}
+yaml={`/rest/sample/doc/basic/01:
+  get:
+    description: Exemplo de documentação simples, somente descrição
+    responses:
+      200:
+        description: Success`}
+/>
+
+## Passos no AppServer
+
+1. Compile `sample_01_basic.tlpp`
+2. Suba o REST na porta configurada
+3. Execute `tlpp.doc.generate('swagger', 'api_doc', {8080})`
+4. Localize o path `/rest/sample/doc/basic/01` no YAML
+
+## O que você deve ver
+
+Apenas `description` e resposta `200` no OpenAPI — sem `parameters` nem `summary`.

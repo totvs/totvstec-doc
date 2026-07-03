@@ -1,0 +1,73 @@
+.wrap {
+  margin: 1.5rem 0;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--ifm-background-surface-color);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 0;
+  background: var(--ifm-color-emphasis-100);
+  color: var(--ifm-font-color-base);
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.15s ease;
+}
+
+.header:hover,
+.headerOpen {
+  background: rgba(var(--totvs-azul-rgb), 0.08);
+}
+
+.headerMain {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.path {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.8rem;
+  color: var(--ifm-color-content-secondary);
+  word-break: break-all;
+}
+
+.meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  font-size: 0.8rem;
+  color: var(--ifm-color-content-secondary);
+}
+
+.chevron {
+  color: var(--totvs-cyan);
+  font-size: 0.95rem;
+}
+
+.panel :global(pre) {
+  margin: 0;
+  border-radius: 0;
+}
+
+.panel :global(.theme-code-block) {
+  margin-bottom: 0;
+}
+
+.codeBlock :global(pre) {
+  border-left: 3px solid var(--totvs-cyan);
+}

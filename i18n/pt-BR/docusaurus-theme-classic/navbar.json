@@ -1,0 +1,15 @@
+{
+  "title.tagline": {
+    "message": "Documentação, Exemplos e ferramentas",
+    "description": "Tagline do site em pt-BR"
+  },
+  "item.label.Docs": {
+    "message": "Docs"
+  },
+  "item.label.Tools": {
+    "message": "Tools"
+  },
+  "item.label.TOTVS Developers": {
+    "message": "TOTVS Developers"
+  }
+}

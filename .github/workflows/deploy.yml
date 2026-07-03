@@ -1,0 +1,110 @@
+name: Deploy TLPP Docs
+
+on:
+  push:
+    branches: [main]
+  repository_dispatch:
+    types: [rest-samples-updated, doc-generate-updated]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Load repository config from repos.config.json
+        id: repos
+        run: |
+          node <<'NODE'
+          const cfg = require('./repos.config.json');
+          const byId = Object.fromEntries(cfg.repos.map((r) => [r.id, r]));
+          const doc = byId['doc-generate'];
+          const rest = byId['rest-samples'];
+          const out = process.env.GITHUB_OUTPUT;
+          const fs = require('fs');
+          const write = (k, v) => fs.appendFileSync(out, `${k}=${v}\n`);
+          write('site_repo', `${cfg.site.owner}/${cfg.site.name}`);
+          write('doc_generate', `${doc.owner}/${doc.name}`);
+          write('doc_generate_path', doc.sync.submodulePath);
+          write('doc_generate_ref', doc.branch);
+          write('rest_samples', `${rest.owner}/${rest.name}`);
+          write('rest_samples_path', rest.sync.submodulePath);
+          write('rest_samples_ref', rest.branch);
+          NODE
+
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ steps.repos.outputs.doc_generate }}
+          path: ${{ steps.repos.outputs.doc_generate_path }}
+          ref: ${{ steps.repos.outputs.doc_generate_ref }}
+
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ steps.repos.outputs.rest_samples }}
+          path: ${{ steps.repos.outputs.rest_samples_path }}
+          ref: ${{ steps.repos.outputs.rest_samples_ref }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - run: npm ci
+
+      - name: Block AI/context files from deploy
+        run: npm run audit:remote
+
+      - name: Sync dependent repositories
+        run: npm run sync:deps
+
+      - name: Build Docusaurus
+        run: |
+          set -a
+          eval "$(node scripts/ci-env.mjs)"
+          set +a
+          npm run build
+
+      - name: Normalize artifact permissions
+        run: |
+          find build -type d -exec chmod 755 {} +
+          find build -type f -exec chmod 644 {} +
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy1.outputs.page_url || steps.deploy2.outputs.page_url || steps.deploy3.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages (attempt 1)
+        id: deploy1
+        uses: actions/deploy-pages@v4
+        continue-on-error: true
+
+      - name: Deploy to GitHub Pages (attempt 2)
+        id: deploy2
+        if: steps.deploy1.outcome == 'failure'
+        uses: actions/deploy-pages@v4
+        continue-on-error: true
+
+      - name: Deploy to GitHub Pages (attempt 3)
+        id: deploy3
+        if: steps.deploy2.outcome == 'failure'
+        uses: actions/deploy-pages@v4

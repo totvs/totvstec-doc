@@ -1,0 +1,34 @@
+---
+sidebar_position: 5
+title: "05 — Multi-linha"
+---
+
+import CodeToOpenAPI from '@site/src/components/CodeToOpenAPI';
+
+# Exemplo 05 — Descrição multi-linha
+
+## Objetivo
+
+Descrições longas com quebras de linha via `description1`, `description2`, ...
+
+## Arquivo
+
+`src/rest/basic/sample_05_basic_multiline.tlpp`
+
+<CodeToOpenAPI
+tlpp={`"description1" : "Linha 1",;
+"description2" : "",;
+"description3" : "Linha 2\\n",;
+"description6" : "Linha N";`}
+yaml={`description: |-
+  Linha 1
+
+  Linha 2
+  Linha 3
+  ...
+  Linha N`}
+/>
+
+:::warning Sequência numérica
+Não pule números em `descriptionN` — o motor para no primeiro gap.
+:::
