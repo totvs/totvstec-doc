@@ -7,14 +7,20 @@ displayed_sidebar: restSidebar
 
 import RepoCatalog from '@site/src/components/RepoCatalog';
 
-O **TLPP Docs** é só o site de documentação. O código de exemplo vive em repositórios separados — cada um com um propósito.
+O **totvstec-doc** é o motor do site. Código, conceito e catálogo de exemplos vivem nos repositórios abaixo — cada um com `docs/conceito`, `docs/exemplos` e `docs/sidebar.json`.
 
 <RepoCatalog intro="Clique no repositório para abrir no GitHub ou use os atalhos para pastas específicas." />
 
+## Arquitetura
+
+Como o hub integra os módulos: [Arquitetura modular](/docs/ARQUITETURA).
+
+**Atalhos:** [REST](/docs/tlpp/rest) · [Exemplos REST](/docs/tlpp/rest/exemplos-repositorio) · [Doc Generate](/docs/tlpp/rest/metadados/visao-geral) · [PROBAT](/docs/tlpp/probat)
+
 ## Adicionar outro projeto
 
-1. Edite `src/data/external-repos.ts` no repositório do site
-2. Inclua um item em `EXTERNAL_REPOS` com `owner`, `name`, `branch`, `highlights` etc.
-3. Nos MDX, use `<ExemploRef repo="seu-id" file="..." path="..." />` para apontar exemplos
+1. Crie o repositório com `docs/conceito/`, `docs/exemplos/` e `docs/sidebar.json`
+2. Adicione uma entrada em `repos.config.json` no [totvstec-doc](https://github.com/totvs/totvstec-doc)
+3. Rode `npm run ecosystem:export` e `npm run validate:repos`
 
-**Próximo passo:** [Metadados — introdução](/docs/tlpp/rest/metadados/visao-geral) · [Exemplos REST](/docs/tlpp/rest/exemplos-repositorio) · [Exemplos metadados](/docs/tlpp/rest/metadados/exemplos/basic/description-only)
+Detalhes: [Arquitetura modular](/docs/ARQUITETURA).

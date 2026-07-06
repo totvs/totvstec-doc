@@ -1,5 +1,5 @@
 {
-  "$comment": "Fonte única de verdade para URLs GitHub, sync de MDX e deploy.",
+  "$comment": "Fonte única de verdade para URLs GitHub, sync de MDX, sidebar e deploy.",
   "site": {
     "owner": "totvs",
     "name": "totvstec-doc",
@@ -8,6 +8,39 @@
     "baseUrl": "/totvstec-doc/"
   },
   "repos": [
+    {
+      "id": "rest-samples",
+      "owner": "totvs",
+      "name": "tlpp-sample-rest",
+      "branch": "master",
+      "label": "REST TLPP — exemplos TDN",
+      "description": "Exemplos TLPP extraídos do TDN oficial: oREST, verbos HTTP, configs, callbacks e primeiros passos.",
+      "tags": ["rest", "orest", "tdn"],
+      "srcRoot": "src",
+      "highlights": [
+        {"label": "Primeiros passos", "path": "src/primeiros-passos"},
+        {"label": "oREST", "path": "src/orest"},
+        {"label": "Verbos HTTP", "path": "src/verbs"}
+      ],
+      "sidebar": {
+        "category": "REST",
+        "collapsed": false,
+        "order": 1,
+        "key": "rest-module"
+      },
+      "sync": {
+        "submodulePath": "deps/tlpp-sample-rest",
+        "submoduleUrl": "https://github.com/totvs/tlpp-sample-rest.git",
+        "sidebarFile": "docs/sidebar.json",
+        "mdxSources": [
+          {"from": "docs/conceito", "to": "docs/tlpp/rest"},
+          {"from": "docs/exemplos", "to": "docs/tlpp/rest/exemplos-repositorio"}
+        ]
+      },
+      "notifyHub": {
+        "eventType": "rest-samples-updated"
+      }
+    },
     {
       "id": "doc-generate",
       "owner": "totvs",
@@ -25,41 +58,24 @@
         {"label": "Rotas dinâmicas", "path": "src/rest/04_dynamic_mapping"},
         {"label": "Gerador OpenAPI", "path": "src/rest/generator"}
       ],
+      "sidebar": {
+        "category": "DOC GENERATE",
+        "collapsed": true,
+        "order": 2,
+        "key": "doc-generate-module"
+      },
       "sync": {
         "submodulePath": "deps/tlpp-sample-rest-documentation",
         "submoduleUrl": "https://github.com/totvs/tlpp-sample-rest-documentation.git",
+        "sidebarFile": "docs/sidebar.json",
         "mdxSources": [
           {"from": "docs/metadados", "to": "docs/tlpp/rest/metadados"},
-          {"from": "docs/doc-generate", "to": "docs/tlpp/rest/doc-generate"}
+          {"from": "docs/doc-generate", "to": "docs/tlpp/rest/doc-generate"},
+          {"from": "docs/exemplos", "to": "docs/tlpp/rest/exemplos-doc-generate"}
         ]
       },
       "notifyHub": {
         "eventType": "doc-generate-updated"
-      }
-    },
-    {
-      "id": "rest-samples",
-      "owner": "totvs",
-      "name": "tlpp-sample-rest",
-      "branch": "master",
-      "label": "REST TLPP — exemplos TDN",
-      "description": "Exemplos TLPP extraídos do TDN oficial: oREST, verbos HTTP, configs, callbacks e primeiros passos.",
-      "tags": ["rest", "orest", "tdn"],
-      "srcRoot": "src",
-      "highlights": [
-        {"label": "Primeiros passos", "path": "src/primeiros-passos"},
-        {"label": "oREST", "path": "src/orest"},
-        {"label": "Verbos HTTP", "path": "src/verbs"}
-      ],
-      "sync": {
-        "submodulePath": "deps/tlpp-sample-rest",
-        "submoduleUrl": "https://github.com/totvs/tlpp-sample-rest.git",
-        "mdxSources": [
-          {"from": "docs/exemplos", "to": "docs/tlpp/rest/exemplos-repositorio"}
-        ]
-      },
-      "notifyHub": {
-        "eventType": "rest-samples-updated"
       }
     },
     {
@@ -77,11 +93,19 @@
         {"label": "Integração com banco de dados", "path": "test/integration"},
         {"label": "Scripts de automação", "path": "run"}
       ],
+      "sidebar": {
+        "category": "PROBAT",
+        "collapsed": true,
+        "order": 3,
+        "key": "probat-module"
+      },
       "sync": {
         "submodulePath": "deps/tlpp-probat-samples",
         "submoduleUrl": "https://github.com/totvs/tlpp-probat-samples.git",
+        "sidebarFile": "docs/sidebar.json",
         "mdxSources": [
-          {"from": "docs/exemplos", "to": "docs/tlpp/probat"}
+          {"from": "docs/conceito", "to": "docs/tlpp/probat"},
+          {"from": "docs/exemplos", "to": "docs/tlpp/probat/exemplos-repositorio"}
         ]
       },
       "notifyHub": {

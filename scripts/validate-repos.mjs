@@ -68,7 +68,25 @@ function main() {
   const deployPath = path.join(ROOT, '.github/workflows/deploy.yml');
   const deploy = fs.readFileSync(deployPath, 'utf8');
   if (!deploy.includes('repos.config.json')) {
-    fail('deploy.yml deve carregar slugs de repos.config.json');
+    fail('deploy.yml deve referenciar repos.config.json (checkout genérico)');
+  }
+  if (!deploy.includes('ci-checkout-deps.mjs')) {
+    fail('deploy.yml deve usar scripts/ci-checkout-deps.mjs');
+  }
+
+  for (const repo of synced) {
+    const sidebarRel = repo.sync.sidebarFile ?? 'docs/sidebar.json';
+    const sidebarPath = path.join(ROOT, repo.sync.submodulePath, sidebarRel);
+    if (!fs.existsSync(sidebarPath)) {
+      fail(`sidebar ausente para ${repo.id}: ${sidebarRel}`);
+    }
+
+    for (const {from} of repo.sync.mdxSources) {
+      const srcPath = path.join(ROOT, repo.sync.submodulePath, from);
+      if (!fs.existsSync(srcPath)) {
+        fail(`mdxSources ausente para ${repo.id}: ${from}`);
+      }
+    }
   }
 
   for (const repo of synced) {

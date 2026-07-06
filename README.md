@@ -1,21 +1,31 @@
 # totvstec-doc
 
-Centralizador de exemplos e documentação da equipe **TOTVSTec** — código TLPP de referência, trilhas conceituais e ferramentas no navegador.
+**Motor** do site TOTVSTec — integra módulos de documentação e publica em GitHub Pages.
 
-## Documentação
+Cada módulo (REST, Doc Generate, PROBAT) é um repositório satélite que **possui** conceito + exemplos `.tlpp`. Este repo fornece tema, componentes, tools e o pipeline de build.
+
+## Site
 
 **https://totvs.github.io/totvstec-doc/**
 
-## Exemplos suportados
+## Módulos integrados
 
-| Área | Repositório | Na documentação |
-|------|-------------|-----------------|
-| **REST** | [totvs/tlpp-sample-rest](https://github.com/totvs/tlpp-sample-rest) | [REST TLPP](https://totvs.github.io/totvstec-doc/docs/tlpp/rest/) |
-| **Doc Generate** | [totvs/tlpp-sample-rest-documentation](https://github.com/totvs/tlpp-sample-rest-documentation) | [Doc Generate](https://totvs.github.io/totvstec-doc/docs/tlpp/rest/doc-generate/) |
-| **PROBAT** | [totvs/tlpp-probat-samples](https://github.com/totvs/tlpp-probat-samples) | [PROBAT](https://totvs.github.io/totvstec-doc/docs/tlpp/probat/) |
+| Módulo | Repositório | Documentação |
+|--------|-------------|--------------|
+| **REST** | [tlpp-sample-rest](https://github.com/totvs/tlpp-sample-rest) | [/docs/tlpp/rest](https://totvs.github.io/totvstec-doc/docs/tlpp/rest/) |
+| **Doc Generate** | [tlpp-sample-rest-documentation](https://github.com/totvs/tlpp-sample-rest-documentation) | [/docs/tlpp/rest/metadados](https://totvs.github.io/totvstec-doc/docs/tlpp/rest/metadados/) |
+| **PROBAT** | [tlpp-probat-samples](https://github.com/totvs/tlpp-probat-samples) | [/docs/tlpp/probat](https://totvs.github.io/totvstec-doc/docs/tlpp/probat/) |
 
-Cada repositório de exemplos contém fontes `.tlpp` organizados por tema. A documentação explica os conceitos e aponta para o código-fonte no GitHub.
+Configuração central: [`repos.config.json`](repos.config.json).  
+Como funciona: [Arquitetura modular](docs/ARQUITETURA.md).
 
-## Ferramentas
+## Desenvolvimento local
 
-Utilitários interativos (por exemplo, explorador OpenAPI) em [Tools](https://totvs.github.io/totvstec-doc/tools/).
+```bash
+npm run setup          # submodules + sync + sidebars
+npm start
+```
+
+## Adicionar um módulo
+
+Ver [docs/ARQUITETURA.md](docs/ARQUITETURA.md#adicionar-um-novo-módulo).

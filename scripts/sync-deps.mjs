@@ -12,6 +12,11 @@ import {getRepoById, loadReposConfig, syncedRepos} from './lib/load-repos-config
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
 
+/** Arquivos do motor que não devem ser apagados ao sincronizar um destino. */
+const PRESERVE_IN_DEST = {
+  'docs/tlpp/rest': ['exemplos-praticos.mdx'],
+};
+
 function copyRecursive(src, dest) {
   fs.mkdirSync(dest, {recursive: true});
   for (const entry of fs.readdirSync(src, {withFileTypes: true})) {
@@ -25,10 +30,10 @@ function copyRecursive(src, dest) {
   }
 }
 
-function syncDirectory(src, dest) {
+function syncDirectory(src, dest, preserveNames = []) {
   const preserved = [];
   if (fs.existsSync(dest)) {
-    for (const name of ['.gitkeep', 'README.md']) {
+    for (const name of ['.gitkeep', 'README.md', ...preserveNames]) {
       const p = path.join(dest, name);
       if (fs.existsSync(p)) {
         preserved.push({name, content: fs.readFileSync(p)});
@@ -69,7 +74,7 @@ function main() {
         console.error(`[sync-deps] Ausente em ${repo.id}: ${src}`);
         process.exit(1);
       }
-      syncDirectory(src, dest);
+      syncDirectory(src, dest, PRESERVE_IN_DEST[to] ?? []);
       console.log(`[sync-deps] ${repo.id}: ${from} → ${to}`);
     }
   }

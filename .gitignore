@@ -27,14 +27,15 @@ scripts/prepare-standalone-repo.mjs
 /deps/
 
 # Conteúdo sincronizado dos repositórios dependentes (npm run sync:deps)
-/docs/tlpp/rest/doc-generate/**
-!/docs/tlpp/rest/doc-generate/.gitkeep
-/docs/tlpp/rest/metadados/**
-!/docs/tlpp/rest/metadados/.gitkeep
-/docs/tlpp/rest/exemplos-repositorio/**
+/docs/tlpp/rest/**
+!/docs/tlpp/rest/exemplos-praticos.mdx
 !/docs/tlpp/rest/exemplos-repositorio/.gitkeep
+!/docs/tlpp/rest/exemplos-doc-generate/.gitkeep
+!/docs/tlpp/rest/metadados/.gitkeep
+!/docs/tlpp/rest/doc-generate/.gitkeep
 /docs/tlpp/probat/**
 !/docs/tlpp/probat/.gitkeep
+!/docs/tlpp/probat/exemplos-repositorio/.gitkeep
 
 # Artefatos gerados — não versionar em static/
 /static/openapi/
