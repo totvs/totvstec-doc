@@ -191,6 +191,12 @@ const sidebars: SidebarsConfig = {
             "key": "doc-generate-intro"
           },
           "tlpp/rest/doc-generate/list-dinamico",
+          {
+            "type": "doc",
+            "id": "tlpp/rest/doc-generate/list-filter",
+            "label": "Filtro de rotas",
+            "key": "doc-generate-filter"
+          },
           "tlpp/rest/doc-generate/openapi",
           "tlpp/rest/doc-generate/mapa-arquivos"
         ]
