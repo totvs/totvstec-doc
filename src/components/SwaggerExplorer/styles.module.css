@@ -1,0 +1,960 @@
+.page {
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 5rem;
+}
+
+.topBar {
+  margin-bottom: 2rem;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--ifm-color-content-secondary);
+  text-decoration: none;
+  padding: 0.4rem 0.75rem;
+  border-radius: 8px;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.backLink:hover {
+  color: var(--totvs-tools-accent);
+  background: var(--totvs-tools-accent-soft);
+  text-decoration: none;
+}
+
+/* ?? Hero ??????????????????????????????????????? */
+
+.hero {
+  margin-bottom: 2.75rem;
+  text-align: center;
+}
+
+.heroBadge {
+  display: inline-block;
+  margin-bottom: 1rem;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  background: var(--totvs-tools-accent-soft);
+  border: 1px solid var(--totvs-tools-accent-mid);
+  color: var(--totvs-tools-accent);
+}
+
+.hero h1 {
+  font-family: var(--totvs-font-heading);
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin: 0 0 0.85rem;
+  line-height: 1.1;
+  background: linear-gradient(135deg, var(--ifm-font-color-base) 40%, var(--totvs-tools-accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero p {
+  margin: 0 auto;
+  color: var(--ifm-color-content-secondary);
+  max-width: 36rem;
+  line-height: 1.7;
+  font-size: 1.05rem;
+}
+
+/* ?? Input workspace ???????????????????????????? */
+
+.workspace {
+  border-radius: 20px;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  background: var(--ifm-background-surface-color);
+  overflow: hidden;
+  margin-bottom: 2rem;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    0 8px 32px rgba(var(--totvs-azul-escuro-rgb), 0.06);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.workspace:focus-within {
+  border-color: rgba(var(--totvs-roxo-rgb), 0.25);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    0 8px 40px rgba(var(--totvs-roxo-rgb), 0.08);
+}
+
+.inputTabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  background: var(--ifm-background-color);
+  padding: 0 0.5rem;
+}
+
+.inputTab {
+  flex: 1;
+  padding: 1rem 1.25rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ifm-color-content-secondary);
+  background: transparent;
+  border: none;
+  border-bottom: 2.5px solid transparent;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.2s ease;
+}
+
+.inputTab:hover {
+  color: var(--ifm-font-color-base);
+}
+
+.inputTabActive {
+  color: var(--totvs-tools-accent);
+  border-bottom-color: var(--totvs-tools-accent);
+}
+
+.inputPanel {
+  padding: 1.75rem;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 200px;
+  padding: 1.25rem 1.35rem;
+  border-radius: 14px;
+  border: 1.5px solid var(--ifm-color-emphasis-200);
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+  font-family: var(--totvs-font-mono);
+  font-size: 0.82rem;
+  line-height: 1.65;
+  resize: vertical;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: var(--totvs-tools-accent);
+  box-shadow: 0 0 0 4px var(--totvs-tools-accent-soft);
+}
+
+.textarea::placeholder {
+  color: var(--ifm-color-emphasis-500);
+  opacity: 0.7;
+}
+
+.dropzone {
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  padding: 2.5rem 2rem;
+  border-radius: 14px;
+  border: 2px dashed rgba(var(--totvs-roxo-rgb), 0.25);
+  background: var(--totvs-tools-accent-soft);
+  color: var(--ifm-color-content-secondary);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, transform 0.15s;
+}
+
+.dropzone:hover,
+.dropzoneActive {
+  border-color: var(--totvs-tools-accent);
+  background: rgba(var(--totvs-roxo-rgb), 0.08);
+  transform: scale(1.005);
+}
+
+.dropzone input {
+  display: none;
+}
+
+.dropzoneIcon {
+  color: var(--totvs-tools-accent);
+  opacity: 0.9;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: rgba(var(--totvs-roxo-rgb), 0.1);
+}
+
+.dropzoneTitle {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ifm-font-color-base);
+}
+
+.dropzoneHint {
+  font-size: 0.78rem;
+  opacity: 0.6;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 0 1.75rem 1.75rem;
+}
+
+.btnPrimary,
+.btnSecondary {
+  padding: 0.7rem 1.5rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btnPrimary {
+  background: var(--totvs-tools-accent);
+  color: var(--totvs-branco);
+  box-shadow: 0 2px 8px rgba(var(--totvs-roxo-rgb), 0.25);
+}
+
+.btnPrimary:hover {
+  background: var(--totvs-tools-accent-bright);
+  box-shadow: 0 4px 16px rgba(var(--totvs-roxo-rgb), 0.3);
+  transform: translateY(-1px);
+}
+
+.btnPrimary:active {
+  transform: translateY(0);
+}
+
+.btnSecondary {
+  background: transparent;
+  border: 1.5px solid var(--ifm-color-emphasis-300);
+  color: var(--ifm-font-color-base);
+}
+
+.btnSecondary:hover {
+  border-color: var(--totvs-tools-accent);
+  color: var(--totvs-tools-accent);
+  background: var(--totvs-tools-accent-soft);
+}
+
+/* ?? Error & Empty ?????????????????????????????? */
+
+.error {
+  padding: 1rem 1.25rem;
+  border-radius: 14px;
+  border: 1px solid rgba(220, 52, 59, 0.3);
+  background: rgba(220, 52, 59, 0.06);
+  color: var(--totvs-erro);
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 4.5rem 2rem;
+  border-radius: 20px;
+  border: 1.5px dashed var(--ifm-color-emphasis-200);
+  background: var(--ifm-background-surface-color);
+}
+
+.emptyIcon {
+  margin-bottom: 1.25rem;
+  color: var(--ifm-color-emphasis-300);
+  opacity: 0.6;
+}
+
+.emptyState p {
+  margin: 0 auto;
+  color: var(--ifm-color-content-secondary);
+  font-size: 0.95rem;
+  max-width: 26rem;
+  line-height: 1.7;
+}
+
+.loading {
+  text-align: center;
+  padding: 4rem;
+  color: var(--ifm-color-content-secondary);
+  font-size: 0.95rem;
+}
+
+/* ?? Swagger UI Section ????????????????????????? */
+
+.swaggerSection {
+  border-radius: 20px;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  background: var(--ifm-background-surface-color);
+  overflow: hidden;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    0 8px 32px rgba(var(--totvs-azul-escuro-rgb), 0.06);
+  animation: fadeIn 0.35s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ??????????????????????????????????????????????????
+   SWAGGER UI — TOTVS OVERRIDES
+   ?????????????????????????????????????????????????? */
+
+.swaggerWrapper {
+  padding: 1.5rem;
+}
+
+.swaggerWrapper :global(.swagger-ui) {
+  font-family: var(--totvs-font-body);
+  color: var(--ifm-font-color-base);
+}
+
+.swaggerWrapper :global(.swagger-ui .wrapper) {
+  padding: 0;
+  max-width: 100%;
+}
+
+/* ?? Info header ??????????????????????????????? */
+
+.swaggerWrapper :global(.swagger-ui .info) {
+  margin: 0.5rem 0 2rem;
+  padding: 1.5rem 1.75rem;
+  background: linear-gradient(135deg, var(--totvs-azul-escuro) 0%, var(--totvs-azul-escuro-mid) 100%);
+  border-radius: 14px;
+  border: 1px solid rgba(var(--totvs-azul-rgb), 0.12);
+}
+
+.swaggerWrapper :global(.swagger-ui .info .title) {
+  font-family: var(--totvs-font-heading);
+  font-size: 1.3rem;
+  color: var(--totvs-branco);
+}
+
+.swaggerWrapper :global(.swagger-ui .info .description),
+.swaggerWrapper :global(.swagger-ui .info .description p) {
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.6;
+  font-size: 0.88rem;
+}
+
+.swaggerWrapper :global(.swagger-ui .info .base-url) {
+  color: var(--totvs-azul);
+  font-family: var(--totvs-font-mono);
+  font-size: 0.8rem;
+}
+
+/* Hide version badge and schemes pills inside info */
+.swaggerWrapper :global(.swagger-ui .info .info__extdocs),
+.swaggerWrapper :global(.swagger-ui .info span.url),
+.swaggerWrapper :global(.swagger-ui .info hgroup a),
+.swaggerWrapper :global(.swagger-ui .info .version-stamp),
+.swaggerWrapper :global(.swagger-ui .info small),
+.swaggerWrapper :global(.swagger-ui .info .version-pragma) {
+  display: none !important;
+}
+
+.swaggerWrapper :global(.swagger-ui .info pre.base-url) {
+  display: none !important;
+}
+
+/* ?? Scheme container ?????????????????????????? */
+
+.swaggerWrapper :global(.swagger-ui .scheme-container) {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0.75rem 0;
+  margin: 0 0 1rem;
+}
+
+/* ?? Tag sections ?????????????????????????????? */
+
+.swaggerWrapper :global(.swagger-ui .opblock-tag-section) {
+  margin-bottom: 1.25rem;
+}
+
+.swaggerWrapper :global(.swagger-ui .opblock-tag) {
+  font-family: var(--totvs-font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  border-bottom: 1.5px solid var(--ifm-color-emphasis-200);
+  padding: 0.85rem 0;
+  margin: 0;
+}
+
+/* ?? Operations ???????????????????????????????? */
+
+.swaggerWrapper :global(.swagger-ui .opblock) {
+  border-radius: 14px !important;
+  margin-bottom: 0.85rem;
+  border-width: 1px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+  overflow: hidden;
+  transition: box-shadow 0.2s ease;
+}
+
+.swaggerWrapper :global(.swagger-ui .opblock:hover) {
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+}
+
+.swaggerWrapper :global(.swagger-ui .opblock .opblock-summary) {
+  padding: 0.75rem 1.15rem;
+  border: none !important;
+}
+
+/* Method badges */
+.swaggerWrapper :global(.swagger-ui .opblock.opblock-get) {
+  background: rgba(var(--totvs-azul-rgb), 0.025);
+  border-color: rgba(var(--totvs-azul-rgb), 0.2);
+}
+.swaggerWrapper :global(.swagger-ui .opblock.opblock-get .opblock-summary-method) {
+  background: var(--totvs-azul);
+  color: var(--totvs-azul-escuro);
+  font-weight: 800;
+  border-radius: 6px;
+  font-size: 0.65rem;
+  padding: 0.35rem 0.65rem;
+  min-width: 3.2rem;
+  text-align: center;
+}
+
+.swaggerWrapper :global(.swagger-ui .opblock.opblock-post) {
+  background: rgba(0, 255, 212, 0.025);
+  border-color: rgba(0, 255, 212, 0.2);
+}
+.swaggerWrapper :global(.swagger-ui .opblock.opblock-post .opblock-summary-method) {
+  background: var(--totvs-verde);
+  color: var(--totvs-azul-escuro);
+  font-weight: 800;
+  border-radius: 6px;
+  font-size: 0.65rem;
+  padding: 0.35rem 0.65rem;
+  min-width: 3.2rem;
+  text-align: center;
+}
+
+.swaggerWrapper :global(.swagger-ui .opblock.opblock-put) {
+  background: rgba(255, 137, 0, 0.025);
+  border-color: rgba(255, 137, 0, 0.2);
+}
+.swaggerWrapper :global(.swagger-ui .opblock.opblock-put .opblock-summary-method) {
+  background: var(--totvs-laranja);
+  color: var(--totvs-azul-escuro);
+  font-weight: 800;
+  border-radius: 6px;
+  font-size: 0.65rem;
+  padding: 0.35rem 0.65rem;
+  min-width: 3.2rem;
+  text-align: center;
+}
+
+.swaggerWrapper :global(.swagger-ui .opblock.opblock-delete) {
+  background: rgba(220, 52, 59, 0.025);
+  border-color: rgba(220, 52, 59, 0.2);
+}
+.swaggerWrapper :global(.swagger-ui .opblock.opblock-delete .opblock-summary-method) {
+  background: var(--totvs-erro);
+  color: var(--totvs-branco);
+  font-weight: 800;
+  border-radius: 6px;
+  font-size: 0.65rem;
+  padding: 0.35rem 0.65rem;
+  min-width: 3.2rem;
+  text-align: center;
+}
+
+.swaggerWrapper :global(.swagger-ui .opblock.opblock-patch) {
+  background: rgba(var(--totvs-roxo-rgb), 0.025);
+  border-color: rgba(var(--totvs-roxo-rgb), 0.2);
+}
+.swaggerWrapper :global(.swagger-ui .opblock.opblock-patch .opblock-summary-method) {
+  background: var(--totvs-roxo);
+  color: var(--totvs-branco);
+  font-weight: 800;
+  border-radius: 6px;
+  font-size: 0.65rem;
+  padding: 0.35rem 0.65rem;
+  min-width: 3.2rem;
+  text-align: center;
+}
+
+/* Path & description in summary */
+.swaggerWrapper :global(.swagger-ui .opblock-summary-path) {
+  font-family: var(--totvs-font-mono);
+  font-size: 0.84rem;
+  font-weight: 600;
+}
+
+.swaggerWrapper :global(.swagger-ui .opblock-summary-description) {
+  font-size: 0.8rem;
+  color: var(--ifm-color-content-secondary);
+  opacity: 0.8;
+}
+
+/* ?? Expanded body ????????????????????????????? */
+
+.swaggerWrapper :global(.swagger-ui .opblock-body) {
+  padding: 1.5rem 1.5rem 1.75rem;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+}
+
+/* Description text — remove o highlight estranho */
+.swaggerWrapper :global(.swagger-ui .opblock-body .opblock-description-wrapper),
+.swaggerWrapper :global(.swagger-ui .opblock-body .opblock-description-wrapper p),
+.swaggerWrapper :global(.swagger-ui .opblock-external-docs-wrapper),
+.swaggerWrapper :global(.swagger-ui .opblock-description) {
+  background: none !important;
+  border: none !important;
+  padding: 0 0 1rem !important;
+  margin: 0 !important;
+  font-size: 0.88rem;
+  color: var(--ifm-color-content-secondary);
+  line-height: 1.6;
+}
+
+/* Markdown rendered inside descriptions */
+.swaggerWrapper :global(.swagger-ui .renderedMarkdown p) {
+  background: none !important;
+  padding: 0 !important;
+  margin: 0 0 0.5rem !important;
+  color: var(--ifm-color-content-secondary);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+/* ?? Section headers (Parameters / Responses) ?? */
+
+.swaggerWrapper :global(.swagger-ui .opblock-section-header) {
+  background: none;
+  border-radius: 0;
+  padding: 0.75rem 0;
+  margin: 0 0 1rem;
+  border: none;
+  border-bottom: 1.5px solid var(--ifm-color-emphasis-200);
+  box-shadow: none;
+}
+
+.swaggerWrapper :global(.swagger-ui .opblock-section-header h4) {
+  font-family: var(--totvs-font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ifm-color-content-secondary);
+  margin: 0;
+}
+
+/* ?? Try it out button ????????????????????????? */
+
+.swaggerWrapper :global(.swagger-ui .try-out__btn) {
+  font-family: var(--totvs-font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.45rem 0.95rem;
+  border-radius: 7px;
+  border: 1.5px solid var(--totvs-tools-accent) !important;
+  color: var(--totvs-tools-accent) !important;
+  background: transparent !important;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.swaggerWrapper :global(.swagger-ui .try-out__btn:hover) {
+  background: var(--totvs-tools-accent-soft) !important;
+}
+
+.swaggerWrapper :global(.swagger-ui .try-out__btn.cancel) {
+  border-color: var(--ifm-color-emphasis-300) !important;
+  color: var(--ifm-color-content-secondary) !important;
+}
+
+/* ?? Parameters table ?????????????????????????? */
+
+.swaggerWrapper :global(.swagger-ui table.parameters) {
+  border-collapse: separate;
+  border-spacing: 0;
+  border: none;
+  border-radius: 0;
+  overflow: visible;
+  margin: 0;
+}
+
+.swaggerWrapper :global(.swagger-ui table.parameters thead tr th),
+.swaggerWrapper :global(.swagger-ui table.parameters thead tr td) {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ifm-color-content-secondary);
+  background: none;
+  padding: 0.5rem 0.75rem 0.65rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  border-right: none;
+}
+
+.swaggerWrapper :global(.swagger-ui table.parameters tbody tr td) {
+  padding: 1rem 0.75rem;
+  vertical-align: top;
+  border-bottom: 1px solid var(--ifm-color-emphasis-100);
+  border-right: none;
+  font-size: 0.88rem;
+}
+
+.swaggerWrapper :global(.swagger-ui table.parameters tbody tr:last-child td) {
+  border-bottom: none;
+}
+
+.swaggerWrapper :global(.swagger-ui .parameters-col_name) {
+  font-family: var(--totvs-font-mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ifm-font-color-base);
+}
+
+.swaggerWrapper :global(.swagger-ui .parameter__name.required span) {
+  color: var(--totvs-erro);
+}
+
+.swaggerWrapper :global(.swagger-ui .parameter__in) {
+  font-size: 0.7rem;
+  color: var(--ifm-color-content-secondary);
+  font-style: normal;
+  opacity: 0.75;
+}
+
+.swaggerWrapper :global(.swagger-ui .parameter__type) {
+  font-size: 0.72rem;
+  color: var(--totvs-tools-accent);
+  font-weight: 500;
+}
+
+/* ?? Inputs & textareas ???????????????????????? */
+
+.swaggerWrapper :global(.swagger-ui input[type="text"]),
+.swaggerWrapper :global(.swagger-ui input[type="password"]),
+.swaggerWrapper :global(.swagger-ui input[type="search"]) {
+  border-radius: 8px;
+  border: 1.5px solid var(--ifm-color-emphasis-200);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.84rem;
+  font-family: var(--totvs-font-mono);
+  background: var(--ifm-background-color);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.swaggerWrapper :global(.swagger-ui input[type="text"]:focus),
+.swaggerWrapper :global(.swagger-ui input[type="password"]:focus) {
+  border-color: var(--totvs-tools-accent);
+  box-shadow: 0 0 0 3px var(--totvs-tools-accent-soft);
+  outline: none;
+}
+
+.swaggerWrapper :global(.swagger-ui textarea) {
+  border-radius: 10px;
+  border: 1.5px solid var(--ifm-color-emphasis-200);
+  padding: 0.75rem 0.9rem;
+  font-size: 0.82rem;
+  font-family: var(--totvs-font-mono);
+  line-height: 1.55;
+  background: var(--ifm-background-color);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.swaggerWrapper :global(.swagger-ui textarea:focus) {
+  border-color: var(--totvs-tools-accent);
+  box-shadow: 0 0 0 3px var(--totvs-tools-accent-soft);
+  outline: none;
+}
+
+.swaggerWrapper :global(.swagger-ui select) {
+  border-radius: 7px;
+  border: 1.5px solid var(--ifm-color-emphasis-200);
+  padding: 0.4rem 0.65rem;
+  font-size: 0.82rem;
+  background: var(--ifm-background-color);
+}
+
+/* ?? Execute / Cancel ?????????????????????????? */
+
+.swaggerWrapper :global(.swagger-ui .btn.execute) {
+  background: var(--totvs-tools-accent);
+  color: var(--totvs-branco);
+  border: none;
+  font-family: var(--totvs-font-body);
+  font-weight: 700;
+  font-size: 0.8rem;
+  border-radius: 8px;
+  padding: 0.6rem 1.35rem;
+  box-shadow: 0 2px 8px rgba(var(--totvs-roxo-rgb), 0.2);
+  transition: all 0.15s ease;
+}
+
+.swaggerWrapper :global(.swagger-ui .btn.execute:hover) {
+  background: var(--totvs-tools-accent-bright);
+  box-shadow: 0 4px 14px rgba(var(--totvs-roxo-rgb), 0.3);
+  transform: translateY(-1px);
+}
+
+.swaggerWrapper :global(.swagger-ui .btn.cancel) {
+  border: 1.5px solid var(--ifm-color-emphasis-300);
+  color: var(--ifm-color-content-secondary);
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 0.55rem 1.1rem;
+  font-size: 0.8rem;
+  background: transparent;
+}
+
+.swaggerWrapper :global(.swagger-ui .btn.cancel:hover) {
+  border-color: var(--totvs-erro);
+  color: var(--totvs-erro);
+}
+
+/* ?? Responses ????????????????????????????????? */
+
+.swaggerWrapper :global(.swagger-ui .responses-inner h4),
+.swaggerWrapper :global(.swagger-ui .responses-inner h5) {
+  font-family: var(--totvs-font-heading);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ifm-color-content-secondary);
+  margin: 1.25rem 0 0.65rem;
+  padding: 0;
+}
+
+.swaggerWrapper :global(.swagger-ui table.responses-table) {
+  border-collapse: separate;
+  border-spacing: 0;
+  border: none;
+  border-radius: 0;
+  overflow: visible;
+}
+
+.swaggerWrapper :global(.swagger-ui table.responses-table thead tr td),
+.swaggerWrapper :global(.swagger-ui table.responses-table thead tr th) {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ifm-color-content-secondary);
+  background: none;
+  padding: 0.5rem 0.75rem 0.65rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.swaggerWrapper :global(.swagger-ui table.responses-table tbody tr td) {
+  padding: 0.85rem 0.75rem;
+  vertical-align: top;
+  border-bottom: 1px solid var(--ifm-color-emphasis-100);
+  font-size: 0.88rem;
+}
+
+.swaggerWrapper :global(.swagger-ui table.responses-table tbody tr:last-child td) {
+  border-bottom: none;
+}
+
+.swaggerWrapper :global(.swagger-ui .response-col_status) {
+  font-family: var(--totvs-font-mono);
+  font-weight: 800;
+  font-size: 0.85rem;
+  color: var(--ifm-font-color-base);
+}
+
+.swaggerWrapper :global(.swagger-ui .response-col_links) {
+  font-size: 0.8rem;
+  color: var(--ifm-color-content-secondary);
+  font-style: italic;
+  opacity: 0.7;
+}
+
+/* ?? Code blocks ??????????????????????????????? */
+
+.swaggerWrapper :global(.swagger-ui .opblock-body pre) {
+  border-radius: 10px;
+  padding: 1.1rem 1.25rem;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  background: var(--totvs-azul-escuro) !important;
+  border: none;
+  margin: 0.5rem 0;
+}
+
+.swaggerWrapper :global(.swagger-ui .opblock-body pre.microlight) {
+  border-radius: 10px;
+  background: var(--totvs-azul-escuro) !important;
+}
+
+.swaggerWrapper :global(.swagger-ui .highlight-code) {
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0.5rem 0;
+}
+
+.swaggerWrapper :global(.swagger-ui .highlight-code pre) {
+  border-radius: 10px;
+  margin: 0;
+}
+
+/* Content type selectors */
+.swaggerWrapper :global(.swagger-ui .body-param-content-type select),
+.swaggerWrapper :global(.swagger-ui .response-content-type select) {
+  border-radius: 6px;
+  padding: 0.35rem 0.6rem;
+  font-weight: 600;
+  font-size: 0.75rem;
+}
+
+/* ?? Models ???????????????????????????????????? */
+
+.swaggerWrapper :global(.swagger-ui section.models) {
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 12px;
+  margin: 2rem 0 0.5rem;
+  overflow: hidden;
+}
+
+.swaggerWrapper :global(.swagger-ui section.models h4) {
+  font-family: var(--totvs-font-heading);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--ifm-font-color-base);
+  padding: 0.85rem 1.25rem;
+  margin: 0;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  background: var(--ifm-background-color);
+}
+
+.swaggerWrapper :global(.swagger-ui section.models .model-container) {
+  margin: 0.5rem 0.75rem;
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  background: var(--ifm-background-color);
+}
+
+/* ?? Hide topbar ??????????????????????????????? */
+
+.swaggerWrapper :global(.swagger-ui .topbar) {
+  display: none;
+}
+
+/* ?? Authorization ????????????????????????????? */
+
+.swaggerWrapper :global(.swagger-ui .btn.authorize) {
+  border: 1.5px solid var(--totvs-tools-accent);
+  color: var(--totvs-tools-accent);
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 0.45rem 1rem;
+  font-size: 0.8rem;
+  transition: all 0.15s ease;
+}
+
+.swaggerWrapper :global(.swagger-ui .btn.authorize:hover) {
+  background: var(--totvs-tools-accent-soft);
+}
+
+.swaggerWrapper :global(.swagger-ui .btn.authorize svg) {
+  fill: var(--totvs-tools-accent);
+}
+
+/* ?? Tab links (Example Value / Schema) ???????? */
+
+.swaggerWrapper :global(.swagger-ui .tab li) {
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.swaggerWrapper :global(.swagger-ui .tab li.active) {
+  font-weight: 700;
+}
+
+/* ?? "No parameters" / empty states ???????????? */
+
+.swaggerWrapper :global(.swagger-ui .opblock-body > .opblock-section > div) {
+  font-size: 0.88rem;
+  color: var(--ifm-color-content-secondary);
+  padding: 0.25rem 0;
+}
+
+/* ?? Dark mode ????????????????????????????????? */
+
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui) {
+  filter: invert(0.88) hue-rotate(180deg);
+}
+
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui img),
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui svg) {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+[data-theme='dark'] .swaggerWrapper :global(.swagger-ui .info) {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* ?? Responsive ????????????????????????????????? */
+
+@media (max-width: 768px) {
+  .page {
+    padding: 1.5rem 1rem 3.5rem;
+  }
+
+  .hero {
+    margin-bottom: 2rem;
+  }
+
+  .hero h1 {
+    font-size: 1.75rem;
+  }
+
+  .inputPanel {
+    padding: 1.25rem;
+  }
+
+  .actions {
+    padding: 0 1.25rem 1.25rem;
+  }
+
+  .swaggerWrapper {
+    padding: 0.75rem;
+  }
+
+  .swaggerWrapper :global(.swagger-ui .opblock-body) {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .page {
+    padding: 1rem 0.75rem 3rem;
+  }
+
+  .inputTabs {
+    padding: 0;
+  }
+
+  .inputTab {
+    padding: 0.85rem 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .btnPrimary,
+  .btnSecondary {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+}

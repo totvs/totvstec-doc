@@ -33,11 +33,15 @@
     "@easyops-cn/docusaurus-search-local": "^0.55.2",
     "@mdx-js/react": "^3.0.0",
     "@types/js-yaml": "^4.0.9",
+    "buffer": "^6.0.3",
     "clsx": "^2.0.0",
     "js-yaml": "^5.2.0",
     "prism-react-renderer": "^2.3.0",
+    "process": "^0.11.10",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "stream-browserify": "^3.0.0",
+    "swagger-ui-react": "^5.32.14"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.10.1",

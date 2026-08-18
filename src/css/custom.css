@@ -1304,3 +1304,13 @@ div[class*='codeBlockTitle'] {
 [data-theme='dark'] .theme-code-block .token.annotation {
   text-shadow: 0 0 14px rgba(var(--totvs-azul-rgb), 0.35);
 }
+
+/* Swagger Explorer — full-width layout */
+.swagger-explorer-layout main {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+.swagger-explorer-layout .container {
+  max-width: 100% !important;
+}
