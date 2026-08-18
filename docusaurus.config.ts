@@ -59,6 +59,7 @@ const config: Config = {
   ],
 
   plugins: [
+    require.resolve('./plugins/webpack-polyfills'),
     [
       require.resolve('@docusaurus/plugin-client-redirects'),
       {
