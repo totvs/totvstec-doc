@@ -62,3 +62,10 @@ scripts/prepare-standalone-repo.mjs
 /static/**/videos/
 /static/**/*.mp4
 /static/**/*.webm
+
+# Env
+tsconfig.json
+
+#TOTVS
+console_error.log
+.vscode/
