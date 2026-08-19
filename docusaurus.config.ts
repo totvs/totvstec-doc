@@ -155,7 +155,7 @@ const config: Config = {
       items: [
         {
           type: 'docSidebar',
-          sidebarId: 'restSidebar',
+          sidebarId: 'docsSidebar',
           position: 'left',
           label: 'Docs',
         },

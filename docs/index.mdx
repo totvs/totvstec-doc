@@ -1,21 +1,28 @@
 ---
-title: TOTVSTec
-description: Hub de documentação TLPP — REST, metadados e ferramentas.
+title: Documentação TOTVSTec
+description: Portal de documentação técnica do ecossistema TLPP — REST, Doc Generate, PROBAT e ferramentas.
 sidebar_position: 0
-displayed_sidebar: hubSidebar
+displayed_sidebar: docsSidebar
 ---
 
-Hub de documentação **TLPP** — REST nativo, metadados OpenAPI e ferramentas.
+# Documentação TOTVSTec
 
-O site **não contém o código-fonte dos exemplos**; ele documenta e aponta para [repositórios GitHub](/docs/tlpp/rest/exemplos-praticos) dedicados.
+Bem-vindo à documentação técnica do ecossistema **TLPP** (TOTVS Language Plus Plus). Aqui você encontra guias, referências e exemplos práticos dos módulos disponíveis.
 
-## Seções
+## Módulos documentados
 
-| Seção | Conteúdo |
-|-------|----------|
-| [REST](/docs/tlpp/rest) | Servidor, rotas, oREST e callbacks |
-| [Doc Generate](/docs/tlpp/rest/metadados/visao-geral) | Metadados, `tlpp.doc.generate()` e OpenAPI |
-| [Repositórios](/docs/tlpp/rest/exemplos-praticos) | Código de exemplo no GitHub |
-| [Tools](/tools) | Explorador OpenAPI e utilitários |
+| Módulo | Descrição | Começar por |
+|--------|-----------|-------------|
+| **REST** | Servidor REST nativo do tlppCore — rotas, objeto oRest, callbacks, autenticação e configuração | [Visão geral REST](/docs/tlpp/rest) |
+| **Doc Generate** | Geração de documentação OpenAPI a partir dos metadados no código TLPP — classe RestDoc (oDoc), CLI e exportação | [Visão geral Doc Generate](/docs/tlpp/rest/metadados/visao-geral) |
+| **PROBAT** | Engine de testes nativa do tlppCore — testes unitários, funcionais, integrados, asserts, suites e cobertura | [Visão geral PROBAT](/docs/tlpp/probat) |
 
-**Começar:** [Quickstart REST](/docs/tlpp/rest/primeiros-passos/quickstart) ou [Metadados](/docs/tlpp/rest/metadados/visao-geral)
+## Repositórios de exemplo
+
+O site **não contém o código-fonte dos exemplos** — ele documenta e aponta para repositórios GitHub dedicados. Cada repositório traz fontes `.tlpp` organizados por funcionalidade.
+
+| Repositório | Conteúdo |
+|-------------|----------|
+| [tlpp-sample-rest](https://github.com/totvs/tlpp-sample-rest) | Exemplos REST: oRest, verbos HTTP, configurações, callbacks e primeiros passos |
+| [tlpp-sample-rest-documentation](https://github.com/totvs/tlpp-sample-rest-documentation) | Exemplos Doc Generate: metadados, classe RestDoc (oDoc), rotas dinâmicas e OpenAPI |
+| [tlpp-probat-samples](https://github.com/totvs/tlpp-probat-samples) | Exemplos PROBAT: asserts, suites, cobertura, testes de API e integração |

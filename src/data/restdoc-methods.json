@@ -1,0 +1,356 @@
+{
+  "generatedAt": "2026-08-18",
+  "groups": [
+    {
+      "id": "restdoc-geral",
+      "title": "Métodos gerais",
+      "description": "Verificação de tipo do objeto RestDoc.",
+      "methods": [
+        {
+          "id": "isa",
+          "name": "isa",
+          "signature": "oDoc:isa(cClassName)",
+          "summary": "Retorna .T. se cClassName for \"restdoc\" ou \"rest_doc\" (case-insensitive). Use para verificar se o objeto recebido por parâmetro é do tipo correto antes de utilizá-lo.",
+          "returnType": "logical",
+          "returnDescription": "Verdadeiro quando o nome informado corresponde à classe RestDoc.",
+          "exampleCode": "// Validação recomendada no início da função DOC\nif ( !valtype(oDoc) == \"O\" .or. !MethIsMemberOf(oDoc,\"isa\") .or. !oDoc:isa(\"RestDoc\") )\n  return \"\"\nendif"
+        }
+      ]
+    },
+    {
+      "id": "restdoc-erro",
+      "title": "Métodos de erro",
+      "description": "Consultar erros ocorridos durante a construção da documentação.",
+      "methods": [
+        {
+          "id": "isError",
+          "name": "isError",
+          "signature": "oDoc:isError()",
+          "summary": "Retorna .T. se houver um erro registrado durante a construção da documentação.",
+          "returnType": "logical",
+          "returnDescription": "Verdadeiro quando existe ao menos um erro."
+        },
+        {
+          "id": "lastError",
+          "name": "lastError",
+          "signature": "oDoc:lastError()",
+          "summary": "Retorna a mensagem do último erro registrado.",
+          "returnType": "character",
+          "returnDescription": "Texto descritivo do último erro."
+        },
+        {
+          "id": "lastErrorFrom",
+          "name": "lastErrorFrom",
+          "signature": "oDoc:lastErrorFrom()",
+          "summary": "Retorna o nome do método onde ocorreu o último erro.",
+          "returnType": "character",
+          "returnDescription": "Nome do método de origem do erro."
+        },
+        {
+          "id": "lastErrorLine",
+          "name": "lastErrorLine",
+          "signature": "oDoc:lastErrorLine()",
+          "summary": "Retorna a linha onde ocorreu o último erro.",
+          "returnType": "numeric",
+          "returnDescription": "Número da linha de origem do erro."
+        },
+        {
+          "id": "getErrors",
+          "name": "getErrors",
+          "signature": "oDoc:getErrors()",
+          "summary": "Retorna array com todos os erros registrados. Cada elemento contém: [1] mensagem, [2] origem (método), [3] linha.",
+          "returnType": "array",
+          "returnDescription": "Array de erros no formato { {cMensagem, cOrigem, nLinha}, ... }."
+        }
+      ]
+    },
+    {
+      "id": "restdoc-titulo",
+      "title": "Título",
+      "description": "Definir e consultar o título do endpoint documentado.",
+      "methods": [
+        {
+          "id": "setTitle",
+          "name": "setTitle",
+          "signature": "oDoc:setTitle(cTitle)",
+          "summary": "Define o título do endpoint. Retorna .F. se o valor informado for vazio.",
+          "returnType": "logical",
+          "returnDescription": "Verdadeiro quando o título foi definido com sucesso.",
+          "exampleCode": "oDoc:setTitle(\"Cadastro de clientes\")"
+        },
+        {
+          "id": "getTitle",
+          "name": "getTitle",
+          "signature": "oDoc:getTitle()",
+          "summary": "Retorna o título previamente definido.",
+          "returnType": "character",
+          "returnDescription": "Título do endpoint."
+        }
+      ]
+    },
+    {
+      "id": "restdoc-descricao",
+      "title": "Descrição",
+      "description": "Construir descrições multi-linha para o endpoint.",
+      "methods": [
+        {
+          "id": "addDescription",
+          "name": "addDescription",
+          "signature": "oDoc:addDescription(cDescription)",
+          "summary": "Adiciona uma linha de descrição ao endpoint. Pode ser chamado várias vezes para compor texto multi-linha. Retorna .F. se a string for vazia.",
+          "returnType": "logical",
+          "returnDescription": "Verdadeiro quando a linha foi adicionada.",
+          "exampleCode": "oDoc:addDescription(\"Exemplo completo com todos os recursos.\")\noDoc:addDescription(\"1 - Descrição multi-linha\")\noDoc:addDescription(\"2 - Parâmetros de entrada\")"
+        },
+        {
+          "id": "getDescription",
+          "name": "getDescription",
+          "signature": "oDoc:getDescription()",
+          "summary": "Retorna o array com todas as linhas de descrição adicionadas.",
+          "returnType": "array",
+          "returnDescription": "Array de strings com as descrições."
+        },
+        {
+          "id": "clearDescription",
+          "name": "clearDescription",
+          "signature": "oDoc:clearDescription()",
+          "summary": "Limpa todas as descrições cadastradas.",
+          "returnType": "nil",
+          "returnDescription": "Sem retorno."
+        }
+      ]
+    },
+    {
+      "id": "restdoc-parametros",
+      "title": "Parâmetros (query, path, header)",
+      "description": "Documentar parâmetros de entrada recebidos via query string, path param ou header HTTP.",
+      "methods": [
+        {
+          "id": "createParam",
+          "name": "createParam",
+          "signature": "oDoc:createParam()",
+          "summary": "Cria um novo parâmetro e retorna seu índice numérico. Use esse índice nos demais métodos setParam*.",
+          "returnType": "numeric",
+          "returnDescription": "Índice do parâmetro criado.",
+          "exampleCode": "nIndex := oDoc:createParam()\noDoc:setParam(nIndex, \"param1\", \"Descrição\", _query_, _char_, .T.)"
+        },
+        {
+          "id": "setParam",
+          "name": "setParam",
+          "signature": "oDoc:setParam(nIndex, cName, cDescription, nIn, cType, lRequired)",
+          "summary": "Define todas as propriedades de um parâmetro de uma vez. Forma compacta equivalente a chamar cada setter individualmente.",
+          "returnType": "logical",
+          "returnDescription": "Verdadeiro quando todas as propriedades foram atribuídas.",
+          "exampleCode": "nIndex := oDoc:createParam()\noDoc:setParam(nIndex, \"id\", \"Identificador do registro\", _path_, _int_, .T.)"
+        },
+        {
+          "id": "getParam",
+          "name": "getParam",
+          "signature": "oDoc:getParam(nIndex)",
+          "summary": "Retorna os dados do parâmetro no índice informado.",
+          "returnType": "array",
+          "returnDescription": "Array com as propriedades do parâmetro."
+        },
+        {
+          "id": "setParamName",
+          "name": "setParamName",
+          "signature": "oDoc:setParamName(nIndex, cName)",
+          "summary": "Define o nome do parâmetro no índice indicado.",
+          "returnType": "logical",
+          "returnDescription": "Verdadeiro quando definido com sucesso."
+        },
+        {
+          "id": "setParamDescription",
+          "name": "setParamDescription",
+          "signature": "oDoc:setParamDescription(nIndex, cDescription)",
+          "summary": "Define a descrição do parâmetro.",
+          "returnType": "logical",
+          "returnDescription": "Verdadeiro quando definido com sucesso."
+        },
+        {
+          "id": "setParamIn",
+          "name": "setParamIn",
+          "signature": "oDoc:setParamIn(nIndex, nIn)",
+          "summary": "Define a localização do parâmetro: _query_, _path_ ou _header_.",
+          "returnType": "logical",
+          "returnDescription": "Verdadeiro quando definido com sucesso.",
+          "note": "Constantes disponíveis no include tlpp-doc.th: _query_ (QueryString), _path_ (Path Param), _header_ (Header HTTP)."
+        },
+        {
+          "id": "setParamType",
+          "name": "setParamType",
+          "signature": "oDoc:setParamType(nIndex, cType)",
+          "summary": "Define o tipo do parâmetro: _char_, _int_, _numeric_ ou _logical_.",
+          "returnType": "logical",
+          "returnDescription": "Verdadeiro quando definido com sucesso.",
+          "note": "Constantes disponíveis no include tlpp-doc.th: _char_ (character), _int_ (integer), _numeric_ (number), _logical_ (boolean)."
+        },
+        {
+          "id": "setParamRequired",
+          "name": "setParamRequired",
+          "signature": "oDoc:setParamRequired(nIndex, lRequired)",
+          "summary": "Define se o parâmetro é obrigatório.",
+          "returnType": "logical",
+          "returnDescription": "Verdadeiro quando definido com sucesso."
+        },
+        {
+          "id": "addParamValue",
+          "name": "addParamValue",
+          "signature": "oDoc:addParamValue(nIndex, xValue, cDescription)",
+          "summary": "Adiciona um valor possível (enum) ao parâmetro com sua descrição.",
+          "returnType": "logical",
+          "returnDescription": "Verdadeiro quando adicionado com sucesso.",
+          "exampleCode": "oDoc:addParamValue(nIndex, 0, \"Desliga Log\")\noDoc:addParamValue(nIndex, 1, \"Liga Log\")"
+        },
+        {
+          "id": "setParamValues",
+          "name": "setParamValues",
+          "signature": "oDoc:setParamValues(nIndex, aValues)",
+          "summary": "Define todos os valores possíveis de uma vez. Recebe array de arrays no formato { {valor, descricao}, ... }.",
+          "returnType": "logical",
+          "returnDescription": "Verdadeiro quando definido com sucesso."
+        },
+        {
+          "id": "setParamValueDefault",
+          "name": "setParamValueDefault",
+          "signature": "oDoc:setParamValueDefault(nIndex, xDefault)",
+          "summary": "Define o valor padrão do parâmetro.",
+          "returnType": "logical",
+          "returnDescription": "Verdadeiro quando definido com sucesso.",
+          "exampleCode": "oDoc:setParamValueDefault(nIndex, 0)"
+        },
+        {
+          "id": "setParamValueMinimum",
+          "name": "setParamValueMinimum",
+          "signature": "oDoc:setParamValueMinimum(nIndex, xMinimum)",
+          "summary": "Define o valor mínimo aceito pelo parâmetro.",
+          "returnType": "logical",
+          "returnDescription": "Verdadeiro quando definido com sucesso."
+        },
+        {
+          "id": "setParamValueMaximum",
+          "name": "setParamValueMaximum",
+          "signature": "oDoc:setParamValueMaximum(nIndex, xMaximum)",
+          "summary": "Define o valor máximo aceito pelo parâmetro.",
+          "returnType": "logical",
+          "returnDescription": "Verdadeiro quando definido com sucesso."
+        }
+      ]
+    },
+    {
+      "id": "restdoc-body",
+      "title": "Body (Request Body)",
+      "description": "Documentar o corpo da requisição HTTP — content-type, obrigatoriedade e componentes.",
+      "methods": [
+        {
+          "id": "setParamBody",
+          "name": "setParamBody",
+          "signature": "oDoc:setParamBody(cDescription, lRequired, cBodyContentType)",
+          "summary": "Define descrição, obrigatoriedade e content-type do body de uma vez (forma compacta).",
+          "returnType": "logical",
+          "returnDescription": "Verdadeiro quando definido com sucesso."
+        },
+        {
+          "id": "setParamBodyDescription",
+          "name": "setParamBodyDescription",
+          "signature": "oDoc:setParamBodyDescription(cDescription)",
+          "summary": "Define a descrição do body da requisição.",
+          "returnType": "logical",
+          "returnDescription": "Verdadeiro quando definido com sucesso.",
+          "exampleCode": "oDoc:setParamBodyDescription(\"Corpo JSON com dados do cliente\")"
+        },
+        {
+          "id": "setParamBodyRequired",
+          "name": "setParamBodyRequired",
+          "signature": "oDoc:setParamBodyRequired(lRequired)",
+          "summary": "Define se o body é obrigatório na requisição.",
+          "returnType": "logical",
+          "returnDescription": "Verdadeiro quando definido com sucesso."
+        },
+        {
+          "id": "setParamBodyContentType",
+          "name": "setParamBodyContentType",
+          "signature": "oDoc:setParamBodyContentType(cBodyContentType)",
+          "summary": "Define o content-type do body. Valores válidos: _json_, _xml_, _csv_, _txt_.",
+          "returnType": "logical",
+          "returnDescription": "Verdadeiro quando definido com sucesso.",
+          "note": "Constantes disponíveis no include tlpp-doc.th: _json_, _xml_, _csv_, _txt_."
+        },
+        {
+          "id": "setParamBodyComponent",
+          "name": "setParamBodyComponent",
+          "signature": "oDoc:setParamBodyComponent(cNameComponent, cTypeComponent)",
+          "summary": "Associa um componente global ao body. O componente define a estrutura detalhada do JSON/XML esperado.",
+          "returnType": "logical",
+          "returnDescription": "Verdadeiro quando associado com sucesso.",
+          "exampleCode": "oDoc:setParamBodyComponent(\"sampleBodyIn\", _json_)"
+        },
+        {
+          "id": "setParamBodyContentInfo",
+          "name": "setParamBodyContentInfo",
+          "signature": "oDoc:setParamBodyContentInfo(cDescription, cType, cFormat)",
+          "summary": "Define informações de conteúdo do body de forma direta (descrição, tipo e formato opcional).",
+          "returnType": "logical",
+          "returnDescription": "Verdadeiro quando definido com sucesso."
+        }
+      ]
+    },
+    {
+      "id": "restdoc-respostas",
+      "title": "Respostas (Responses)",
+      "description": "Documentar os possíveis retornos HTTP do endpoint — status codes, descrições e componentes.",
+      "methods": [
+        {
+          "id": "createResponse",
+          "name": "createResponse",
+          "signature": "oDoc:createResponse([nStatusCode], [cDescription])",
+          "summary": "Cria uma nova resposta e retorna seu índice. Ambos parâmetros são opcionais — podem ser informados aqui ou via setters individuais.",
+          "returnType": "numeric",
+          "returnDescription": "Índice da resposta criada.",
+          "exampleCode": "// Modo simplificado\noDoc:createResponse(200, \"OK\")\n\n// Modo detalhado\nnIndex := oDoc:createResponse()\noDoc:setResponseStatusCode(nIndex, 400)\noDoc:setResponseDescription(nIndex, \"Parâmetro inválido\")"
+        },
+        {
+          "id": "setResponseStatusCode",
+          "name": "setResponseStatusCode",
+          "signature": "oDoc:setResponseStatusCode(nIndex, nStatusCode)",
+          "summary": "Define o status code HTTP da resposta (100 a 599).",
+          "returnType": "logical",
+          "returnDescription": "Verdadeiro quando definido com sucesso."
+        },
+        {
+          "id": "setResponseDescription",
+          "name": "setResponseDescription",
+          "signature": "oDoc:setResponseDescription(nIndex, cDescription)",
+          "summary": "Define a descrição textual da resposta.",
+          "returnType": "logical",
+          "returnDescription": "Verdadeiro quando definido com sucesso."
+        },
+        {
+          "id": "setResponseComponent",
+          "name": "setResponseComponent",
+          "signature": "oDoc:setResponseComponent(nIndex, cNameComponent, cTypeComponent...)",
+          "summary": "Associa um componente global à resposta. Aceita múltiplos tipos via variadic (ex.: _json_, _xml_).",
+          "returnType": "logical",
+          "returnDescription": "Verdadeiro quando associado com sucesso.",
+          "exampleCode": "nIndex := oDoc:createResponse(200, \"Sucesso\")\noDoc:setResponseComponent(nIndex, \"sampleBodyOutOk\", _json_, _xml_)"
+        }
+      ]
+    },
+    {
+      "id": "restdoc-exportacao",
+      "title": "Exportação",
+      "description": "Gerar o JSON final de documentação. Uso interno do REST_DOC — o desenvolvedor normalmente não precisa chamar.",
+      "methods": [
+        {
+          "id": "toJson",
+          "name": "toJson",
+          "signature": "oDoc:toJson(@cJsonDoc)",
+          "summary": "Gera o JSON de documentação no formato esperado pelo REST_DOC. O parâmetro é passado por referência e recebe o resultado. Para o desenvolvedor final, esse método não precisa ser utilizado pois o REST_DOC o invoca internamente.",
+          "returnType": "logical",
+          "returnDescription": "Verdadeiro se o JSON foi gerado com sucesso.",
+          "note": "Método de uso interno. O REST_DOC chama toJson() automaticamente ao final da execução da função DOC."
+        }
+      ]
+    }
+  ]
+}

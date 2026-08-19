@@ -20,7 +20,7 @@ export type HomeCard = {
 export const homeCards: HomeCard[] = [
   {
     id: 'tlpp',
-    to: '/docs/tlpp/rest',
+    to: '/docs',
     accent: 'tlpp',
     titleId: 'home.card.tlpp.title',
     titleDefault: 'DOCS',

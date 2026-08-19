@@ -2,7 +2,7 @@
 title: Repositórios GitHub
 description: Projetos de código referenciados pela documentação TLPP Docs.
 sidebar_position: 7
-displayed_sidebar: restSidebar
+displayed_sidebar: docsSidebar
 ---
 
 import RepoCatalog from '@site/src/components/RepoCatalog';
@@ -11,10 +11,6 @@ O **totvstec-doc** é o motor do site. Código, conceito e catálogo de exemplos
 
 <RepoCatalog intro="Clique no repositório para abrir no GitHub ou use os atalhos para pastas específicas." />
 
-## Arquitetura
-
-Como o hub integra os módulos: [Arquitetura modular](/docs/ARQUITETURA).
-
 **Atalhos:** [REST](/docs/tlpp/rest) · [Exemplos REST](/docs/tlpp/rest/exemplos-repositorio) · [Doc Generate](/docs/tlpp/rest/metadados/visao-geral) · [PROBAT](/docs/tlpp/probat)
 
 ## Adicionar outro projeto
@@ -22,5 +18,3 @@ Como o hub integra os módulos: [Arquitetura modular](/docs/ARQUITETURA).
 1. Crie o repositório com `docs/conceito/`, `docs/exemplos/` e `docs/sidebar.json`
 2. Adicione uma entrada em `repos.config.json` no [totvstec-doc](https://github.com/totvs/totvstec-doc)
 3. Rode `npm run ecosystem:export` e `npm run validate:repos`
-
-Detalhes: [Arquitetura modular](/docs/ARQUITETURA).

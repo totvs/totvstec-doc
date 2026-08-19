@@ -3,12 +3,14 @@
 import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
 
 const sidebars: SidebarsConfig = {
-  hubSidebar: ['index', 'ARQUITETURA'],
-  restSidebar: [
+  hubSidebar: ['index'],
+  docsSidebar: [
+  "index",
   {
     "type": "category",
     "label": "REST",
-    "collapsed": false,
+    "collapsible": true,
+    "collapsed": true,
     "key": "rest-module",
     "items": [
       {
@@ -189,6 +191,18 @@ const sidebars: SidebarsConfig = {
             "id": "tlpp/rest/doc-generate/index",
             "label": "Visão geral",
             "key": "doc-generate-intro"
+          },
+          {
+            "type": "doc",
+            "id": "tlpp/rest/doc-generate/classe-restdoc",
+            "label": "Classe RestDoc (oDoc)",
+            "key": "doc-generate-restdoc"
+          },
+          {
+            "type": "doc",
+            "id": "tlpp/rest/doc-generate/cli",
+            "label": "CLI (linha de comando)",
+            "key": "doc-generate-cli"
           },
           "tlpp/rest/doc-generate/list-dinamico",
           {

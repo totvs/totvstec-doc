@@ -24,7 +24,7 @@
       ],
       "sidebar": {
         "category": "REST",
-        "collapsed": false,
+        "collapsed": true,
         "order": 1,
         "key": "rest-module"
       },
