@@ -126,9 +126,15 @@ function main() {
 /* AUTO-GENERATED — npm run generate:sidebars */
 import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
 
+const docsSidebarItems = [
+  "index",
+  ${JSON.stringify(restSidebarCategories, null, 2).slice(1, -1)}
+];
+
 const sidebars: SidebarsConfig = {
-  hubSidebar: ['index', 'ARQUITETURA'],
-  restSidebar: ${JSON.stringify(restSidebarCategories, null, 2)},
+  hubSidebar: ['index'],
+  docsSidebar: docsSidebarItems,
+  restSidebar: docsSidebarItems,
 };
 
 export default sidebars;

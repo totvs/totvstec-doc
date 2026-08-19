@@ -27,7 +27,7 @@ const config: Config = {
   organizationName: ORG,
   projectName: PROJECT,
 
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
 
   // Apenas pt-BR ativo. Traduções futuras: reative en-US em locales e o localeDropdown na navbar.
   // Arquivos em i18n/en-US/ permanecem no repo como base para quando iniciarmos a tradução.

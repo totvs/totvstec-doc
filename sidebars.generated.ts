@@ -2,14 +2,12 @@
 /* AUTO-GENERATED — npm run generate:sidebars */
 import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
 
-const sidebars: SidebarsConfig = {
-  hubSidebar: ['index'],
-  docsSidebar: [
+const docsSidebarItems = [
   "index",
+  
   {
     "type": "category",
     "label": "REST",
-    "collapsible": true,
     "collapsed": true,
     "key": "rest-module",
     "items": [
@@ -330,7 +328,13 @@ const sidebars: SidebarsConfig = {
       }
     ]
   }
-],
+
+];
+
+const sidebars: SidebarsConfig = {
+  hubSidebar: ['index'],
+  docsSidebar: docsSidebarItems,
+  restSidebar: docsSidebarItems,
 };
 
 export default sidebars;
