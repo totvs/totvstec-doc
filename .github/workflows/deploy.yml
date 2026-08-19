@@ -24,13 +24,12 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '24'
-          cache: npm
+          node-version: '22'
 
       - name: Checkout satellite repositories (repos.config.json)
         run: node scripts/ci-checkout-deps.mjs
 
-      - run: npm ci
+      - run: npm install
 
       - name: Block AI/context files from deploy
         run: npm run audit:remote
