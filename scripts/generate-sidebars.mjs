@@ -128,8 +128,6 @@ import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
 
 const docsSidebarItems = [
   "index",
-  "guia-identidade-visual-totvs",
-  "guia-linguagem-totvs",
   ${JSON.stringify(restSidebarCategories, null, 2).slice(1, -1)}
 ];
 
