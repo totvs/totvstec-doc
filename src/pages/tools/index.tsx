@@ -3,6 +3,7 @@ import Link from '@docusaurus/Link';
 import Layout from '@theme/Layout';
 import Translate from '@docusaurus/Translate';
 import OpenApiExplorerPromo from '@site/src/components/OpenApiExplorerPromo';
+import ApiAuditorPromo from '@site/src/components/ApiAuditorPromo';
 
 import styles from './tools.module.css';
 
@@ -32,12 +33,15 @@ export default function TlppToolsPage(): ReactNode {
 
         <div className="container">
           <section className={styles.featured} aria-label="Ferramentas disponíveis">
-            <OpenApiExplorerPromo />
+            <div className={styles.featuredGrid}>
+              <OpenApiExplorerPromo />
+              <ApiAuditorPromo />
+            </div>
           </section>
 
           <p className={styles.back}>
             <Link to="/">
-              <Translate id="tools.backHome">← Voltar ao menu principal</Translate>
+              <Translate id="tools.backHome">↝ Voltar ao menu principal</Translate>
             </Link>
           </p>
         </div>
