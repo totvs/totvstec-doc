@@ -202,6 +202,18 @@ const docsSidebarItems = [
             "label": "CLI (linha de comando)",
             "key": "doc-generate-cli"
           },
+          {
+            "type": "doc",
+            "id": "tlpp/rest/doc-generate/auditoria",
+            "label": "Auditoria da geração",
+            "key": "doc-generate-auditoria"
+          },
+          {
+            "type": "doc",
+            "id": "tlpp/rest/doc-generate/simulate",
+            "label": "Simulate (um endpoint)",
+            "key": "doc-generate-simulate"
+          },
           "tlpp/rest/doc-generate/list-dinamico",
           {
             "type": "doc",

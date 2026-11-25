@@ -279,11 +279,12 @@
         {
           "id": "setParamBodyComponent",
           "name": "setParamBodyComponent",
-          "signature": "oDoc:setParamBodyComponent(cNameComponent, cTypeComponent)",
-          "summary": "Associa um componente global ao body. O componente define a estrutura detalhada do JSON/XML esperado.",
+          "signature": "oDoc:setParamBodyComponent(cNameComponent, cTypeComponent, [cTypeComponentN, ...])",
+          "summary": "Associa um componente global ao body. Aceita um ou mais content-types (_json_, _xml_): cada um vira uma entrada em requestBody.content apontando para o mesmo componente.",
           "returnType": "logical",
           "returnDescription": "Verdadeiro quando associado com sucesso.",
-          "exampleCode": "oDoc:setParamBodyComponent(\"sampleBodyIn\", _json_)"
+          "exampleCode": "// Somente JSON\noDoc:setParamBodyComponent(\"sampleBodyIn\", _json_)\n\n// JSON e XML com o mesmo schema\noDoc:setParamBodyComponent(\"clienteJson\", _json_, _xml_)",
+          "note": "Retorna .F. e registra o erro (setError) quando nenhum tipo é informado ou quando algum tipo não é _json_ ou _xml_."
         },
         {
           "id": "setParamBodyContentInfo",
